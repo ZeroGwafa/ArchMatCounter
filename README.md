@@ -49,6 +49,7 @@ Be sure to Click "Start" to once again track materials, as it will be disabled w
 ### Filter Mats
 
 Enabling this will show only materials with a quantity greater than 0.  This is useful if you want to only see mats that you are currently getting.
+
 ![filter](/images/filter.png)
 
 ### Export to CSV
