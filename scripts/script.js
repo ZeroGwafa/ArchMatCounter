@@ -1,3 +1,5 @@
+a1lib.identifyUrl("appconfig.json");
+
 var reader = new ChatBoxReader();
 reader.readargs = {
     colors: [
@@ -142,3 +144,4 @@ $(".export").click(function () {
         }
     }
 });
+
