@@ -21,9 +21,9 @@ The table will auto-populate and keep track of the materials that you have recei
 
 Click "Stop" to stop tracking.
 
-## Material locations
+### Material Information
 
-If you mouse over each material name, it will show a small popup showing where you can obtain those materials.
+If you mouse over each material name, it will show a small popup showing the level that it can be accessed at, as well as where you can obtain those materials.
 
 ### Edit Mode
 
