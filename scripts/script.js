@@ -70,7 +70,7 @@ function readChatbox() {
 function buildTable() {
     $(".mats > tr").remove();
     materials.forEach(mat => {
-        let name = mat.name.replace("'", "")
+        let name = mat.name.replace("'", "");
         $(".mats").append(`<tr data-name="${name}"><td title="Level:${mat.level}\nLocation(s):\n${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
     })
 }
