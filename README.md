@@ -13,7 +13,7 @@ Keeps data until you hit the "Clear" button.
 
     2. Ensure that the chat filter is off.  This ensures that all material messages are visible.
     
-    3. Gather materials.  This will catch all material messages (I do not have the level to test for the autosifter).
+    3. Gather materials.  This will catch all material messages.
 
 The app will automatically start tracking as soon as it is opened.
 
