@@ -37,7 +37,7 @@ function readChatbox() {
     var chat = "";
     reader.find();
 
-    for (a in opts)) {
+    for (a in opts) {
         chat += opts[a].text + " ";
     }
 
