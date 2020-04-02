@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" src="/ArchMatCounter/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/ArchMatCounter/scripts/jquery-color.js"></script>
+    <script type="text/javascript" src="https://runeapps.org/runeappslib.js"></script>
+    <script type="text/javascript" src="https://runeapps.org/alt1lib.js"></script>
+    <script type="text/javascript" src="https://runeapps.org/imagedetect.js"></script>
+    <script type="text/javascript" src="https://runeapps.org/imagelibs/chatbox.js"></script>
+</head>
+
+<body class="nis">
+    <div class="main">
+        <table class="ui">
+            <thead class='menu'>
+                <tr>
+                    <th><button class="tracker nisbutton">Start</button></th>
+                    <th><button class="clear nisbutton">Clear</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-menu='hide' colspan=2 class="toggleMenu">Click to Show/Hide Menu</td>
+                </tr>
+            </tbody>
+            <tbody class='options'>
+                <tr>
+                    <th>Edit Mode:</th>
+                    <th><input type="checkbox" class="edit"></th>
+                </tr>
+                <tr>
+                    <th colspan=2><span class='export'>Export data as CSV</span></th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th>Actions</th>
+                    <th><span class='actions'></span></th>
+                </tr>
+                <tr>
+                    <th>Comps</th>
+                    <th>Quantity</th>
+                </tr>
+            </tbody>
+            <tbody class="mats">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
