@@ -33,10 +33,14 @@ function readChatbox() {
     if (chat.length === 0) //Check if chat is null, to reduce some console errors.
         return;
     //Match "You find some <material>"
-    var material = chat.match(/\d+ x \w+( \w+)?[^\d+:]|You find some .+/g)[0].trim();
+    var material = chat.match(/\d+ x \w+( \w+)?[^\d+:]|You find some .+|Your auto-screener .+/g)[0].trim();
     if (material !== null) {
         actions++;
-        let name = material.split("You find some ")[1].trim().replace("'", "")
+        let name = "";
+        if (material.indexOf("You find some") > -1)
+            name = material.split("You find some ")[1].trim().replace("'", "")
+        else
+            name = material.split("Your auto-screener spits out some ")[1].trim().replace("'", "")
         materials.forEach(mat => {
             if (mat.name.replace("'", "") === name) {
                 console.log()
@@ -49,7 +53,7 @@ function readChatbox() {
 
 function buildTable() {
     materials.forEach(mat => {
-        let name = mat.name.replace("'","")
+        let name = mat.name.replace("'", "")
         $(".mats").append(`<tr data-name="${name}"><td title="${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
     })
 }
@@ -57,12 +61,12 @@ function buildTable() {
 function tidyTable(name) {
     localStorage.mats = JSON.stringify(materials);
     materials.forEach(mat => {
-        let name = mat.name.replace("'","")
-        document.querySelector("[data-name='"+name+"'] > .qty").innerText = mat.qty;
+        let name = mat.name.replace("'", "")
+        document.querySelector("[data-name='" + name + "'] > .qty").innerText = mat.qty;
     })
-        $(`[data-name="${name}"]`).css({ "background-color": "lime" }).animate({
-            backgroundColor: $.Color("rgba(0, 0, 0, 0)")
-        }, 500, function () { $(this).removeAttr("style") });
+    $(`[data-name="${name}"]`).css({ "background-color": "lime" }).animate({
+        backgroundColor: $.Color("rgba(0, 0, 0, 0)")
+    }, 500, function () { $(this).removeAttr("style") });
     $(".actions").text(actions);
 }
 
