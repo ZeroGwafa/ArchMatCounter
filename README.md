@@ -1,12 +1,17 @@
 # ArchMatCounter
 
-Install with this link (Alt1 Required): 
-
-alt1://addapp/https://zerogwafa.github.io/ArchMatCounter/appconfig.json
-
 Tracks Archaeology Materials gained via the chat window.
 
 Keeps data until you hit the "Clear" button.
+
+## Installation:
+Install by copying this either copy pasting the following link in your browser. 
+
+alt1://addapp/https://zerogwafa.github.io/ArchMatCounter/appconfig.json
+
+Or, by going to the following link in the Alt1 Browser
+
+https://zerogwafa.github.io/ArchMatCounter/
 
 ## Instructions:
     1. Open app with RuneScape window visible.
