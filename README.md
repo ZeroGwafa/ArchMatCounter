@@ -4,11 +4,7 @@ Install with this link (Alt1 Required):
 
 alt1://addapp/https://zerogwafa.github.io/ArchMatCounter/appconfig.json
 
-Tracks Invention materials from the following sources:
-- Standard Dissassembling
-- Auto-Dissassembler
-- Spring Cleaner
-- Scavenging
+Tracks Archaeology Materials gained via the chat window.
 
 Keeps data until you hit the "Clear" button.
 
@@ -24,6 +20,10 @@ The app will automatically start tracking as soon as it is opened.
 The table will auto-populate and keep track of the materials that you have received.
 
 Click "Stop" to stop tracking.
+
+## Material locations
+
+If you mouse over each material name, it will show a small popup showing where you can obtain those materials.
 
 ### Edit Mode
 
