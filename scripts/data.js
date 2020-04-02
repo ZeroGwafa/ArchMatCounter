@@ -247,12 +247,12 @@ let materials = [
 ];
 
 if (localStorage.getItem("mats") != null) {
-    tempList = JSON.parse(localStorage.mats);
-    for (x in tempList) {
-        if (!tempList[x] || !materials[x]) {
-            continue;
-        } else {
-            materials[x].qty = tempList[x].qty;
-        }
-    }
+    materials = JSON.parse(localStorage.mats);
+    // for (x in tempList) {
+    //     if (!tempList[x] || !materials[x]) {
+    //         continue;
+    //     } else {
+    //         materials[x].qty = tempList[x].qty;
+    //     }
+    // }
 }

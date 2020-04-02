@@ -18,6 +18,17 @@ try {
 
 var chatCheck = reader.read();
 
+var sortComps = true;
+if (localStorage.getItem("sortComps") != null) {
+    sortComps = localStorage.sortComps == "true";
+}
+if (sortComps) {
+    materials.sort((a, b) => a.level - b.level);
+}
+else {
+    materials.sort((a, b) => b.qty - a.qty);
+}
+
 var count, mats, index;
 var actions = 0;
 
@@ -26,17 +37,14 @@ function readChatbox() {
     var chat = "";
     reader.find();
 
-    for (a in opts) {
+    for (a in opts.slice(-2)) {
         chat += opts[a].text + " ";
     }
 
-    if (chat.trim().length === 0) //Check if chat is null, to reduce some console errors.
+    if (chat.length === 0) //Check if chat is null, to reduce some console errors.
         return;
     //Match "You find some <material>"
-    console.log(chat)
-    if (chat.match(/You find some .+|Your auto-screener .+|You transport the following item to your material storage: .+/g) !== null)
-        var material = chat.match(/You find some .+|Your auto-screener .+|You transport the following item to your material storage: .+/g)[0].trim();
-    else return;
+    var material = chat.match(/You find some .+|Your auto-screener .+|You transport the following item to your material storage: .+/g)[0].trim();
     if (material !== null) {
         actions++;
         let name = "";
@@ -46,11 +54,13 @@ function readChatbox() {
             name = material.split("Your auto-screener spits out some ")[1].trim().replace("'", "");
         else
             name = material.split("material storage:")[1].trim().replace("'", "");
-        console.log(name);
         materials.forEach(mat => {
             if (mat.name.replace("'", "") === name) {
-                console.log()
                 mat.qty++;
+                if (!sortComps) {
+                    materials.sort((a, b) => b.qty - a.qty);
+                    buildTable(name);
+                }
                 tidyTable(name);
             }
         })
@@ -58,6 +68,7 @@ function readChatbox() {
 }
 
 function buildTable() {
+    $(".mats > tr").remove();
     materials.forEach(mat => {
         let name = mat.name.replace("'", "")
         $(".mats").append(`<tr data-name="${name}"><td title="Level:${mat.level}\nLocation(s):\n${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
@@ -89,8 +100,13 @@ $(".edit").change(function () {
     } else {
         $(".qty").removeAttr('contenteditable');
         materials.forEach(mat => {
-            mat.qty = parseInt($(`[data-name='${mat.name}'] .qty`).text());
+            let name = mat.name.replace("'", "");
+            mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
         })
+        if (!sortComps) {
+            materials.sort((a, b) => b.qty - a.qty);
+            buildTable(name);
+        }
         tidyTable();
     }
 });
@@ -120,10 +136,27 @@ $(".toggleMenu").click(function () {
     $(".options").toggle();
 });
 
+$("#comps").click(function() {
+    sortComps = true;
+    materials.sort((a, b) => a.level - b.level);
+    buildTable();
+    tidyTable();
+    localStorage.sortComps = true;
+})
+
+$("#quantity").click(function() {
+    sortComps = false;
+    materials.sort((a, b) => b.qty - a.qty);
+    buildTable();
+    tidyTable();
+    localStorage.sortComps = false;
+})
+
 $(".export").click(function () {
     var str = 'ComponentName,Quantity\n'; // column headers
     materials.forEach(mat => {
-        str = `${str}${mat.name},${mat.qty}\n`;
+        let name = man.name.replace("'", "");
+        str = `${str}${name},${mat.qty}\n`;
     })
     var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
