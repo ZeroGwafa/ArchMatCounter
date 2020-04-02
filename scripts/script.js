@@ -35,9 +35,8 @@ function readChatbox() {
     if (chat.trim().length === 0) //Check if chat is null, to reduce some console errors.
         return;
     //Match "You find some <material>"
-    console.log(chat)
-    if (chat.match(/You find some .+|Your auto-screener .+|You transport the following item to your material storage: .+/g) !== null)
-        var material = chat.match(/You find some .+|Your auto-screener .+|You transport the following item to your material storage: .+/g)[0].trim();
+    if (chat.match(/You find some .+|Your auto-screener .+|material storage:? .+/g) !== null)
+        var material = chat.match(/You find some .+|Your auto-screener .+|material storage:? .+/g)[0].trim();
     else return;
     if (material !== null) {
         actions++;
@@ -47,7 +46,7 @@ function readChatbox() {
         else if (material.indexOf("auto-screener") > -1)
             name = material.split("Your auto-screener spits out some ")[1].trim().replace("'", "");
         else
-            name = material.split("material storage:")[1].trim().replace("'", "");
+            name = material.split(/material storage:? /)[1].trim().replace("'", "");
         console.log(name);
         materials.forEach(mat => {
             if (mat.name.replace("'", "") === name) {
