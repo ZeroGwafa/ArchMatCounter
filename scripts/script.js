@@ -63,6 +63,11 @@ function buildTable() {
         let name = mat.name.replace("'", "")
         $(".mats").append(`<tr data-name="${name}"><td title="Level:${mat.level}\nLocation(s):\n${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
     })
+    if (localStorage.getItem("filter") === "true") {
+        console.log("Setting filter")
+        $(".filter").prop("checked", true)
+    }
+    tidyTable();
 }
 
 function tidyTable(name) {
@@ -74,11 +79,21 @@ function tidyTable(name) {
     $(`[data-name="${name}"]`).css({ "background-color": "lime" }).animate({
         backgroundColor: $.Color("rgba(0, 0, 0, 0)")
     }, 500, function () { $(this).removeAttr("style") });
+    console.log(localStorage.filter)
+    if (localStorage.filter === "true") {
+        materials.forEach(mat => {
+            let name = mat.name.replace("'", "")
+            if (mat.qty === 0) {
+                $(`[data-name='${name}']`).hide();
+            } else {
+                $(`[data-name='${name}']`).show();
+            }
+        });
+    }
     $(".actions").text(actions);
 }
 
 buildTable();
-tidyTable();
 
 $(".edit").change(function () {
     if ($(this).is(':checked')) {
@@ -90,7 +105,8 @@ $(".edit").change(function () {
     } else {
         $(".qty").removeAttr('contenteditable');
         materials.forEach(mat => {
-            mat.qty = parseInt($(`[data-name='${mat.name}'] .qty`).text());
+            let name = mat.name.replace("'", "")
+            mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
         })
         tidyTable();
     }
@@ -144,3 +160,8 @@ $(".export").click(function () {
     }
 });
 
+$(".filter").change(function () {
+    localStorage.filter = $(this).is(":checked");
+    $(".mats tr").show();
+    tidyTable();
+})

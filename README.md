@@ -28,9 +28,17 @@ The table will auto-populate and keep track of the materials that you have recei
 
 Click "Stop" to stop tracking.
 
-### Material Information
+![unfiltered](/images/unfiltered.png)
 
+### Action Counter
+- This will track how many times materials were added to the list.
+
+### Material Information
 If you mouse over each material name, it will show a small popup showing the level that it can be accessed at, as well as where you can obtain those materials.
+
+![info.png](/images/info.png)
+
+## Menu
 
 ### Edit Mode
 
@@ -38,9 +46,10 @@ I have included an Edit mode, to edit the number of materials for any row (in ca
 
 Be sure to Click "Start" to once again track materials, as it will be disabled while editing.
 
+### Filter Mats
 
-### Action Counter
-- This will track how many times materials were added to the list.
+Enabling this will show only materials with a quantity greater than 0.  This is useful if you want to only see mats that you are currently getting.
+![filter](/images/filter.png)
 
 ### Export to CSV
 - Clicking this will generate a CSV file with your current material stats.  
