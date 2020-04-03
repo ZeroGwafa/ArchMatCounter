@@ -11,19 +11,19 @@ reader.readargs = {
     backwards: true
 };
 reader.find();
+reader.pos.boxes.map((box, i) => {
+    $(".chat").append(`<option value=${i}>Chat ${i}</option>`)
+})
 //If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
 reader.pos.mainbox = reader.pos.boxes[0];
+showSelectedChat(reader.pos);
 
-
-//Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
-try {
-    var p = reader.pos;
-    alt1.overLayRect(a1lib.mixcolor(255, 255, 255), p.mainbox.rect.x, p.mainbox.rect.y, p.mainbox.rect.width, p.mainbox.rect.height, 2000, 1);
-} catch { }
 
 var chatCheck = reader.read();
-
 var sortComps = true;
+var count, mats, index;
+var actions = 0;
+
 if (localStorage.getItem("sortComps") != null) {
     sortComps = localStorage.sortComps == "true";
 }
@@ -34,15 +34,17 @@ else {
     materials.sort((a, b) => b.qty - a.qty);
 }
 
-var count, mats, index;
-var actions = 0;
+function showSelectedChat(chat){
+    //Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
+    try {
+        alt1.overLayRect(a1lib.mixcolor(255, 255, 255), chat.mainbox.rect.x, chat.mainbox.rect.y, chat.mainbox.rect.width, chat.mainbox.rect.height, 2000, 1);
+    } catch { }
+
+}
 
 function readChatbox() {
     var opts = reader.read() || [];
     var chat = "";
-    reader.find();
-    //If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
-    reader.pos.mainbox = reader.pos.boxes[0];
 
     for (a in opts) {
         chat += opts[a].text + " ";
@@ -115,6 +117,11 @@ function tidyTable(name) {
 }
 
 buildTable();
+
+$(".chat").change(function(){
+    reader.pos.mainbox = reader.pos.boxes[$(this).val()];
+    showSelectedChat(reader.pos);
+})
 
 $(".edit").change(function () {
     if ($(this).is(':checked')) {
