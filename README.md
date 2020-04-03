@@ -53,7 +53,7 @@ Enabling this will show only materials with a quantity greater than 0.  This is 
 ![filter](/images/filter.png)
 
 ### Select Chat
-When opening the app, it will detect all visible chat windows.  You can use this option to have the app target a specific window (The default is the window closest to the top-left of the screen).  When selecting a different window, a white box will surround the selected chat window briefly to show which chat you have seleted.
+When opening the app, it will detect all visible chat windows.  You can use this option to have the app target a specific window (The default is the window closest to the top-left of the screen).  When selecting a different window, a white box will surround the selected chat window briefly to show which chat you have selected.
 
 ![chatSelect](/images/chatSelect.gif)
 
