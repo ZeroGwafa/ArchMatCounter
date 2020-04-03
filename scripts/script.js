@@ -11,6 +11,9 @@ reader.readargs = {
     backwards: true
 };
 reader.find();
+//If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
+reader.pos.mainbox = reader.pos.boxes[0];
+
 
 //Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
 try {
@@ -38,6 +41,8 @@ function readChatbox() {
     var opts = reader.read() || [];
     var chat = "";
     reader.find();
+    //If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
+    reader.pos.mainbox = reader.pos.boxes[0];
 
     for (a in opts) {
         chat += opts[a].text + " ";
@@ -176,7 +181,7 @@ $("#quantity").click(function () {
 $(".export").click(function () {
     var str = 'ComponentName,Quantity\n'; // column headers
     materials.forEach(mat => {
-        let name = man.name.replace("'", "");
+        let name = mat.name.replace("'", "");
         str = `${str}${name},${mat.qty}\n`;
     })
     var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
