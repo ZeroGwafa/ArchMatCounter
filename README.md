@@ -21,6 +21,9 @@ https://zerogwafa.github.io/ArchMatCounter/
         2a. Ensure timestamps are on!
     
     3. Gather materials.  This will catch all material messages.
+    
+## Usage with multiple windows
+This is the most effective way to use this app.  If it detects multiple chat windows, it will select the box in the top-left of the RunesScape Window.  For best results, use the Trade and Assists Chat.
 
 The app will automatically start tracking as soon as it is opened.
 
