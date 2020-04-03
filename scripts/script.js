@@ -58,7 +58,10 @@ function readChatbox() {
             name = material.split("Your auto-screener spits out some ")[1].trim().replace("'", "");
         else
             name = material.split(/material storage:? /)[1].trim().replace("'", "");
-        console.log(name);
+        console.log({
+            chat: chat,
+            name: name
+        });
         materials.forEach(mat => {
             if (mat.name.replace("'", "") === name) {
                 mat.qty++;
@@ -79,7 +82,6 @@ function buildTable() {
         $(".mats").append(`<tr data-name="${name}"><td title="Level:${mat.level}\nLocation(s):\n${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
     })
     if (localStorage.getItem("filter") === "true") {
-        console.log("Setting filter")
         $(".filter").prop("checked", true)
     }
     tidyTable();
@@ -94,7 +96,6 @@ function tidyTable(name) {
     $(`[data-name="${name}"]`).css({ "background-color": "lime" }).animate({
         backgroundColor: $.Color("rgba(0, 0, 0, 0)")
     }, 500, function () { $(this).removeAttr("style") });
-    console.log(localStorage.filter)
     if (localStorage.filter === "true") {
         materials.forEach(mat => {
             let name = mat.name.replace("'", "")
@@ -156,7 +157,7 @@ $(".toggleMenu").click(function () {
     $(".options").toggle();
 });
 
-$("#comps").click(function() {
+$("#comps").click(function () {
     sortComps = true;
     materials.sort((a, b) => a.level - b.level);
     buildTable();
@@ -164,7 +165,7 @@ $("#comps").click(function() {
     localStorage.sortComps = true;
 })
 
-$("#quantity").click(function() {
+$("#quantity").click(function () {
     sortComps = false;
     materials.sort((a, b) => b.qty - a.qty);
     buildTable();
