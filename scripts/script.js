@@ -20,6 +20,17 @@ try {
 
 var chatCheck = reader.read();
 
+var sortComps = true;
+if (localStorage.getItem("sortComps") != null) {
+    sortComps = localStorage.sortComps == "true";
+}
+if (sortComps) {
+    materials.sort((a, b) => a.level - b.level);
+}
+else {
+    materials.sort((a, b) => b.qty - a.qty);
+}
+
 var count, mats, index;
 var actions = 0;
 
@@ -50,8 +61,11 @@ function readChatbox() {
         console.log(name);
         materials.forEach(mat => {
             if (mat.name.replace("'", "") === name) {
-                console.log()
                 mat.qty++;
+                if (!sortComps) {
+                    materials.sort((a, b) => b.qty - a.qty);
+                    buildTable(name);
+                }
                 tidyTable(name);
             }
         })
@@ -59,8 +73,9 @@ function readChatbox() {
 }
 
 function buildTable() {
+    $(".mats > tr").remove();
     materials.forEach(mat => {
-        let name = mat.name.replace("'", "")
+        let name = mat.name.replace("'", "");
         $(".mats").append(`<tr data-name="${name}"><td title="Level:${mat.level}\nLocation(s):\n${mat.location}">${mat.name}</td><td class='qty'>${mat.qty}</td></tr>`);
     })
     if (localStorage.getItem("filter") === "true") {
@@ -105,9 +120,13 @@ $(".edit").change(function () {
     } else {
         $(".qty").removeAttr('contenteditable');
         materials.forEach(mat => {
-            let name = mat.name.replace("'", "")
+            let name = mat.name.replace("'", "");
             mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
         })
+        if (!sortComps) {
+            materials.sort((a, b) => b.qty - a.qty);
+            buildTable(name);
+        }
         tidyTable();
     }
 });
@@ -137,10 +156,27 @@ $(".toggleMenu").click(function () {
     $(".options").toggle();
 });
 
+$("#comps").click(function() {
+    sortComps = true;
+    materials.sort((a, b) => a.level - b.level);
+    buildTable();
+    tidyTable();
+    localStorage.sortComps = true;
+})
+
+$("#quantity").click(function() {
+    sortComps = false;
+    materials.sort((a, b) => b.qty - a.qty);
+    buildTable();
+    tidyTable();
+    localStorage.sortComps = false;
+})
+
 $(".export").click(function () {
     var str = 'ComponentName,Quantity\n'; // column headers
     materials.forEach(mat => {
-        str = `${str}${mat.name},${mat.qty}\n`;
+        let name = man.name.replace("'", "");
+        str = `${str}${name},${mat.qty}\n`;
     })
     var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
