@@ -67,3 +67,7 @@ body.nis {
     background-color: transparent;
     transition: background-color 500ms;
 }
+
+.goal {
+    display: none;
+}

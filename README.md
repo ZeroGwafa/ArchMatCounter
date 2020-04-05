@@ -60,9 +60,10 @@ Next, the Qty and Goal boxes for each material can be edited.  Useful for tracki
 
 When setting a goal, once the Qty amount is greater than, or equal to the goal, the material row will highlight in green.
 
-
 ![editMode](/images/editMode.png)
 
+### Enable Goals
+Checking this option will show the Goals column.
 
 ### Select Chat
 When opening the app, it will detect all visible chat windows.  You can use this option to have the app target a specific window (The default is the window closest to the top-left of the screen).  When selecting a different window, a white box will surround the selected chat window briefly to show which chat you have selected.

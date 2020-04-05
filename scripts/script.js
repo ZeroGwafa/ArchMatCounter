@@ -26,7 +26,6 @@ function showSelectedChat(chat) {
     try {
         alt1.overLayRect(a1lib.mixcolor(255, 255, 255), chat.mainbox.rect.x, chat.mainbox.rect.y, chat.mainbox.rect.width, chat.mainbox.rect.height, 2000, 1);
     } catch { }
-
 }
 
 function readChatbox() {
@@ -85,6 +84,10 @@ function buildTable() {
     if (localStorage.getItem("filter") === "true") {
         $(".filter").prop("checked", true)
     }
+    if (localStorage.getItem("goals") === "true") {
+        $(".goals").prop("checked", true)
+        $(".goal").show();
+    }
     tidyTable();
 }
 
@@ -95,7 +98,7 @@ function tidyTable(name) {
     materials.forEach(mat => {
         let name = mat.name.replace("'", "");
         $("[data-name='" + name + "'] > .qty").text(mat.qty);
-        if ((mat.qty >= 0 && mat.goal > 0) && mat.qty >= mat.goal) {
+        if ((mat.qty >= 0 && mat.goal > 0) && mat.qty >= mat.goal && localStorage.goals === "true") {
             $(`[data-name="${name}"]`).removeClass('getMat normal')
             $(`[data-name="${name}"]`).addClass("complete")
         } else {
@@ -226,6 +229,17 @@ $(function () {
         if (!$(".edit").is(":checked")) {
             localStorage.filter = $(this).is(":checked");
             $(".mats .row").show();
+            tidyTable();
+        }
+    })
+
+    $(".goals").change(function () {
+        localStorage.goals = $(this).is(":checked");
+        if (localStorage.goals === "true") {
+            $(".goal").show();
+            tidyTable();
+        } else {
+            $(".goal").hide();
             tidyTable();
         }
     })
