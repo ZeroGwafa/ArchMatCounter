@@ -20,7 +20,6 @@ showSelectedChat(reader.pos);
 
 var chatCheck = reader.read();
 var count, mats, index;
-var actions = 0;
 
 function showSelectedChat(chat) {
     //Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
@@ -45,7 +44,6 @@ function readChatbox() {
         var material = chat.match(/You find some .+|Your auto-screener .+|material storage:? .+/g)[0].trim();
     else return;
     if (material !== null) {
-        actions++;
         let name = "";
         if (material.indexOf("You find some") > -1)
             name = material.split("You find some ")[1].trim().replace("'", "")
@@ -118,7 +116,6 @@ function tidyTable(name) {
             }
         });
     }
-    $(".actions").text(actions);
 }
 
 $(function () {
@@ -184,7 +181,6 @@ $(function () {
         materials.forEach(mat => {
             mat.qty = 0;
         })
-        actions = 0;
         location.reload();
     });
 

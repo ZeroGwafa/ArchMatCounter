@@ -28,9 +28,6 @@ Click "Stop" to stop tracking.
 
 ![unfiltered](/images/unfiltered.png)
 
-### Action Counter
-- This will track how many times materials were added to the list.
-
 ### Material Information
 If you mouse over any material name, it will show a small popup showing the level that it can be accessed at, the faction it is affiliated with, and locations for that material.
 

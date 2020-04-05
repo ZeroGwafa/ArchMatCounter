@@ -6,10 +6,20 @@
     text-align: center;
 }
 
-.matHeader *,
-.mats * {
-    border: white .5px solid;
+.matHeader {
+    border-top: white solid .5px;
+}
+
+.mats>.row,
+.matHeader * {
+    border-bottom: white solid .5px;
+    border-right: white solid .5px;
     border-collapse: collapse;
+}
+
+.matHeader,
+.mats>.row * {
+    border-left: white solid .5px;
 }
 
 .matSection {
