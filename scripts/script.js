@@ -69,14 +69,14 @@ function buildTable() {
         let name = mat.name.replace("'", "");
         $(".mats").append(`
         <div class='row' data-name="${name}">
-            <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""} tabindex=99/></div>
+            <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""}/></div>
             <div class='col-6' title="\nLevel: ${mat.level}\nFaction: ${mat.faction}\nLocation(s):\n${mat.location}">
                 ${mat.name}
             </div>
-            <div class="col qty" tabindex=0>
+            <div class="col qty">
                 ${mat.qty}
             </div>
-            <div class="col goal" tabindex=1>
+            <div class="col goal">
                 ${mat.goal}
             </div>
             </div>`);
@@ -108,10 +108,9 @@ function tidyTable(name) {
             }, 500)
         }
     })
-    if (localStorage.filter === "true") {
+    if (localStorage.filter === "true" && !$(".edit").is(":checked")) {
         materials.forEach(mat => {
             let name = mat.name.replace("'", "")
-            // if (mat.hide === true) {
             if (mat.qty === 0 && mat.goal === 0 || mat.hide === true) {
                 $(`[data-name='${name}']`).hide();
             } else {
@@ -124,6 +123,7 @@ function tidyTable(name) {
 $(function () {
 
     buildTable();
+    $("button, input, select, body").attr("tabindex", "-1");
 
     $(".chat").change(function () {
         reader.pos.mainbox = reader.pos.boxes[$(this).val()];
@@ -138,7 +138,11 @@ $(function () {
                 materials[i].hide = false
         })
         if ($(this).is(':checked')) {
-            $(".filter").prop("disabled", true);
+            $(".filter").prop("disabled", true).click();
+            
+            // Apply tabindex
+            $(".row .qty").attr("tabindex", "1");
+            $(".row .goal").attr("tabindex", "2");
             document.querySelectorAll(".col-6").forEach(row => {
                 row.classList.remove("col-6")
                 row.classList.add("col-4")
@@ -147,12 +151,14 @@ $(function () {
                 $(".tracker").click();
             }
             $(".row:hidden, .hide").show();
-            $(".qty, .goal").attr('contenteditable', 'true').on("focus click", function () { document.execCommand('selectAll', false, null) });
+            $(".qty, .goal").attr('contenteditable', 'true').on("focus", function () { document.execCommand('selectAll', false, null); });
+            $(".qty:first").focus();
         } else {
             if ($(".tracker").text() == "Start") {
                 $(".tracker").click();
             }
             $(".filter").prop("disabled", false);
+            $(".row .qty,.row .goal").removeAttr("tabindex");
             document.querySelectorAll(".col-4").forEach(row => {
                 row.classList.remove("col-4")
                 row.classList.add("col-6")
@@ -240,10 +246,10 @@ $(function () {
         localStorage.goals = $(this).is(":checked");
         if (localStorage.goals === "true") {
             $(".goal, .goalCol").show();
-            // tidyTable();
+            tidyTable();
         } else {
             $(".goal, .goalCol").hide();
-            // tidyTable();
+            tidyTable();
         }
     })
 

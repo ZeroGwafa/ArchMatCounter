@@ -41,7 +41,7 @@ body.nis::-webkit-scrollbar {
 }
 
 body.nis {
-    margin: 3em 0;
+    margin-bottom: 3em;
 }
 
 .complete {
