@@ -239,10 +239,10 @@ $(function () {
     $(".goals").change(function () {
         localStorage.goals = $(this).is(":checked");
         if (localStorage.goals === "true") {
-            $(".goal").show();
+            $(".goal, .goalCol").show();
             // tidyTable();
         } else {
-            $(".goal").hide();
+            $(".goal, .goalCol").hide();
             // tidyTable();
         }
     })

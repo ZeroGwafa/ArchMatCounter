@@ -68,7 +68,8 @@ body.nis {
     transition: background-color 500ms;
 }
 
-.goal {
+.goal,
+.goalCol {
     display: none;
 }
 

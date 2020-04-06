@@ -21,9 +21,6 @@
                 <button class="tracker nisbutton">
                     Start
                 </button>
-                <button class="clear nisbutton">
-                    Clear
-                </button>
                 <button class="nisbutton" type="button" data-toggle="collapse" data-target="#menu" aria-expanded="false" aria-controls="menu">
                     Menu
                 </button>
@@ -67,6 +64,20 @@
                     </div>
                     <div class="row">
                         <div class="col header" title="Exports the current data as a CSV file.">
+                            <button class="clear nisbutton" data-type="qty">
+                                    Clear Qty
+                                </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col header" title="Exports the current data as a CSV file.">
+                            <button class="clear nisbutton" data-type="goal">
+                                    Clear Goals
+                                </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col header" title="Exports the current data as a CSV file.">
                             <h6>
                                 <button class='nisbutton export'>
                                     Export data as CSV
@@ -87,7 +98,7 @@
             <div class="col sort" data-sort='qty'>
                 Qty
             </div>
-            <div class="col sort goal" data-sort='goal'>
+            <div class="col sort goalCol" data-sort='goal'>
                 Goal
             </div>
         </div>
