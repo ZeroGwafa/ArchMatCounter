@@ -86,7 +86,7 @@ function buildTable() {
     }
     if (localStorage.getItem("goals") === "true") {
         $(".goals").prop("checked", true)
-        $(".goal").show();
+        $(".goal, .goalCol").show();
     }
     tidyTable();
 }
