@@ -69,14 +69,14 @@ function buildTable() {
         let name = mat.name.replace("'", "");
         $(".mats").append(`
         <div class='row' data-name="${name}">
-            <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""}/></div>
+            <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""} tabindex=99/></div>
             <div class='col-6' title="\nLevel: ${mat.level}\nFaction: ${mat.faction}\nLocation(s):\n${mat.location}">
                 ${mat.name}
             </div>
-            <div class="col qty">
+            <div class="col qty" tabindex=0>
                 ${mat.qty}
             </div>
-            <div class="col goal">
+            <div class="col goal" tabindex=1>
                 ${mat.goal}
             </div>
             </div>`);
@@ -147,8 +147,11 @@ $(function () {
                 $(".tracker").click();
             }
             $(".row:hidden, .hide").show();
-            $(".qty, .goal").attr('contenteditable', 'true').focus(function () { document.execCommand('selectAll', false, null) });
+            $(".qty, .goal").attr('contenteditable', 'true').on("focus click", function () { document.execCommand('selectAll', false, null) });
         } else {
+            if ($(".tracker").text() == "Start") {
+                $(".tracker").click();
+            }
             $(".filter").prop("disabled", false);
             document.querySelectorAll(".col-4").forEach(row => {
                 row.classList.remove("col-4")
@@ -161,7 +164,7 @@ $(function () {
                 mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
                 mat.goal = parseInt($(`[data-name='${name}'] .goal`).text());
             })
-            tidyTable();
+            buildTable();
         }
     });
 
@@ -179,12 +182,13 @@ $(function () {
         }
     })
 
-    $("button.clear").click(function () {
-        localStorage.removeItem("mats");
+    $(".clear").click(function (e) {
+        console.log(e.target.dataset.type)
+        let type = e.target.dataset.type;
         materials.forEach(mat => {
-            mat.qty = 0;
+            mat[type] = 0;
         })
-        location.reload();
+        buildTable()
     });
 
     $(".sort").click(e => {
@@ -196,7 +200,6 @@ $(function () {
             else
                 materials.sort((a, b) => b[sort] - a[sort])
             buildTable();
-            tidyTable();
             localStorage.sort = sort;
         }
     })
@@ -237,13 +240,16 @@ $(function () {
         localStorage.goals = $(this).is(":checked");
         if (localStorage.goals === "true") {
             $(".goal").show();
-            tidyTable();
+            // tidyTable();
         } else {
             $(".goal").hide();
-            tidyTable();
+            // tidyTable();
         }
     })
 
     $("button.tracker").click();
+
+    $("#menu").on("shown.bs.collapse", function(){$("body").addClass("expand")})
+    $("#menu").on("hide.bs.collapse", function(){$("body").removeClass("expand")})
 
 })
