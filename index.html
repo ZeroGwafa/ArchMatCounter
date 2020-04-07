@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script type="text/javascript" src="https://runeapps.org/runeappslib.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://runeapps.org/runeappslib.css">
     <script type="text/javascript" src="https://runeapps.org/alt1lib.js"></script>
     <script type="text/javascript" src="https://runeapps.org/imagedetect.js"></script>
     <script type="text/javascript" src="https://runeapps.org/imagelibs/chatbox.js"></script>
@@ -22,13 +23,14 @@
                     Start
                 </button>
                 <button class="nisbutton" type="button" data-toggle="collapse" data-target="#menu" aria-expanded="false" aria-controls="menu">
+                <!-- <button class="nisbutton" id="test"> -->
                     Menu
                 </button>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="collapse" id="menu">
+                <div class="collapse" id="menu" class="menu">
                     <div class="row">
                         <div class="col header" title="When checked, will only show materials with a Quantity greater than 0">
                             <h6>Filter Mats</h6>
@@ -59,29 +61,32 @@
                         </div>
                         <div class="col">
                             <select class="chat">
+                                <option value="">Select Chat</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">Clear: </div>
                         <div class="col header" title="Clears material Qty column.">
-                            <button class="clear nisbutton" data-type="qty">
-                                    Qty
+                            <button class="clear nisbutton" data-type="qty" name='qty'>
+                                    ClearQty
                                 </button>
                         </div>
                         <div class="col header" title="Clears material Goals column.">
-                            <button class="clear nisbutton" data-type="goal">
-                                    Goals
+                            <button class="clear nisbutton" data-type="goal" name="goals">
+                                    ClearGoals
                                 </button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col header" title="Exports the current data as a CSV file.">
-                            <h6>
-                                <button class='nisbutton export'>
-                                    Export data as CSV
+                        <div class="col header" title="Imports a JSON list from the Wiki Calc.">
+                            <button class='nisbutton openImport'>
+                                    ArtifactCalc
                                 </button>
-                            </h6>
+                        </div>
+                        <div class="col header" title="Exports the current data as a CSV file.">
+                            <button class='nisbutton export'>
+                                    CSV Export
+                                </button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +97,7 @@
         <div class="row matHeader">
             <div class="col hide">Hide</div>
             <div class="col-6 sort" data-sort='level'>
-                Comps
+                Mats
             </div>
             <div class="col sort" data-sort='qty'>
                 Qty

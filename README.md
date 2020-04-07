@@ -70,5 +70,13 @@ When opening the app, it will detect all visible chat windows.  You can use this
 
 ![chatSelect](/images/chatSelect.gif)
 
+### Artifact Calculator
+
+This will open a new window with a list of Artifacts in the game.  Enter the number of artifacts that you have/want to repair, then click the Import button in the top right of the window.  Your Goals column will automatically populate with the amount of Materials that you will need for the Artifacts entered.
+
+The Artifact list is stored, and will populate when the window opens again.  
+
+![atrifactCalc](/images/artifactCalc.gif)
+
 ### Export Data as CSV
 - Clicking this will generate a CSV file with your current material stats.  

@@ -36,12 +36,13 @@
     display: none;
 }
 
-body.nis::-webkit-scrollbar {
+body.nis:not(.artefact)::-webkit-scrollbar {
     display: none;
 }
 
 body.nis {
-    margin-bottom: 3em;
+    /* margin-bottom: 3em; */
+    overflow: scroll !important;
 }
 
 .complete {
@@ -59,7 +60,7 @@ body.nis {
 }
 
 .getMat {
-    background-color: lime;
+    background-color: #00eeff;
     transition: background-color 500ms;
 }
 
@@ -74,5 +75,30 @@ body.nis {
 }
 
 .expand {
-    margin-bottom: 20em !important;
+    margin-bottom: 17em !important;
+}
+
+.nisbutton {
+    font-size: 8pt !important;
+}
+
+.artefact {
+    overflow: scroll !important;
+}
+
+.artefactInput {
+    width: 20%;
+    text-align: center;
+}
+
+.artefactInput::-webkit-outer-spin-button,
+.artefactInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.import {
+    position: fixed;
+    top: 0;
+    right: 0;
 }
