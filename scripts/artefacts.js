@@ -25,6 +25,7 @@ let artefactsList = [
     { name: "Legatus Pendant", mats: [{ name: "Third Age iron", qty: 16 }, { name: "Goldrune", qty: 18 }, { name: "Ancient vis", qty: 12 }] },
     { name: "Ceremonial Unicorn Ornament", mats: [{ name: "Keramos", qty: 26 }, { name: "Cobalt blue", qty: 20 }] },
     { name: "Ceremonial Unicorn Saddle", mats: [{ name: "Leather scraps", qty: 24 }, { name: "Cobalt blue", qty: 22 }] },
+    { name: "Tertacompass", mats: [{ name: "Malachite green", qty: 30 },{ name: "Cadmium red", qty: 30 },{ name: "Cobalt blue", qty: 30 },{ name: "Armadylean yellow", qty: 30 },{ name: "Tyrian purple", qty: 30 } ] },
     { name: "Everlight Harp", mats: [{ name: "Everlight silvthril", qty: 30 }, { name: "White oak", qty: 22 }] },
     { name: "Everlight Trumpet", mats: [{ name: "Everlight silvthril", qty: 28 }, { name: "Goldrune", qty: 24 }] },
     { name: "Everlight Violin", mats: [{ name: "Star of Saradomin", qty: 16 }, { name: "White oak", qty: 20 }, { name: "Samite silk", qty: 16 }] },
