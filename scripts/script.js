@@ -59,11 +59,12 @@ else {
             if (material.indexOf("You find some") > -1)
                 name = material.split("You find some ")[1].trim().replace("'", "")
             else if (material.indexOf("auto-screener") > -1)
-                name = material.split("Your auto-screener spits out some ")[1].trim().replace("'", "");
+                name = material.match(/spits out some[^\d]*/)[0].split(/spits out some /)[1].trim().replace("'", "");
             else
                 name = material.split(/material storage:? /)[1].trim().replace("'", "");
             console.log({
                 chat: chat,
+                material: material,
                 name: name
             });
             materials.forEach(mat => {
@@ -125,7 +126,7 @@ else {
         if (localStorage.filter === "true" && !$(".edit").is(":checked")) {
             materials.forEach(mat => {
                 let name = mat.name.replace("'", "")
-                if (mat.qty === 0 && mat.goal === 0 || mat.hide === true) {
+                if ((mat.qty === 0 && mat.goal === 0) || mat.hide === true) {
                     $(`[data-name='${name}']`).hide();
                 } else {
                     $(`[data-name='${name}']`).show();
@@ -300,7 +301,7 @@ else {
         window.addEventListener('storage', onStorageEvent, false);
 
         $(".openImport").click(function () {
-            window.open("/ArchMatCounter/artefacts.html", "", "width=275")
+            window.open("/ArchMatCounter/artefacts.html", "", "width=400")
         })
 
         // $("#test").click(function () {
