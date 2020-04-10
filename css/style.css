@@ -40,9 +40,9 @@ body.nis:not(.artefact)::-webkit-scrollbar {
     display: none;
 }
 
-body.nis {
-    /* margin-bottom: 3em; */
+body.nis:not(.artefact) {
     overflow: scroll !important;
+    min-width: 315px;
 }
 
 .complete {
@@ -60,7 +60,7 @@ body.nis {
 }
 
 .getMat {
-    background-color: #00eeff;
+    background-color: #00eeff !important;
     transition: background-color 500ms;
 }
 
@@ -83,12 +83,14 @@ body.nis {
 }
 
 .artefact {
-    overflow: scroll !important;
+    overflow: hidden !important;
+    margin-bottom: 2em !important;
+    min-width: 400px;
 }
 
 .artefactInput {
-    width: 20%;
     text-align: center;
+    /* max-width: 2em; */
 }
 
 .artefactInput::-webkit-outer-spin-button,
@@ -101,4 +103,19 @@ body.nis {
     position: fixed;
     top: 0;
     right: 0;
+}
+
+.menu {
+    margin-bottom: 4em
+}
+
+.main {
+    overflow: scroll;
+    padding-bottom: 3em;
+    max-height: 100vh;
+    margin: 0 5px;
+}
+
+.input-group-text {
+    min-width: 249px;
 }
