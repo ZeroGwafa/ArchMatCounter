@@ -304,6 +304,10 @@ else {
             window.open("/ArchMatCounter/artefacts.html", "", "width=400")
         })
 
+        $(".openCollectionsImport").click(function () {
+            window.open("/ArchMatCounter/collections.html", "", "width=400")
+        })
+
         // $("#test").click(function () {
         //     console.log("test")
         //     let chat = ["Select Chat"];

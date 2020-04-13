@@ -25,7 +25,7 @@ let artefactsList = [
     { name: "Legatus Pendant", mats: [{ name: "Third Age iron", qty: 16 }, { name: "Goldrune", qty: 18 }, { name: "Ancient vis", qty: 12 }] },
     { name: "Ceremonial Unicorn Ornament", mats: [{ name: "Keramos", qty: 26 }, { name: "Cobalt blue", qty: 20 }] },
     { name: "Ceremonial Unicorn Saddle", mats: [{ name: "Leather scraps", qty: 24 }, { name: "Cobalt blue", qty: 22 }] },
-    { name: "Tertacompass", mats: [{ name: "Malachite green", qty: 30 },{ name: "Cadmium red", qty: 30 },{ name: "Cobalt blue", qty: 30 },{ name: "Armadylean yellow", qty: 30 },{ name: "Tyrian purple", qty: 30 } ] },
+    { name: "Tertacompass", mats: [{ name: "Malachite green", qty: 30 }, { name: "Cadmium red", qty: 30 }, { name: "Cobalt blue", qty: 30 }, { name: "Armadylean yellow", qty: 30 }, { name: "Tyrian purple", qty: 30 }] },
     { name: "Everlight Harp", mats: [{ name: "Everlight silvthril", qty: 30 }, { name: "White oak", qty: 22 }] },
     { name: "Everlight Trumpet", mats: [{ name: "Everlight silvthril", qty: 28 }, { name: "Goldrune", qty: 24 }] },
     { name: "Everlight Violin", mats: [{ name: "Star of Saradomin", qty: 16 }, { name: "White oak", qty: 20 }, { name: "Samite silk", qty: 16 }] },
@@ -152,38 +152,81 @@ let artefactsList = [
     { name: "Da Boss Man Sculpture", mats: [{ name: "Yu'biusk clay", qty: 50 }, { name: "Malachite green", qty: 44 }, { name: "Soapstone", qty: 44 }] }
 ]
 
+let artefactCollections = [
+    { name: "Other", artefacts: ["Tertacompass"]},
+    { name: "Blingy Fings", artefacts: ["Ancient Timepiece", "Legatus Pendant", "Pontifex Signet Ring", "Bronze Dominion Medal", "Silver Dominion Medal"] },
+    { name: "Smoky Fings", artefacts: ["Hookah Pipe", "Opulent Wine Goblet", "Everlight Trumpet", "Dominion Torch", "Pontifex Censer"] },
+    { name: "Saradominist II", artefacts: ["Dominion Discus", "Dominion Javelin", "Dominion Pelte Shield", "Bronze Dominion Medal", "Silver Dominion Medal", "Dominion Torch", "Decorative Vase", "Kantharos Cup", "Patera Bowl"] },
+    { name: "Zamorakian II", artefacts: ["Branding Iron", "Manacles", "The Lake of Fire Painting", "Lust Metal Sculpture", "Chaos Star", "Spiked Dog Collar", "Larupia Trophy", "Lion Trophy", "She-Wolf Trophy"] },
+    { name: "Zarosian II", artefacts: ["Ancient Timepiece", "Legatus Pendant", "Incite Fear Spell Scroll", "Pontifex Signet Ring", "Ceremonial Mace", "Pontifex Maximus Figurine", "Consensus Ad Idem Painting", "Pontifex Censer", "Pontifex Crozier", "Pontifex Mitre"] },
+    { name: "Green Gobbo Goodies I", artefacts: ["Ekeleshuun Blinder Mask", "Narogoshuun Hob Da Gob", "Rekeshuun War Tether", "Thorobshuun Battle Standard", "Yurkolgokh Stink Grenade"] },
+    { name: "Armadylean I", artefacts: ["Ikovian Gerege", "Toy Glider", "Toy War Golem", "Avian Song Egg Player", "Keshik Drum", "Morin Khuur", "Aviansie Dreamcoat", "Ceremonial Plume", "Peacocking Parasol"] },
+    { name: "Hitty Fings", artefacts: ["Ceremonial Mace", "Pontifex Crozier", "Fishing Trident", "High Priest Crozier", "High Priest Orb"] },
+    { name: "Bandosian I", artefacts: ["Ekeleshuun Blinder Mask", "Narogoshuun Hob Da Gob", "Rekeshuun War Tether", "Ogre Kyzaj Axe", "Ork Cleaver Sword", "Thorobshuun Battle Standard", "Yurkolgokh Stink Grenade", "High Priest Crozier", "High Priest Mitre", "High Priest Orb"] },
+    { name: "Anarchic Abstraction", artefacts: ["Disorder Painting", "The Lake of Fire Painting", "Pandemonium Tapestry"] },
+    { name: "Wise Am the Music Man", artefacts: ["Avian Song Egg Player", "Everlight Harp", "Everlight Trumpet", "Everlight Violin", "Keshik Drum", "Morin Khuur", "Songbird Recorder"] },
+    { name: "Showy Fings", artefacts: ["Crest of Dagon", "Legatus Maximus Figurine", "Lust Metal Sculpture", "Pontifex Maximus Figurine", "Ceremonial Plume", "Rod of Asclepius"] },
+    { name: "Red Rum Relics I", artefacts: ["Ork Cleaver Sword", "Ogre Kyzaj Axe", "Beastkeeper Helm", "Nosorog Sculpture"] },
+    { name: "Green Gobbo Goodies II", artefacts: ["High Priest Crozier", "High Priest Mitre", "High Priest Orb", "Idithuun Horn Ring", "Garagorshuun Anchor"] },
+    { name: "Armadylean II", artefacts: ["Hawkeye Lens Multi Vision Scope", "Talon 3 Razor Wing", "Prototype Gravimeter", "Songbird Recorder", "Dayguard Shield", "Stormguard Gerege", "Golem Heart", "Golem Instruction"] },
+    { name: "Saradominist III", artefacts: ["Amphora", "Rod of Asclepius", "Dominarian Device", "Fishing Trident", "Kopis Dagger", "Xiphos Short Sword"] },
+    { name: "Radiant Renaissance", artefacts: ["Hallowed Be the Everlight Painting", "The Lord of Light Painting", "The Pride of Padosan Painting"] },
+    { name: "Zarosian III", artefacts: ["Exsanguinate Spell Scroll", "Necromantic Focus", "Zarosian Ewer", "Zarosian Stein", "Smoke Cloud Spell Scroll", "Vigorem Vial", "Ancient Magic Tablet", "Animate Dead Spell Scroll", "Portable Phylactery"] },
+    { name: "Zamorakian III", artefacts: ["Torment Metal Sculpture", "Pandemonium Tapestry", "Hellfire Haladie", "Hellfire Katar", "Hellfire Zaghnal", "Chaos Elemental Trophy", "Virius Trophy"] },
+    { name: "Red Rum Relics II", artefacts: ["Hobgoblin Mansticker", "Ourg Megahitter", "Ourg Tower Goblin Cower Shield", "Forged in War Sculpture"] },
+    { name: "Bandosian II", artefacts: ["Beastkeeper Helm", "Dorgeshuun Spear", "Hobgoblin Mansticker", "Idithuun Horn Ring", "Ourg Megahitter", "Forged in War Sculpture", "Nosorog Sculpture", "Ourg Tower Goblin Cower Shield"] },
+    { name: "Hat Problem", artefacts: ["Beastkeeper Helm", "Imp Mask", "Ekeleshuun Blinder Mask", "Flat Cap", "High Priest Mitre", "Huzamogaarb Chaos Crown", "Praetorian Hood"] },
+    { name: "Hat Hoarder", artefacts: ["Ceremonial Unicorn Ornament", "Lesser Demon Mask", "Greater Demon Mask", "Kal I Kran Chieftain Crown", "Pontifex Mitre", "Saragorgak Star Crown", "Tsutsaroth Helm"] },
+    { name: "Zamorakian IV", artefacts: ["Possession Metal Sculpture", "Trishula", "Tsutsaroth Piercing", "Tsutsaroth Helm", "Tsutsaroth Pauldron", "Tsutsaroth Urumi"] },
+    { name: "Saradominist IV", artefacts: ["The Pride of Padosan Painting", "Hallowed Be the Everlight Painting", "The Lord of Light Painting", "The Enlightened Soul Scroll", "The Eudoxian Elements Tablet", "Doru Spear", "Kontos Lance"] },
+    { name: "Imperial Impressionism", artefacts: ["Hallowed Be the Everlight Painting", "The Lord of Light Painting", "The Pride of Padosan Painting"] },
+    { name: "Magic Man", artefacts: ["Ancient Timepiece", "Chuluu Stone", "High Priest Mitre", "Legatus Maximus Figurine", "Portable Phylactery", "Ritual Dagger", "Animate Dead Spell Scroll", "Exsanguinate Spell Scroll", "Incite Fear Spell Scroll", "Smoke Cloud Spell Scroll"] },
+    { name: "Armadylean III", artefacts: ["Blackfire Lance", "Nightguard Shield", "Flat Cap", "Night Owl Flight Goggles", "Prototype Godbow", "Prototype Godstaff", "Prototype Godsword", "Chuluu Stone", "Quintessence Counter", "Spherical Astrolabe"] },
+    { name: "Zarosian IV", artefacts: ["Praetorian Hood", "Praetorian Robes", "Praetorian Staff", "Ancient Globe", "Battle Plans", "Prima Legio Painting"] },
+    { name: "Red Rum Relics III", artefacts: ["Kal I Kran Chieftain Crown", "Kal I Kran Mace", "Kal I Kran Warhorn", "Da Boss Man Sculpture"] },
+    { name: "Knowledge is Power", artefacts: ["Crest of Dagon", "Golem Instruction", "Necromantic Focus", "Ikovian Gerege", "The Enlightened Soul Scroll", "Da Boss Man Sculpture", "The Eudoxian Elements Tablet"] },
+    { name: "Green Gobbo Goodies III", artefacts: ["Huzamogaarb Chaos Crown", "Saragorgak Star Crown", "Drogokishuun Hook Sword", "Dorgeshuun Spear", "Horogothgar Cooking Pot", "Da Boss Man Sculpture"] },
+    { name: "Bandosian III", artefacts: ["Drogokishuun Hook Sword", "Garagorshuun Anchor", "Horogothgar Cooking Pot", "Huzamogaarb Chaos Crown", "Kal I Kran Chieftain Crown", "Kal I Kran Mace", "Kal I Kran Warhorn", "Saragorgak Star Crown", "Da Boss man Sculpture"] },
+];
+
 let artefactInput = {}
-if(localStorage.artefactInput)
+//TODO: should probably clear the local storage of old layout
+if (localStorage.artefactInput)
     artefactInput = JSON.parse(localStorage.artefactInput);
-console.log(artefactInput)    
-artefactsList.forEach(item => {
-    $(".main").append(`
-    <div class="row">
+console.log(artefactInput)
+
+artefactCollections.forEach(collection => {
+    let html = [];
+    html.push(`<div class="row"><div class="col-sm-4"></div><div class="col-sm-4"><h3>Collection: ${collection.name}</h3></div>`);
+
+    collection.artefacts.forEach(artefact => {
+        html.push(`
         <div class="col-sm-4"></div>
-        <div class="col-sm-3">
-            ${item.name}    
-        </div>
+        <div class="col-sm-4">${artefact}</div>
         <div class="col-sm-1">
-            <input class="artefactInput" type='number' data-name='${item.name}' value=${artefactInput[item.name] || 0}>
+            <input class="artefactInput" type='number' data-collection='${collection.name}' data-artefact='${artefact}' value=${artefactInput[collection.name + "_" + artefact] || 0}>
         </div>
-        <div class="col-sm-4"></div>
-    </div>`)
+        <div class="col-sm-4"></div>`);
+    });
+    html.push(`</div>`);
+    $(".main").append(html.join(`\n`));
 });
 
 $(".import").click(() => {
     let mats = {};
     let artefactInput = {};
     document.querySelectorAll("input").forEach(item => {
-        let name = item.dataset.name;
-        artefactInput[name] = parseInt(item.value);
+        let collectionName = item.dataset.collection;
+        let artefactName = item.dataset.artefact;
+        artefactInput[collectionName + "_" + artefactName] = parseInt(item.value);
         artefactsList.forEach(art => {
-            if (art.name === name) {
+            if (art.name === artefactName) {
                 art.mats.forEach(mat => {
-                    if (mats[mat.name] === undefined){
+                    if (mats[mat.name] === undefined) {
                         mats[mat.name] = parseInt(mat.qty) * parseInt(item.value)
                     }
-                    else{
-                        mats[mat.name] =+ mats[mat.name] + (parseInt(mat.qty) * parseInt(item.value))
+                    else {
+                        mats[mat.name] = + mats[mat.name] + (parseInt(mat.qty) * parseInt(item.value))
                     }
                 })
             }
