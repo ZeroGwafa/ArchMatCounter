@@ -193,32 +193,56 @@ let artefactInput = {}
 //TODO: should probably clear the local storage of old layout
 if (localStorage.artefactInput)
     artefactInput = JSON.parse(localStorage.artefactInput);
-console.log(artefactInput)
+console.log(artefactInput);
+
+let currentPage = window.location.pathname.split("/").pop();
 
 artefactCollections.forEach(collection => {
-    let html = [];
-    html.push(`<div class="row"><div class="col-sm-4"></div><div class="col-sm-4"><h3>Collection: ${collection.name}</h3></div>`);
-
-    collection.artefacts.forEach(artefact => {
-        html.push(`
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">${artefact}</div>
-        <div class="col-sm-1">
-            <input class="artefactInput" type='number' data-collection='${collection.name}' data-artefact='${artefact}' value=${artefactInput[collection.name + "_" + artefact] || 0}>
-        </div>
-        <div class="col-sm-4"></div>`);
-    });
-    html.push(`</div>`);
-    $(".main").append(html.join(`\n`));
+    if(currentPage === 'artefacts.html'){
+        $(".main").append(`
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-3">
+                ${item.name}    
+            </div>
+            <div class="col-sm-1">
+                <input class="artefactInput" type='number' data-name='${item.name}' value=${artefactInput[item.name] || 0}>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>`)
+    }
+    else if(currentPage === 'collections.html'){
+        let html = [];
+        html.push(`<div class="row"><div class="col-sm-4"></div><div class="col-sm-4"><h3>Collection: ${collection.name}</h3></div>`);
+    
+        collection.artefacts.forEach(artefact => {
+            html.push(`
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">${artefact}</div>
+            <div class="col-sm-1">
+                <input class="artefactInput" type='number' data-collection='${collection.name}' data-artefact='${artefact}' value=${artefactInput[collection.name + "_" + artefact] || 0}>
+            </div>
+            <div class="col-sm-4"></div>`);
+        });
+        html.push(`</div>`);
+        $(".main").append(html.join(`\n`));
+    }
 });
 
 $(".import").click(() => {
     let mats = {};
     let artefactInput = {};
     document.querySelectorAll("input").forEach(item => {
-        let collectionName = item.dataset.collection;
-        let artefactName = item.dataset.artefact;
-        artefactInput[collectionName + "_" + artefactName] = parseInt(item.value);
+        let artefactName;
+        if(currentPage === 'artefacts.html') {
+            artefactName = item.dataset.name;
+            artefactInput[name] = parseInt(item.value);
+        }
+        else if(currentPage === 'collections.html') {
+            let collectionName = item.dataset.collection;
+            artefactName = item.dataset.artefact;
+            artefactInput[collectionName + "_" + artefactName] = parseInt(item.value);
+        }
         artefactsList.forEach(art => {
             if (art.name === artefactName) {
                 art.mats.forEach(mat => {
