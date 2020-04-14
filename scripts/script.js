@@ -5,7 +5,8 @@ reader.readargs = {
         a1lib.mixcolor(255, 255, 255), //Common Mats
         a1lib.mixcolor(255, 128, 0), //Uncommon Mats
         a1lib.mixcolor(255, 165, 0), //Scavenging comps
-        a1lib.mixcolor(255, 0, 0) //Rare Mats
+        a1lib.mixcolor(255, 0, 0), //Rare Mats
+        a1lib.mixcolor(0, 255, 0) //Green Fortune Text
     ],
     backwards: true
 };
@@ -51,20 +52,33 @@ else {
         if (chat.trim().length === 0) //Check if chat is null, to reduce some console errors.
             return;
         //Match "You find some <material>"
-        if (chat.match(/You find some .+|Your auto-screener .+|material storage:? .+/g) !== null)
-            var material = chat.match(/You find some .+|Your auto-screener .+|material storage:? .+/g)[0].trim();
-        else return;
+        if (chat.match(/You find some .+|Your auto-screener .+|material storage:? .+|Fortune perk/g) !== null)
+            var material = chat.match(/You find some .+|Your auto-screener .+|material storage:? .+|Fortune perk .+/g)[0].trim();
+        else {
+            return
+        }
         if (material !== null) {
-            let name = "";
-            if (material.indexOf("You find some") > -1)
+            let name, type
+            if (material.indexOf("You find some") > -1) {
                 name = material.split("You find some ")[1].trim().replace("'", "")
-            else if (material.indexOf("auto-screener") > -1)
-                name = material.match(/spits out some[^\d]*/)[0].split(/spits out some /)[1].trim().replace("'", "");
-            else
-                name = material.split(/material storage:? /)[1].trim().replace("'", "");
+                type = "Normal"
+            }
+            else if (material.indexOf("auto-screener") > -1) {
+                name = material.match(/spits out some [\w+\s]+/)[0].split(/spits out some/)[1].trim().replace("'", "");
+                type = "Auto-Screener";
+            }
+            else if ((material.indexOf("material storage") > -1)) {
+                name = material.match(/material storage:? [\w+\s]*/)[0].split(/material storage:? /)[1].trim().replace("'", "");
+                type = "porter"
+            }
+            else if ((material.indexOf("Fortune perk") > -1)) {
+                name = material.match(/your bank:? [\w+\s]*/)[0].split(/your bank:? /)[1].split(/ x /)[0].trim().replace("'", "");
+                type = "fortune"
+            }
             console.log({
                 chat: chat,
                 material: material,
+                type: type,
                 name: name
             });
             materials.forEach(mat => {
@@ -124,14 +138,23 @@ else {
             }
         })
         if (localStorage.filter === "true" && !$(".edit").is(":checked")) {
-            materials.forEach(mat => {
-                let name = mat.name.replace("'", "")
-                if ((mat.qty === 0 && mat.goal === 0) || mat.hide === true) {
-                    $(`[data-name='${name}']`).hide();
-                } else {
-                    $(`[data-name='${name}']`).show();
-                }
-            });
+            $(".mats .row").hide();
+            if ($(".goals").is(":checked")) {
+                materials.forEach(mat => {
+                    let name = mat.name.replace("'", "");
+                    if (mat.hide === false && mat.goal > 0) {
+                        $(`[data-name='${name}']`).show();
+                    }
+                });
+            }
+            else {
+                materials.forEach(mat => {
+                    let name = mat.name.replace("'", "");
+                    if (mat.hide === false && mat.qty > 0) {
+                        $(`[data-name='${name}']`).show();
+                    }
+                });
+            }
         }
     }
 
@@ -170,7 +193,7 @@ else {
                 if ($(".tracker").text() == "Stop") {
                     $(".tracker").click();
                 }
-                $(".row:hidden, .hide").show();
+                $(".row:hidden:not(.modal *), .hide").show();
                 $(".qty, .goal").attr('contenteditable', 'true').on("focus", function () { document.execCommand('selectAll', false, null); });
                 $(".qty:first").focus();
             } else {
@@ -209,21 +232,12 @@ else {
         })
 
         $(".clear").click(function (e) {
-            var sbox = promptbox2({ width: document.body.offsetWidth, title: `Clear ${e.target.name}`, style: "nis" }, [
-                { t: "text", text: `Are you sure you want to clear ${e.target.name}?` },
-                { t: "h/11" },
-                { t: "button:confirm", text: "Confirm" },
-                { t: "button:cancel", text: "Cancel" }
-            ]);
-            sbox.confirm.onclick = function () {
-                let type = e.target.dataset.type;
-                materials.forEach(mat => {
-                    mat[type] = 0;
-                })
-                buildTable()
-                sbox.frame.close();
-            }
-            sbox.cancel.onclick = sbox.frame.close.b();
+            let type = e.target.dataset.type;
+            materials.forEach(mat => {
+                mat[type] = 0;
+            })
+            buildTable();
+
         });
 
         $(".sort").click(e => {
@@ -240,14 +254,14 @@ else {
         })
 
         $(".export").click(function () {
-            var str = 'ComponentName,Quantity,goaled\n'; // column headers
+            var str = 'Material,Quantity,Goal\n'; // column headers
             materials.forEach(mat => {
                 let name = mat.name.replace("'", "");
                 str = `${str}${name},${mat.qty},${mat.goal}\n`;
             })
             var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
             if (navigator.msSaveBlob) { // IE 10+
-                navigator.msSaveBlob(blob, "componentExport.csv");
+                navigator.msSaveBlob(blob, "archMatsExport.csv");
             } else {
                 var link = document.createElement("a");
                 if (link.download !== undefined) { // feature detection
@@ -284,12 +298,15 @@ else {
 
         $("button.tracker").click();
 
-        $("#menu").on("shown.bs.collapse", function () { $("body").addClass("expand") })
-        $("#menu").on("hide.bs.collapse", function () { $("body").removeClass("expand"), buildTable() })
-
         localStorage.removeItem("goalMats")
+        localStorage.removeItem("tempMaterials")
+
         function onStorageEvent(storageEvent) {
             if (storageEvent.key === "goalMats") {
+                if (localStorage.tempMaterials) {
+                    materials = JSON.parse(localStorage.tempMaterials)
+                    localStorage.removeItem("tempMaterials")
+                }
                 var mats = JSON.parse(storageEvent.newValue)
                 materials.forEach((mat, i) => {
                     mat.goal = parseInt(mats[mat.name])
@@ -304,44 +321,10 @@ else {
             window.open("/ArchMatCounter/artefacts.html", "", "width=400")
         })
 
-        // $("#test").click(function () {
-        //     console.log("test")
-        //     let chat = ["Select Chat"];
-        //     reader.pos.boxes.forEach((box,i) => {
-        //         chat.push(i)
-        //     })
-        //     var sbox = promptbox2({ width: window.innerWidth, title: "Settings", style: "nis" }, [
-        //         { t: "h/11" },
-        //         { t: "button:save", text: "Save Settings" },
-        //         { t: "button:cancel", text: "Cancel" },
-        //         { t: "h/11" },
-        //         { t: "text", text: "Filter" },
-        //         { t: "bool:filter"},
-        //         { t: "h/11" },
-        //         { t: "text", text: "Edit Mode" },
-        //         { t: "bool:edit"},
-        //         { t: "h/11" },
-        //         { t: "text", text: "Enable Goals" },
-        //         { t: "bool:goals"},
-        //         { t: "h/11" },
-        //         { t: "text", text: "Select Chat" },
-        //         { t: "dropdown:chat", options:chat},
-        //         { t: "h/11" },
-        //         { t: "button:clearQty", text: "Clear Qty" },
-        //         { t: "button:clearGoals", text: "Clear Goals" },
-        //         { t: "h/11" },
-        //         { t: "button:artiCalc", text: "Artifact Calculator" },
-        //         { t: "button:exportCsv", text: "Export CSV" },
-                
-        //     ]);
-        //     sbox.save.onclick = function () {
-        //         console.log(sbox.filter.getValue(), sbox.edit.getValue(), sbox.goals.getValue(), sbox.chat.getValue())
-        //         sbox.frame.close();
-        //     }
-        //     sbox.cancel.onclick = sbox.frame.close.b();
-        // })
-
-
+        window.onresize = () => {
+            if (!$(".edit").is(":checked") && !$("#settings").hasClass("show"))
+                location.reload();
+        }
     })
 
 }

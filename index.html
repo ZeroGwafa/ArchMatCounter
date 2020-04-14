@@ -17,23 +17,46 @@
 
 <body class="nis">
     <div class="container">
-        <div class="row">
+        <div class="row matHeader">
+            <div class="col hide">Hide</div>
+            <div class="col-6 sort" data-sort='level'>
+                Mats
+            </div>
+            <div class="col sort" data-sort='qty'>
+                Qty
+            </div>
+            <div class="col sort goalCol" data-sort='goal'>
+                Goal
+            </div>
+        </div>
+        <div class="row scroll">
+            <div class="col mats ">
+            </div>
+        </div>
+        <div class="row fixed-bottom">
             <div class="col">
                 <button class="tracker nisbutton">
                     Start
                 </button>
-                <button class="nisbutton" type="button" data-toggle="collapse" data-target="#menu" aria-expanded="false" aria-controls="menu">
-                <!-- <button class="nisbutton" id="test"> -->
-                    Menu
+                <button class="nisbutton" data-toggle="modal" data-target="#settings" type="button">
+                    Settings
                 </button>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="collapse" id="menu" class="menu">
+    </div>
+    <div class="modal nis" tabindex="-1" role="dialog" id="settings">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="col header" title="When checked, will only show materials with a Quantity greater than 0">
-                            <h6>Filter Mats</h6>
+                            <h6>Enable Filter</h6>
                         </div>
                         <div class="col">
                             <input type="checkbox" class="filter" />
@@ -41,10 +64,10 @@
                     </div>
                     <div class="row">
                         <div class="col header" title="When checked, allows you to edit the values for each material.">
-                            <h6>Edit Mode</h6>
+                            <h6>Enable Edit</h6>
                         </div>
                         <div class="col">
-                            <input type="checkbox" class="edit" />
+                            <input type="checkbox" class="edit" data-toggle="modal" data-target="#settings" />
                         </div>
                     </div>
                     <div class="row">
@@ -67,47 +90,72 @@
                     </div>
                     <div class="row">
                         <div class="col header" title="Clears material Qty column.">
-                            <button class="clear nisbutton" data-type="qty" name='qty'>
-                                    ClearQty
-                                </button>
+                            <button class="nisbutton" data-type="qty" name='qty' data-toggle="collapse" href="#clearQty">
+                                ClearQty
+                            </button>
                         </div>
                         <div class="col header" title="Clears material Goals column.">
-                            <button class="clear nisbutton" data-type="goal" name="goals">
-                                    ClearGoals
-                                </button>
+                            <button class="nisbutton" data-type="goal" name="goals" data-toggle="collapse" href="#clearGoals">
+                                ClearGoals
+                            </button>
                         </div>
                     </div>
+                    <div class="row collapse warning" id="clearQty">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col text-center">
+                                    Clear Qty?
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col header">
+                                    <button class="nisbutton clear" data-type="qty" data-toggle="collapse" href="#clearQty">
+                                        Yes
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="nisbutton" data-toggle="collapse" href="#clearQty">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row collapse warning" id="clearGoals">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col text-center">
+                                    Clear Goals?
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col header">
+                                    <button class="nisbutton clear" data-type="goal" data-toggle="collapse" href="#clearGoals">
+                                        Yes
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="nisbutton" data-toggle="collapse" href="#clearGoals">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col header" title="Imports a JSON list from the Wiki Calc.">
-                            <button class='nisbutton openImport'>
-                                    ArtifactCalc
-                                </button>
+                            <button class='nisbutton openImport' data-toggle="modal" data-target="#settings">
+                                ArtifactCalc
+                            </button>
                         </div>
                         <div class="col header" title="Exports the current data as a CSV file.">
                             <button class='nisbutton export'>
-                                    CSV Export
-                                </button>
+                                CSV Export
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container matSection">
-        <div class="row matHeader">
-            <div class="col hide">Hide</div>
-            <div class="col-6 sort" data-sort='level'>
-                Mats
-            </div>
-            <div class="col sort" data-sort='qty'>
-                Qty
-            </div>
-            <div class="col sort goalCol" data-sort='goal'>
-                Goal
-            </div>
-        </div>
-        <div class="row scroll">
-            <div class="col mats">
             </div>
         </div>
     </div>
