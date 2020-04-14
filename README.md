@@ -44,12 +44,6 @@ Qty and Goal will sort those columns by amount, descending.
 
 ![menu](/images/menu.png)
 
-### Filter Mats
-
-Enabling this option will hide all materials whose Qty or Goal is 0, as well as any materials whose "hide" checkbox is checked (more on this below).
-
-![filter](/images/filter.gif)
-
 ### Edit Mode
 
 Enabling this will enable a couple editable options.
@@ -61,6 +55,19 @@ Next, the Qty and Goal boxes for each material can be edited.  Useful for tracki
 When setting a goal, once the Qty amount is greater than, or equal to the goal, the material row will highlight in green.
 
 ![editMode](/images/editMode.png)
+
+### Filter Mats
+
+- Will always hide any rows with the "Hide" box checked
+
+If only Filter is checked
+ -  Hide rows where qty = 0
+
+If Filter + goals are checked
+ -  Hide rows where qty = 0
+ -  Hide rows where goal = 0
+
+![filter](/images/filter.gif)
 
 ### Enable Goals
 Checking this option will show the Goals column.
