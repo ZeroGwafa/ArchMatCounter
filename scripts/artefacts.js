@@ -15,7 +15,7 @@ $(function () {
                         title='
 Level: ${item.level}
 XP: ${item.experience}
-Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
+Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` })}'>
                         <a href="http://runescape.wiki/${item.name}" target="_blank" tabindex=-1>${item.name}</a>
                     </span>
                 </div>
@@ -26,6 +26,11 @@ Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
             </div>
         </div>`)
         });
+        if ($(".search").val() !== "")
+            $(".search").keyup();
+        else if ($("#collection").val() !== "")
+            $("#collection").change()
+
     }
 
     function calcMats() {
@@ -90,6 +95,7 @@ Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
     })
 
     $(".search").on("keyup search", function () {
+        $("#collection").val("");
         $(".main .row").hide();
         let search = $(this).val();
         $(".main .row").each(function (i, row) {
@@ -120,6 +126,7 @@ Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
 
     //Dropdown logic
     $("#collection").change(function () {
+        $(".search").val("");
         let collection = $(this).val();
         $(".main .row").hide();
         $(".main .row").each(function (i, row) {
