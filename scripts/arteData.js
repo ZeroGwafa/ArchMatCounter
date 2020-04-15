@@ -1279,7 +1279,7 @@ let artefactsList = [
         ]
     },
     {
-        "name": "Narogoshuun 'Hob-da-Gob' ball",
+        "name": "Narogoshuun Hob-da-Gob ball",
         "level": "76",
         "experience": "6066.7",
         "mats": [
