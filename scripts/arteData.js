@@ -3460,6 +3460,6 @@ let artefactsList = [
             "Museum - Bandosian III"
         ]
     },
-    { name: "Tetracompass", mats: [{ name: "Malachite green", qty: 30 }, { name: "Cadmium red", qty: 30 }, { name: "Cobalt blue", qty: 30 }, { name: "Armadylean yellow", qty: 30 }, { name: "Tyrian purple", qty: 30 }] },
+    { name: "Tetracompass", level: 50, experience: "2065", mats: [{ name: "Malachite green", qty: 30 }, { name: "Cadmium red", qty: 30 }, { name: "Cobalt blue", qty: 30 }, { name: "Armadylean yellow", qty: 30 }, { name: "Tyrian purple", qty: 30 }], collections: ["Other"] },
 
 ];

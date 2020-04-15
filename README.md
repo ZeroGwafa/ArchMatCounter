@@ -83,7 +83,16 @@ This will open a new window with a list of Artifacts in the game.  Enter the num
 
 The Artifact list is stored, and will populate when the window opens again.  
 
-![atrifactCalc](/images/artifactCalc.gif)
+![artifactCalc](/images/artifactCalc.gif)
 
-### Export Data as CSV
+#### Artifact Information
+If you mouse-over the name of any artifact in the list, it will show Level, XP, and Material informaiton.  Also, clicking on the artifact name will take you to the appropriate Runescape Wiki page.
+
+#### Search and Collections
+At the bottom of the window is a Search box, for searching for a specific Artifact, or the collections dropdown, which will show all artifacts for the selected collection.
+
+![artifactList](/images/artifactList.png)
+
+
+### CSV Export
 - Clicking this will generate a CSV file with your current material stats.  

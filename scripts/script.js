@@ -179,7 +179,7 @@ else {
                     materials[i].hide = false
             })
             if ($(this).is(':checked')) {
-                $(".filter, .clear").prop("disabled", true)
+                $(".filter, .modal-body button").prop("disabled", true)
 
                 // Apply tabindex
                 $(".row .qty").attr("tabindex", "1");
@@ -200,7 +200,7 @@ else {
                 if ($(".tracker").text() == "Start") {
                     $(".tracker").click();
                 }
-                $(".filter, .clear").prop("disabled", false);
+                $(".filter, .modal-body button").prop("disabled", false);
                 $(".row .qty,.row .goal").removeAttr("tabindex");
                 document.querySelectorAll(".col-4").forEach(row => {
                     row.classList.remove("col-4")

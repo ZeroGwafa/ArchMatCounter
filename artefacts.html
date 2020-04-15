@@ -11,12 +11,27 @@
 </head>
 
 <body class="nis artefact">
-    <div class="container artifactMenu">
-        <div class="row">
-            <div class="col"><button class="nisbutton import">Import</button></div>
-        </div>
-    </div>
     <div class="container main">
+    </div>
+    <div class="container artifactMenu">
+        <div class="row fixed-bottom">
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">Search:</div>
+                    <div class="col-4"><input type="search" class="search"></div>
+                    <div class="col-2">Collection:</div>
+                    <div class="col-4">
+                        <select id="collection">
+                            <option value=''>Show All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"><button class="nisbutton clearAll">Clear</button></div>
+                    <div class="col"><button class="nisbutton import">Import</button></div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="scripts/data.js"></script>

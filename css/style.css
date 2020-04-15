@@ -74,23 +74,18 @@ body.nis:not(.artefact) {
     display: none;
 }
 
-.expand {
-    /* margin-bottom: 17em !important; */
-}
-
 .nisbutton {
     font-size: 8pt !important;
 }
 
 .artefact {
     overflow: hidden !important;
-    /* margin-bottom: 2em !important; */
     min-width: 400px;
+    padding-right: .5em;
 }
 
 .artefactInput {
     text-align: center;
-    /* max-width: 2em; */
 }
 
 .artefactInput::-webkit-outer-spin-button,
@@ -99,21 +94,14 @@ body.nis:not(.artefact) {
     /* margin: 0; */
 }
 
-.import {
-    position: fixed;
-    top: 0;
-    right: 0;
-}
-
 .artifactMenu {
-    margin-bottom: 4em
+    /* margin-top: 4em */
 }
 
 .main {
-    overflow: scroll;
-    padding-bottom: 3em;
-    max-height: 100vh;
-    margin: 0 5px;
+    overflow-y: scroll;
+    max-height: 84vh;
+    margin: 5px 5px 0 5px;
 }
 
 .input-group-text {
@@ -130,4 +118,9 @@ body.nis:not(.artefact) {
     background-color: yellow;
     color: black;
     font-weight: bold;
+}
+
+input[type='search'],
+#collection {
+    width: 100%
 }

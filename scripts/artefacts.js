@@ -8,10 +8,16 @@ $(function () {
         console.log(artefactInput)
         artefactsList.forEach(item => {
             $(".main").append(`
-        <div class="row">
+        <div class="row" data-mat="${item.name}">
             <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-                    <span class="input-group-text">${item.name}</span>
+                    <span class="input-group-text" 
+                        title='
+Level: ${item.level}
+XP: ${item.experience}
+Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
+                        <a href="http://runescape.wiki/${item.name}" target="_blank">${item.name}</a>
+                    </span>
                 </div>
                 <input type="number" class="artefactInput form-control" data-name="${item.name}" value=${artefactInput[item.name] || 0}>
                 <div class="input-group-append" style="${artefactInput[item.name] > 0 ? "" : "display:none"}">
@@ -78,4 +84,59 @@ $(function () {
 
     $(".artefactInput").on("focus", function () { document.execCommand('selectAll', false, null); });
     $(".artefactInput:first").focus()
+
+    $(".clearAll").click(function () {
+        $("input[type='number']").val(0);
+    })
+
+    $(".search").on("keyup search", function () {
+        $(".main .row").hide();
+        let search = $(this).val();
+        $(".main .row").each(function (i, row) {
+            if ($(row).data("mat").toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                $(row).show();
+            }
+        })
+        if (search.length === 0)
+            $(".main .row").show();
+    })
+
+    // Get Collections from artefactList
+    let collectionList = [];
+    artefactsList.forEach(item => {
+        for (x in item.collections) {
+            collectionList.push(item.collections[x])
+        }
+    })
+    //Make unique Set from collections, sorted alphabetically
+    collectionList = new Set([...collectionList.sort()])
+    collectionList.forEach(item => {
+        if (item !== "") {
+            //Add the collection name to the Dropdown.
+            $("#collection").append(`
+            <option value='${item}'>${item}</option>`)
+        }
+    })
+
+    //Dropdown logic
+    $("#collection").change(function () {
+        let collection = $(this).val();
+        $(".main .row").hide();
+        $(".main .row").each(function (i, row) {
+            let name = $(row).data("mat");
+            artefactsList.forEach(artefact => {
+                if (name === artefact.name) {
+                    for (x in artefact.collections) {
+                        if (collection === artefact.collections[x]) {
+                            $(row).show();
+                        }
+                    }
+                    return;
+                }
+            })
+        })
+        if ($(this).val() === "")
+            $(".main .row").show();
+    })
+
 })
