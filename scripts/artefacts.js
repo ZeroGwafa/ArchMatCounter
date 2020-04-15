@@ -56,15 +56,8 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` }
         localStorage.setItem("artefactInput", JSON.stringify(artefactInput))
     }
 
-    listArtefacts();
-
-    $(".import").click(() => {
-        calcMats()
-        window.close()
-    })
-
-    $(".main").on("click", "button", function (e) {
-        let name = $(this).data("name");
+    function markComplete(name) {
+        console.log(name);
         let temp = {};
         let tempMaterials = JSON.parse(localStorage.getItem("mats"))
         artefactsList.forEach(art => {
@@ -83,7 +76,19 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` }
         })
         $(`input[data-name='${name}']`).val(0);
         localStorage.setItem("tempMaterials", JSON.stringify(tempMaterials))
+    }
+
+    listArtefacts();
+
+    $(".import").click(() => {
         calcMats()
+        window.close()
+    })
+
+    $(".main").on("click", "button.complete", function (e) {
+        let name = $(this).data("name");
+        markComplete(name);
+        calcMats();
         listArtefacts();
     })
 
@@ -146,4 +151,11 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` }
             $(".main .row").show();
     })
 
+    $(".completeAll").click(function () {
+        $(".complete:visible").each(function () {
+            markComplete($(this).data("name"))
+            calcMats();
+        })
+        listArtefacts();
+    })
 })

@@ -2133,8 +2133,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Armadylean III",
-            "Museum - Armadylean III"
+            "Armadylean II",
+            "Museum - Armadylean II"
         ]
     },
     {
@@ -2496,8 +2496,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Armadylean II",
-            "Museum - Armadylean II"
+            "Armadylean III",
+            "Museum - Armadylean III"
         ]
     },
     {
