@@ -16,7 +16,7 @@ $(function () {
 Level: ${item.level}
 XP: ${item.experience}
 Materials: ${item.mats.map(function(mat){return `\n${mat.name}: ${mat.qty}`})}'>
-                        <a href="http://runescape.wiki/${item.name}" target="_blank">${item.name}</a>
+                        <a href="http://runescape.wiki/${item.name}" target="_blank" tabindex=-1>${item.name}</a>
                     </span>
                 </div>
                 <input type="number" class="artefactInput form-control" data-name="${item.name}" value=${artefactInput[item.name] || 0}>
