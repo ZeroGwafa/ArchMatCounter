@@ -100,7 +100,7 @@ body.nis:not(.artefact) {
 
 .main {
     overflow-y: scroll;
-    max-height: 84vh;
+    max-height: 80vh;
     margin: 5px 5px 0 5px;
 }
 
