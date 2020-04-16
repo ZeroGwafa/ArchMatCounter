@@ -121,6 +121,7 @@ else {
     }
 
     function tidyTable(name) {
+        $(".mats .warning").remove();
         localStorage.mats = JSON.stringify(materials);
         $(`[data-name="${name}"]`).removeClass('normal complete')
         $(`[data-name="${name}"]`).addClass("getMat")
@@ -154,6 +155,9 @@ else {
                         $(`[data-name='${name}']`).show();
                     }
                 });
+            }
+            if($(".mats .row:visible").length === 0){
+                $(".mats").append("<div class='warning'>No goals have been set.  You can uncheck the 'Enable Goals' box in Settings to see all Materials that have a qty, or uncheck the filter to show everything</div>")
             }
         }
     }
