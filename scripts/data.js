@@ -316,16 +316,21 @@ let materials = [
     }
 ];
 
-if (localStorage.getItem("mats") != null) {
-    if (JSON.parse(localStorage.mats)[0].goal === undefined) {
-        materials = JSON.parse(localStorage.mats);
-        materials.forEach(mat => {
-            if (mat.goal === undefined)
+function checkSaveMats(){
+
+    if (localStorage.getItem("mats") != null) {
+        if (JSON.parse(localStorage.mats)[0].goal === undefined) {
+            materials = JSON.parse(localStorage.mats);
+            materials.forEach(mat => {
+                if (mat.goal === undefined)
                 mat.goal = 0
-        })
-        localStorage.mats = JSON.stringify(materials);
-        location.reload();
-    } else {
-        materials = JSON.parse(localStorage.mats);
+            })
+            localStorage.mats = JSON.stringify(materials);
+            location.reload();
+        } else {
+            materials = JSON.parse(localStorage.mats);
+        }
     }
 }
+
+checkSaveMats();

@@ -306,6 +306,7 @@ else {
         localStorage.removeItem("tempMaterials")
 
         function onStorageEvent(storageEvent) {
+            checkSaveMats()
             if (storageEvent.key === "goalMats") {
                 if (localStorage.tempMaterials) {
                     materials = JSON.parse(localStorage.tempMaterials)

@@ -5,7 +5,6 @@ $(function () {
         let artefactInput = {}
         if (localStorage.artefactInput)
             artefactInput = JSON.parse(localStorage.artefactInput);
-        console.log(artefactInput)
         artefactsList.forEach(item => {
             $(".main").append(`
         <div class="row" data-mat="${item.name}">
@@ -15,7 +14,7 @@ $(function () {
                         title='
 Level: ${item.level}
 XP: ${item.experience}
-Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` })}'>
+Materials: ${item.mats.map(function (mat) { return `\n${mat.name.replace("'","")}: ${mat.qty}` })}'>
                         <a href="http://runescape.wiki/${item.name}" target="_blank" tabindex=-1>${item.name}</a>
                     </span>
                 </div>
@@ -57,7 +56,6 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` }
     }
 
     function markComplete(name) {
-        console.log(name);
         let temp = {};
         let tempMaterials = JSON.parse(localStorage.getItem("mats"))
         artefactsList.forEach(art => {
@@ -152,10 +150,20 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name}: ${mat.qty}` }
     })
 
     $(".completeAll").click(function () {
-        $(".complete:visible").each(function () {
-            markComplete($(this).data("name"))
-            calcMats();
+        localStorage.removeItem("artefactInput");
+        let goalMats = JSON.parse(localStorage.getItem("goalMats"));
+        let curMats = JSON.parse(localStorage.getItem("mats"));
+        Object.keys(goalMats).forEach(tempMat => {
+            curMats.forEach(mat => {
+                if(tempMat === mat.name){
+                    mat.qty = parseInt(mat.qty) - parseInt(goalMats[tempMat])
+                    goalMats[tempMat] -= parseInt(goalMats[tempMat]);
+                }
+            })
         })
+        localStorage.setItem("mats", JSON.stringify(curMats))
+        localStorage.setItem("goalMats", JSON.stringify(goalMats))
         listArtefacts();
+        location.reload()
     })
 })
