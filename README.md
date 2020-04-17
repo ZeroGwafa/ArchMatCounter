@@ -18,8 +18,11 @@ https://zerogwafa.github.io/ArchMatCounter/
 Please submit all issues in the following format:
 
 Issue:
+
 Options enabled at the time of issue: (Filter, Edit, Goals)
+
 Steps to reproduce issue:
+
 Screenshots: (Not needed if you provide reproduction steps).
 
 ## Instructions:
