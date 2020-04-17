@@ -156,7 +156,7 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name.replace("'","")
         Object.keys(goalMats).forEach(tempMat => {
             curMats.forEach(mat => {
                 if(tempMat === mat.name){
-                    mat.qty = parseInt(mat.qty) - parseInt(goalMats[tempMat])
+                    mat.qty = Math.max(parseInt(mat.qty) - parseInt(goalMats[tempMat]), 0)
                     goalMats[tempMat] -= parseInt(goalMats[tempMat]);
                 }
             })
