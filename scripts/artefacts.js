@@ -150,7 +150,6 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name.replace("'","")
     })
 
     $(".completeAll").click(function () {
-        localStorage.removeItem("artefactInput");
         let goalMats = JSON.parse(localStorage.getItem("goalMats"));
         let curMats = JSON.parse(localStorage.getItem("mats"));
         Object.keys(goalMats).forEach(tempMat => {
@@ -164,6 +163,7 @@ Materials: ${item.mats.map(function (mat) { return `\n${mat.name.replace("'","")
         localStorage.setItem("mats", JSON.stringify(curMats))
         localStorage.setItem("goalMats", JSON.stringify(goalMats))
         listArtefacts();
+        localStorage.removeItem("artefactInput");
         location.reload()
     })
 })
