@@ -2082,7 +2082,7 @@ let artefactsList = [
                 "qty": "24"
             },
             {
-                "name": "Soapstone",
+                "name": "Warforged bronze",
                 "qty": "30"
             }
         ],
