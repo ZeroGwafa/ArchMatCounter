@@ -7,7 +7,7 @@
     "defaultWidth": 277,
     "defaultHeight": 551,
     "minWidth": 330,
-    "minHeight": 110,
+    "minHeight": 108,
     "requestHandlers": [],
     "activators": [],
     "permissions": "pixel,gamestate,overlay"
