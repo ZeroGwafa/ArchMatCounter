@@ -8,6 +8,9 @@
 
 .matHeader {
     border-top: white solid .5px;
+    background: url('https://runeapps.org/nis/alt1-currentskin/nisbutton.png') 0px -100%/24px 400% repeat content-box;
+    color: black;
+    font-family: 'trajan-pro-3';
 }
 
 .mats>.row,
@@ -24,7 +27,7 @@
 
 .scroll {
     overflow-y: scroll;
-    height: calc(100% - 78px);
+    height: calc(100% - 70px);
 }
 
 .mats {
@@ -100,7 +103,7 @@ body.nis:not(.artefact) {
 
 .main {
     overflow-y: scroll;
-    max-height: 80vh;
+    max-height: 75vh;
     margin: 5px 5px 0 5px;
 }
 
@@ -109,13 +112,20 @@ body.nis:not(.artefact) {
 }
 
 .modal-body,
-.modal-header {
+.modal-header,
+.modal-footer {
     background-color: grey;
     color: white;
 }
 
 .warning {
     background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
+
+.danger {
+    background-color: red;
     color: black;
     font-weight: bold;
 }

@@ -48,12 +48,16 @@
         </div>
         <div class="row fixed-bottom">
             <div class="col">
-                <button class="tracker nisbutton">
-                    Start
-                </button>
-                <button class="nisbutton" data-toggle="modal" data-target="#settings" type="button">
-                    Settings
-                </button>
+                <div class="row">
+                    <div class="col">
+                        <button class="tracker nisbutton">
+                            Start
+                        </button>
+                        <button class="nisbutton" data-toggle="modal" data-target="#settings" type="button">
+                            Settings
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,6 +71,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <h6>Sort Mats by: </h6>
+                        </div>
+                        <div class="col">
+                            <select id="sort">
+                                <option value="id">Default</option>
+                                <option value="faction">Mat Storage</option>
+                                <option value="name">Name</option>
+                                <option value="qty">Qty</option>
+                                <option value="goal">Goal</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col header" title="When checked, will only show materials with a Quantity greater than 0">
                             <h6>Enable Filter</h6>
@@ -155,7 +173,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col header" title="Imports a JSON list from the Wiki Calc.">
                             <button class='nisbutton openImport' data-toggle="modal" data-target="#settings">
@@ -166,6 +183,38 @@
                             <button class='nisbutton export'>
                                 CSV Export
                             </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="nisbutton" data-type="reset" data-toggle="collapse" href="#resetApp" title="Fa">
+                                        Factory Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row collapse danger" id="resetApp">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            This will remove all saved data and set all settings to default. This is irreversable!
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col header">
+                                            <button class="nisbutton clear" data-type="reset" data-toggle="collapse" href="#resetApp">
+                                                Yes
+                                            </button>
+                                        </div>
+                                        <div class="col">
+                                            <button class="nisbutton" data-toggle="collapse" href="#resetApp">
+                                                No
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

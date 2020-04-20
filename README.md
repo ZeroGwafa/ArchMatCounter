@@ -31,8 +31,10 @@ Screenshots: (Not needed if you provide reproduction steps).
     2. Ensure that the chat filter is off on the chat window you want to track materials on.  
 
         2a. Ensure timestamps are on!  Otherwise, the tracker may miss a material!
+
+    3. Make sure your transparency is turned off (Not see-through) on your interfaces!  Settings -> UI Customisation -> Move Transparency slider all the way to the left.
     
-    3. Gather materials.  This will catch all material messages.
+    4. Gather materials.  This will catch all material messages.
 
 The app will automatically start tracking as soon as it is opened.
 
@@ -56,19 +58,16 @@ Qty and Goal will sort those columns by amount, descending.
 
 ![menu](/images/menu.png)
 
-### Edit Mode
+### Sort Mats by:
 
-Enabling this will enable a couple editable options.
+- Enables changing the sort on the mats list.
+  - Default - Default Level order.
+  - Mat Storage - Lists Mats in the same order as the Material Storage information option on the Archaeology journal.
+  - Name - By name, Ascending.
+  - Qty - By Qty tracked, Descending.
+  - Goal - By Goals set, Descending.
 
-First, the "Hide" column will become visible.  This will allow the user to hide specific columns, regardless of Qty.
-
-Next, the Qty and Goal boxes for each material can be edited.  Useful for tracking your current material count, or setting goals for certain materials.
-
-When setting a goal, once the Qty amount is greater than, or equal to the goal, the material row will highlight in green.
-
-![editMode](/images/editMode.png)
-
-### Filter Mats
+### Enable Filter
 
 - Will always hide any rows with the "Hide" box checked
 
@@ -80,6 +79,18 @@ If Filter + goals are checked
  -  Hide rows where goal = 0
 
 ![filter](/images/filter.gif)
+
+### Enable Edit
+
+Enabling this will enable a couple editable options.
+
+First, the "Hide" column will become visible.  This will allow the user to hide specific columns, regardless of Qty.
+
+Next, the Qty and Goal boxes for each material can be edited.  Useful for tracking your current material count, or setting goals for certain materials.
+
+When setting a goal, once the Qty amount is greater than, or equal to the goal, the material row will highlight in green.
+
+![editMode](/images/editMode.png)
 
 ### Enable Goals
 Checking this option will show the Goals column.
@@ -95,16 +106,26 @@ This will open a new window with a list of Artifacts in the game.  Enter the num
 
 The Artifact list is stored, and will populate when the window opens again.  
 
-![artifactCalc](/images/artifactCalc.gif)
+![artifactCalc](/images/artifactCalc.png)
+
+#### Restore XP
+
+This will show the amount of XP that will be gained by from restoring the entered amount of Artifacts.
 
 #### Artifact Information
 If you mouse-over the name of any artifact in the list, it will show Level, XP, and Material informaiton.  Also, clicking on the artifact name will take you to the appropriate Runescape Wiki page.
 
+![artifactList](/images/artifactList.png)
+
 #### Search and Collections
 At the bottom of the window is a Search box, for searching for a specific Artifact, or the collections dropdown, which will show all artifacts for the selected collection.
 
-![artifactList](/images/artifactList.png)
 
 
 ### CSV Export
 - Clicking this will generate a CSV file with your current material stats.  
+
+
+### Factory Reset
+- This can be used to fully reset everything on the app.  Bringing back to a "fresh install" state.
+- WARNING:  This will delete all saved data, including material quantities, Goals, Artifacts, and settings.  This is irreversible!  Only use if the app is not functioning properly!
