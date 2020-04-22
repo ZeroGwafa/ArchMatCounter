@@ -99,23 +99,26 @@ $(function () {
       });
     });
     $(`input[data-name='${name}']`).val(0);
-    localStorage.setItem("tempMaterials", JSON.parse(tempMaterials));
+    localStorage.setItem("tempMaterials", JSON.stringify(tempMaterials));
   }
 
   listArtefacts();
 
   $(".import").click(() => {
+    
     localStorage.removeItem("goalMats");
     localStorage.setItem("goalMats", localStorage.tempGoalMats)
     localStorage.removeItem("tempGoalMats");
-    window.close();
+    location.reload();
   });
 
   $(".main").on("click", "button.complete", function (e) {
     let name = $(this).data("name");
     markComplete(name);
     calcMats();
-    listArtefacts();
+    localStorage.removeItem("goalMats");
+    localStorage.setItem("goalMats", localStorage.tempGoalMats)
+    location.reload()
   });
 
   $(".artefactInput").on("focus", function () {
@@ -130,6 +133,8 @@ $(function () {
   $(".clearAll").click(function () {
     $("input[type='number']").val(0);
     calcMats();
+    localStorage.removeItem("goalMats");
+    localStorage.setItem("goalMats", localStorage.tempGoalMats)
     location.reload();
   });
 

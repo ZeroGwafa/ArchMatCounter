@@ -241,7 +241,7 @@ if (reader.pos === null) {
         $(".qty, .goal")
           .attr("contenteditable", "true")
           .on("focus", function () {
-            setTimeout(function () { document.execCommand("selectAll", false, null); }, 150);
+            setTimeout(function () { document.execCommand("selectAll", false, null); }, 0);
           });
         $(".qty:first").focus();
       } else {
@@ -405,6 +405,11 @@ if (reader.pos === null) {
     $(".openImport").click(function () {
       window.open("/ArchMatCounter/artefacts.html", "", "width=400");
     });
+
+    $(".matHeader .col:contains('Qty')").dblclick(function(){
+      if($(".edit").is(":checked"))
+        $(".qty").text(1000);
+      })
 
   });
 }
