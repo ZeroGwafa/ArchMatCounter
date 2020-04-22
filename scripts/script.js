@@ -2,10 +2,7 @@ a1lib.identifyUrl("appconfig.json");
 var reader = new ChatBoxReader();
 reader.readargs = {
   colors: [
-    a1lib.mixcolor(255, 255, 255), //Common Mats
-    a1lib.mixcolor(255, 128, 0), //Uncommon Mats
-    a1lib.mixcolor(255, 165, 0), //Scavenging comps
-    a1lib.mixcolor(255, 0, 0), //Rare Mats
+    a1lib.mixcolor(255, 255, 255), //White text
     a1lib.mixcolor(0, 255, 0), //Green Fortune Text
   ],
   backwards: true,
@@ -54,9 +51,9 @@ if (reader.pos === null) {
       chat += opts[a].text + " ";
     }
 
-    let chatParse = new Set(chat.split(/\d+:?|\[|\]/g))
+    let chatParse = chat.split(/\d+:?|\[|\]/g)
     chatParse.forEach(item => {
-      if(item.trim() === "")
+      if (item.trim() === "")
         return;
       let name, type
       if (item.indexOf("You find some") > -1) {
@@ -64,6 +61,9 @@ if (reader.pos === null) {
         type = "Normal";
       }
       else if (item.indexOf("Your auto-screener") > -1) {
+        //Check if material storage is in the same chat line, if it is, skip this output
+        if (chat.indexOf("material storage") > -1)
+          return;
         name = item.trim().split("Your auto-screener spits out some ")[1].trim().replace("'", "");
         type = "Auto-screener";
       }
@@ -82,9 +82,9 @@ if (reader.pos === null) {
           .replace("'", "");
         type = "Fortune"
       }
-      else{
-        if(chat.length > 0)
-          console.log({chat:chat, item:item, error:'No material found'})
+      else {
+        if (chat.length > 0)
+          console.log({ chat: chat, item: item, error: 'No material found' })
         return;
       }
       console.log({
@@ -102,18 +102,25 @@ if (reader.pos === null) {
     })
   }
 
+  function mapLocations(location) {
+    let loc = "";
+    location.split("\n").forEach(site => loc += `- ${site}<br/>`)
+    return loc
+  }
+
   function buildTable() {
     $(".mats > .row").remove();
     materials.forEach((mat) => {
       let name = mat.name.replace("'", "");
-      $(".mats").append(`
+      $(".mats").append(
+        `
         <div class='row' data-name="${name}">
-        <div class="col hide"><input type="checkbox" class="hideMe" ${
-        mat.hide ? "checked=checked" : ""
-        }/></div>
-            <div class='col-6' title="\nLevel: ${mat.level}\nFaction: ${
-        mat.faction
-        }\nLocation(s):\n${mat.location}">
+        <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""}/></div>
+            <div class='col-6' data-toggle="popover" data-html="true" data-trigger="hover" data-placement="bottom"
+            title="${mat.name}" 
+            data-content="<div><span class='header'>Level:</span> ${mat.level}<br/>
+            <span class='header'>Faction:</span> ${mat.faction}<br/>
+            <span class='header'>Location(s):</span><br/>${mapLocations(mat.location)}</div>">
             ${mat.name}
             </div>
             <div class="col qty">
@@ -124,6 +131,7 @@ if (reader.pos === null) {
             </div>
             </div>`);
     });
+
     if (localStorage.getItem("filter") === "true") {
       $(".filter").prop("checked", true);
     }
@@ -132,6 +140,8 @@ if (reader.pos === null) {
       $(".goal, .goalCol").show();
     }
     if ($(".edit").is(":checked")) $(".hide").show();
+
+    $('[data-toggle="popover"]').popover();
     tidyTable();
   }
 
@@ -175,10 +185,23 @@ if (reader.pos === null) {
           }
         });
       }
-      if ($(".mats .row:visible").length === 0) {
-        $(".mats").append(
-          "<div class='warning'>No goals have been set.  You can uncheck the 'Enable Goals' box in Settings to see all Materials that have a qty, or uncheck the filter to show everything</div>"
-        );
+      if ($(".mats .row:visible").length === 0 && !$(".edit").is(":checked")) {
+        if ($(".filter").is(":checked")) {
+          if ($(".goals").is(":checked")) {
+            $(".mats").append(
+              "<div class='warning'>Filtering materials by goals.  This will only show materials that have a goal value set." +
+              " Please enter these values through either Edit Mode, or using the Artifact Calculator in the Settings box.  Or, uncheck 'Enable Filter'.</div>"
+            );
+          }
+          else {
+            $(".mats").append(
+              "<div class='warning'>Filter has been enabled, showing only mats that have a amount greater than 0." +
+              "  Please either fill in your current materials using Edit Mode, or this list will populate as you gain materials.</div>"
+            );
+
+          }
+        }
+
       }
     }
   }
@@ -363,6 +386,8 @@ if (reader.pos === null) {
     function onStorageEvent(storageEvent) {
       checkSaveMats();
       if (storageEvent.key === "goalMats") {
+        if (storageEvent.newValue == null)
+          return
         if (localStorage.tempMaterials) {
           materials = JSON.parse(localStorage.tempMaterials);
           localStorage.removeItem("tempMaterials");
@@ -381,9 +406,5 @@ if (reader.pos === null) {
       window.open("/ArchMatCounter/artefacts.html", "", "width=400");
     });
 
-    window.onresize = () => {
-      if (!$(".edit").is(":checked") && !$("#settings").hasClass("show"))
-        location.reload();
-    };
   });
 }

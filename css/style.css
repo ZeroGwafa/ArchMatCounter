@@ -17,12 +17,21 @@
 .matHeader * {
     border-bottom: white solid .5px;
     border-right: white solid .5px;
-    border-collapse: collapse;
 }
 
 .matHeader,
 .mats>.row * {
     border-left: white solid .5px;
+}
+
+.matHeader>div:nth-child(2) {
+    margin-left: 1px;
+}
+
+.mats input[type='checkbox'] {
+    margin: 20%;
+    height: 25px;
+    width: 25px;
 }
 
 .scroll {
@@ -137,4 +146,11 @@ body.nis:not(.artefact) {
 input[type='search'],
 #collection {
     width: 100%
+}
+
+.popover-header,
+.popover-title {
+    background: url("https://runeapps.org/nis/alt1-currentskin/background.png");
+    color: white;
+    font-family: 'trajan-pro-3';
 }

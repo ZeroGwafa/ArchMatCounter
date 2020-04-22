@@ -1,39 +1,53 @@
 $(function () {
+
+  function listMats(mats) {
+    let list = ""
+    mats.forEach(function (mat) {
+      list += `- ${mat.name.replace("'", "")}: ${mat.qty}<br/>`
+    })
+    return list
+  }
+
   function listArtefacts() {
     $(".main").empty();
     let artefactInput = {};
     if (localStorage.artefactInput)
       artefactInput = JSON.parse(localStorage.artefactInput);
     artefactsList.forEach((item) => {
-      $(".main").append(`
+      $(".main").append(
+        `
         <div class="row" data-mat="${item.name}">
-            <div class="input-group input-group-sm mb-3">
+          <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-                    <span class="input-group-text" 
-                        title='
-Level: ${item.level}
-XP: ${item.experience}
-Materials: ${item.mats.map(function (mat) {
-        return `\n${mat.name.replace("'", "")}: ${mat.qty}`;
-      })}'>
-                        <a href="http://runescape.wiki/${
-        item.name
-        }" target="_blank" tabindex=-1>${item.name}</a>
-                    </span>
+              <span class="input-group-text" data-toggle="popover" data-html="true" data-trigger="hover" data-placement="bottom"
+                title="${item.name}" 
+                data-content="
+                  <div>
+                    <span class='header'>Level:</span> ${item.level}
+                  </div>
+                  <div>
+                    <span class='header'>XP:</span> ${item.experience}
+                  </div>
+                  <div>
+                    <span class='header'>Materials(s):</span><br/>${listMats(item.mats)}
+                  </div>
                 </div>
-                <input type="number" class="artefactInput form-control" data-name="${
-        item.name
-        }" value=${artefactInput[item.name] || 0}>
-                <div class="input-group-append" style="${
-        artefactInput[item.name] > 0 ? "" : "display:none"
-        }">
-                    <button tabindex=-1 class="btn btn-outline-secondary complete" type="button" data-name="${
-        item.name
-        }">Complete</button>
-                </div>
+              ">
+                <a href="http://runescape.wiki/${item.name}" target="_blank" tabindex=-1>${item.name}</a>
+              </span>
             </div>
-        </div>`);
+            <input type="number" class="artefactInput form-control" data-name="${item.name}" value=${artefactInput[item.name] || 0}>
+            <div class="input-group-append" style="${artefactInput[item.name] > 0 ? "" : "display:none"}">
+                <button tabindex=-1 class="btn btn-outline-secondary complete" type="button" data-name="${item.name}">Complete</button>
+            </div>
+          </div>
+        </div>
+        `
+      )
     });
+
+    $('[data-toggle="popover"]').popover();
+
     if ($(".search").val() !== "") $(".search").keyup();
     else if ($("#collection").val() !== "") $("#collection").change();
   }
@@ -60,8 +74,8 @@ Materials: ${item.mats.map(function (mat) {
         }
       });
     });
-    $("#xp").html(xp.toFixed(2))
-    localStorage.setItem("goalMats", JSON.stringify(mats));
+    $("#xp").html(xp.toLocaleString("en-US", { maximumFractionDigits: 2 }))
+    localStorage.setItem("tempGoalMats", JSON.stringify(mats));
     localStorage.setItem("artefactInput", JSON.stringify(artefactInput));
   }
 
@@ -85,13 +99,15 @@ Materials: ${item.mats.map(function (mat) {
       });
     });
     $(`input[data-name='${name}']`).val(0);
-    localStorage.setItem("tempMaterials", JSON.stringify(tempMaterials));
+    localStorage.setItem("tempMaterials", JSON.parse(tempMaterials));
   }
 
   listArtefacts();
 
   $(".import").click(() => {
-    calcMats();
+    localStorage.removeItem("goalMats");
+    localStorage.setItem("goalMats", localStorage.tempGoalMats)
+    localStorage.removeItem("tempGoalMats");
     window.close();
   });
 
