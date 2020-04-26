@@ -353,10 +353,10 @@ let materials = [
 
 function checkSaveMats() {
 
-    if (localStorage.getItem("mats") != null) {
-        materials = JSON.parse(localStorage.mats);
+    if (localStorage.getItem("archMats") != null) {
+        materials = JSON.parse(localStorage.archMats);
     } else {
-        localStorage.mats = JSON.stringify(materials);
+        localStorage.archMats = JSON.stringify(materials);
     }
 }
 

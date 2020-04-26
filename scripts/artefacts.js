@@ -190,7 +190,7 @@ $(function () {
 
   $(".completeAll").click(function () {
     let goalMats = JSON.parse(localStorage.getItem("goalMats"));
-    let curMats = JSON.parse(localStorage.getItem("mats"));
+    let curMats = JSON.parse(localStorage.getItem("archMats"));
     Object.keys(goalMats).forEach((tempMat) => {
       curMats.forEach((mat) => {
         if (tempMat === mat.name) {
@@ -202,7 +202,7 @@ $(function () {
         }
       });
     });
-    localStorage.setItem("mats", JSON.stringify(curMats));
+    localStorage.setItem("archMats", JSON.stringify(curMats));
     localStorage.setItem("goalMats", JSON.stringify(goalMats));
     listArtefacts();
     localStorage.removeItem("artefactInput");

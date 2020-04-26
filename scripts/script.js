@@ -116,7 +116,7 @@ if (reader.pos === null) {
         `
         <div class='row' data-name="${name}">
         <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""}/></div>
-            <div class='col-6' data-toggle="popover" data-html="true" data-trigger="hover" data-placement="bottom"
+            <div class='col-6' tabindex="0" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom"
             title="${mat.name}" 
             data-content="<div><span class='header'>Level:</span> ${mat.level}<br/>
             <span class='header'>Faction:</span> ${mat.faction}<br/>
@@ -142,12 +142,15 @@ if (reader.pos === null) {
     if ($(".edit").is(":checked")) $(".hide").show();
 
     $('[data-toggle="popover"]').popover();
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    })
     tidyTable();
   }
 
   function tidyTable(name) {
     $(".mats .warning").remove();
-    localStorage.mats = JSON.stringify(materials);
+    localStorage.archMats = JSON.stringify(materials);
     $(`[data-name="${name}"]`).removeClass("normal complete");
     $(`[data-name="${name}"]`).addClass("getMat");
     materials.forEach((mat) => {
@@ -284,7 +287,8 @@ if (reader.pos === null) {
     $(".clear").click(function (e) {
       let type = e.target.dataset.type;
       if (type === "reset") {
-        clearlocalstorage();
+        let data = ["goalMats", "goals", "artefactInput", "archMats", "tempGoalMats"];
+        data.forEach(item => localStorage.removeItem(item));
         location.reload();
       }
       else {
