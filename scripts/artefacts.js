@@ -19,7 +19,7 @@ $(function () {
         <div class="row" data-mat="${item.name}">
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" data-toggle="popover" data-html="true" data-trigger="hover" data-placement="bottom"
+              <span class="input-group-text" tabindex="-1" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom"
                 title="${item.name}" 
                 data-content="
                   <div>
@@ -47,6 +47,9 @@ $(function () {
     });
 
     $('[data-toggle="popover"]').popover();
+        $('.popover-dismiss').popover({
+      trigger: 'focus'
+    })
 
     if ($(".search").val() !== "") $(".search").keyup();
     else if ($("#collection").val() !== "") $("#collection").change();

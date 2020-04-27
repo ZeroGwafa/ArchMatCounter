@@ -67,6 +67,11 @@ if (reader.pos === null) {
         name = item.trim().split("Your auto-screener spits out some ")[1].trim().replace("'", "");
         type = "Auto-screener";
       }
+      else if (item.indexOf("Your familiar has produced an item") > -1) {
+        //Check if material storage is in the same chat line, if it is, skip this output
+        name = item.trim().split(/produced an item:? /)[1].trim().replace("'", "");
+        type = "Familiar";
+      }
       else if (item.indexOf("material storage") > -1) {
         name = item.trim().split(/material storage:? /)[1].trim().replace("'", "");
         if (item.indexOf("imp-souled") > -1)
