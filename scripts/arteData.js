@@ -1761,7 +1761,6 @@ let artefactsList = [
         "collections": [
             "Zarosian III",
             "Museum - Zarosian III",
-            "Hat Problem",
             "Knowledge is Power"
         ]
     },
@@ -2156,8 +2155,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Green Gobbo Goodies III",
-            "Museum - Bandosian III"
+            "Green Gobbo Goodies II",
+            "Museum - Bandosian II"
         ]
     },
     {
@@ -2345,7 +2344,6 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Green Gobbo Goodies II",
             "Green Gobbo Goodies III",
             "Museum - Bandosian II"
         ]
@@ -2851,7 +2849,7 @@ let artefactsList = [
         ],
         "collections": [
             "Museum - Bandosian III",
-            ""
+            "Green Gobbo Goodies III"
         ]
     },
     {
@@ -2870,7 +2868,7 @@ let artefactsList = [
         ],
         "collections": [
             "Red Rum Relics II",
-            "Museum - Bandosian II"
+            "Museum - Bandosian III"
         ]
     },
     {

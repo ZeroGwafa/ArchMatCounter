@@ -137,7 +137,7 @@ if (reader.pos === null) {
             </div>`);
     });
 
-    if (localStorage.getItem("filter") === "true") {
+    if (localStorage.getItem("archMatFilter") === "true") {
       $(".filter").prop("checked", true);
     }
     if (localStorage.getItem("goals") === "true") {
@@ -292,7 +292,7 @@ if (reader.pos === null) {
     $(".clear").click(function (e) {
       let type = e.target.dataset.type;
       if (type === "reset") {
-        let data = ["goalMats", "goals", "artefactInput", "archMats", "tempGoalMats"];
+        let data = ["goalMats", "goals", "artefactInput", "archMats", "tempGoalMats", "archMatFilter"];
         data.forEach(item => localStorage.removeItem(item));
         location.reload();
       }
@@ -311,7 +311,6 @@ if (reader.pos === null) {
           else return -1;
         })
         let sort = e.target.value;
-        localStorage.sort = sort;
         switch (sort) {
           case "id":
           case "name":
@@ -371,7 +370,7 @@ if (reader.pos === null) {
 
     $(".filter").change(function () {
       if (!$(".edit").is(":checked")) {
-        localStorage.filter = $(this).is(":checked");
+        localStorage.archMatFilter = $(this).is(":checked");
         $(".mats .row").show();
         tidyTable();
       }
