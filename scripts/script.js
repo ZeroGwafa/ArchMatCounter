@@ -176,7 +176,7 @@ if (reader.pos === null) {
         }, 500);
       }
     });
-    if (localStorage.filter === "true" && !$(".edit").is(":checked")) {
+    if (localStorage.archMatFilter === "true" && !$(".edit").is(":checked")) {
       $(".mats .row").hide();
       if ($(".goals").is(":checked")) {
         materials.forEach((mat) => {
