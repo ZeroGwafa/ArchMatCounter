@@ -84,7 +84,7 @@ $(function () {
 
   function markComplete(name) {
     let temp = {};
-    let tempMaterials = JSON.parse(localStorage.getItem("mats"));
+    let tempMaterials = JSON.parse(localStorage.getItem("archMats"));
     artefactsList.forEach((art) => {
       if (art.name === name) {
         art.mats.forEach((mat) => {
