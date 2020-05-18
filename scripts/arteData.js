@@ -2541,8 +2541,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Zamorakian IV",
-            "Museum - Zamorakian IV"
+            "Zamorakian III",
+            "Museum - Zamorakian III"
         ]
     },
     {
@@ -2588,8 +2588,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Zamorakian IV",
-            "Museum - Zamorakian IV"
+            "Zamorakian III",
+            "Museum - Zamorakian III"
         ]
     },
     {
@@ -2611,8 +2611,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Zamorakian IV",
-            "Museum - Zamorakian IV"
+            "Zamorakian III",
+            "Museum - Zamorakian III"
         ]
     },
     {
@@ -2825,8 +2825,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Zamorakian III",
-            "Museum - Zamorakian III"
+            "Zamorakian IV",
+            "Museum - Zamorakian IV"
         ]
     },
     {
@@ -2890,8 +2890,8 @@ let artefactsList = [
             }
         ],
         "collections": [
-            "Zamorakian III",
-            "Museum - Zamorakian III"
+            "Zamorakian IV",
+            "Museum - Zamorakian IV"
         ]
     },
     {
