@@ -40,7 +40,7 @@ if (reader.pos === null) {
         2000,
         1
       );
-    } catch { }
+    } catch {}
   }
 
   function readChatbox() {
@@ -51,66 +51,84 @@ if (reader.pos === null) {
       chat += opts[a].text + " ";
     }
 
-    let chatParse = chat.split(/\d+:?|\[|\]/g)
-    chatParse.forEach(item => {
-      if (item.trim() === "")
-        return;
-      let name, type
+    let chatParse = chat.split(/\d+:?|\[|\]/g);
+    chatParse.forEach((item) => {
+      // Start of a chat "buffer", to prevent extra chat reads.
+      // let date = new Date();
+      // let chatTime = "";
+      // let curTime = `${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${
+      //   (date.getMinutes() < 10 ? "0" : "") + date.getMinutes()
+      // }:${(date.getSeconds() < 10 ? "0" : "") + date.getSeconds()}`;
+      // let curTimeSeconds = `${(date.getSeconds() < 10 ? "0" : "") + date.getSeconds()}`;
+      // if (chat.match(/\d*:\d*:\d*/)) chatTime = chat.match(/\d*:\d*:\d*/)[0];
+      // if (chatTime !== curTime)
+      //   return console.log("Found old chat, skipping", chatTime, curTime);
+
+      if (item.trim() === "") return;
+      let name, type;
       if (item.indexOf("You find some") > -1) {
         name = item.trim().split("You find some")[1].trim().replace("'", "");
         type = "Normal";
-      }
-      else if (item.indexOf("Your auto-screener") > -1) {
+      } else if (item.indexOf("Your auto-screener") > -1) {
         //Check if material storage is in the same chat line, if it is, skip this output
-        if (chat.indexOf("material storage") > -1)
-          return;
-        name = item.trim().split("Your auto-screener spits out some ")[1].trim().replace("'", "");
+        if (chat.indexOf("material storage") > -1) return;
+        name = item
+          .trim()
+          .split("Your auto-screener spits out some ")[1]
+          .trim()
+          .replace("'", "");
         type = "Auto-screener";
-      }
-      else if (item.indexOf("Your familiar has produced an item") > -1) {
-        //Check if material storage is in the same chat line, if it is, skip this output
-        name = item.trim().split(/produced an item:? /)[1].trim().replace("'", "");
+      } else if (item.indexOf("Your familiar has produced an item") > -1) {
+        name = item
+          .trim()
+          .split(/produced an item:? /)[1]
+          .trim()
+          .replace("'", "");
         type = "Familiar";
-      }
-      else if (item.indexOf("material storage") > -1) {
-        name = item.trim().split(/material storage:? /)[1].trim().replace("'", "");
-        if (item.indexOf("imp-souled") > -1)
-          type = "Imp Souled";
-        else
-          type = "Porter"
-      }
-      else if (item.indexOf("Fortune perk") > -1) {
-        name = item.match(/your bank:? [\w+\s]*/)[0]
+      } else if (item.indexOf("material storage") > -1) {
+        name = item
+          .trim()
+          .split(/material storage:? /)[1]
+          .trim()
+          .replace("'", "");
+        if (item.indexOf("imp-souled") > -1) type = "Imp Souled";
+        else type = "Porter";
+      } else if (
+        item.indexOf("Fortune perk") > -1 ||
+        item.indexOf("imp-souled") > -1
+      ) {
+        //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
+        name = item
+          .match(/your bank:? [\w+\s]*/)[0]
           .split(/your bank:? /)[1]
           .split(/ x /)[0]
           .trim()
           .replace("'", "");
-        type = "Fortune"
-      }
-      else {
+        type = "Fortune";
+      } else {
         if (chat.length > 0)
-          console.log({ chat: chat, item: item, error: 'No material found' })
+          console.log({ chat: chat, item: item, error: "No material found" });
         return;
       }
       console.log({
         chat: chat,
         item: item,
         name: name,
-        type: type
-      })
+        type: type,
+      });
       materials.forEach((mat) => {
         if (mat.name.replace("'", "") === name) {
           mat.qty++;
           tidyTable(name);
         }
       });
-    })
+    });
   }
 
   function mapLocations(location) {
     let loc = "";
-    location.split("\n").forEach(site => loc += `- ${site}<br/>`)
-    return loc
+    location.split("\n").forEach((site) => (loc += `- ${site}<br/>`));
+    return loc;
   }
 
   function buildTable() {
@@ -120,12 +138,18 @@ if (reader.pos === null) {
       $(".mats").append(
         `
         <div class='row' data-name="${name}">
-        <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""}/></div>
+        <div class="col hide"><input type="checkbox" class="hideMe" ${
+          mat.hide ? "checked=checked" : ""
+        }/></div>
             <div class='col-6' tabindex="0" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom"
             title="${mat.name}" 
-            data-content="<div><span class='header'>Level:</span> ${mat.level}<br/>
+            data-content="<div><span class='header'>Level:</span> ${
+              mat.level
+            }<br/>
             <span class='header'>Faction:</span> ${mat.faction}<br/>
-            <span class='header'>Location(s):</span><br/>${mapLocations(mat.location)}</div>">
+            <span class='header'>Location(s):</span><br/>${mapLocations(
+              mat.location
+            )}</div>">
             ${mat.name}
             </div>
             <div class="col qty">
@@ -134,7 +158,8 @@ if (reader.pos === null) {
             <div class="col goal">
             ${mat.goal}
             </div>
-            </div>`);
+            </div>`
+      );
     });
 
     if (localStorage.getItem("archMatFilter") === "true") {
@@ -147,9 +172,9 @@ if (reader.pos === null) {
     if ($(".edit").is(":checked")) $(".hide").show();
 
     $('[data-toggle="popover"]').popover();
-    $('.popover-dismiss').popover({
-      trigger: 'focus'
-    })
+    $(".popover-dismiss").popover({
+      trigger: "focus",
+    });
     tidyTable();
   }
 
@@ -198,18 +223,15 @@ if (reader.pos === null) {
           if ($(".goals").is(":checked")) {
             $(".mats").append(
               "<div class='warning'>Filtering materials by goals.  This will only show materials that have a goal value set." +
-              " Please enter these values through either Edit Mode, or using the Artifact Calculator in the Settings box.  Or, uncheck 'Enable Filter'.</div>"
+                " Please enter these values through either Edit Mode, or using the Artifact Calculator in the Settings box.  Or, uncheck 'Enable Filter'.</div>"
             );
-          }
-          else {
+          } else {
             $(".mats").append(
               "<div class='warning'>Filter has been enabled, showing only mats that have a amount greater than 0." +
-              "  Please either fill in your current materials using Edit Mode, or this list will populate as you gain materials.</div>"
+                "  Please either fill in your current materials using Edit Mode, or this list will populate as you gain materials.</div>"
             );
-
           }
         }
-
       }
     }
   }
@@ -249,7 +271,9 @@ if (reader.pos === null) {
         $(".qty, .goal")
           .attr("contenteditable", "true")
           .on("focus", function () {
-            setTimeout(function () { document.execCommand("selectAll", false, null); }, 0);
+            setTimeout(function () {
+              document.execCommand("selectAll", false, null);
+            }, 0);
           });
         $(".qty:first").focus();
       } else {
@@ -292,11 +316,17 @@ if (reader.pos === null) {
     $(".clear").click(function (e) {
       let type = e.target.dataset.type;
       if (type === "reset") {
-        let data = ["goalMats", "goals", "artefactInput", "archMats", "tempGoalMats", "archMatFilter"];
-        data.forEach(item => localStorage.removeItem(item));
+        let data = [
+          "goalMats",
+          "goals",
+          "artefactInput",
+          "archMats",
+          "tempGoalMats",
+          "archMatFilter",
+        ];
+        data.forEach((item) => localStorage.removeItem(item));
         location.reload();
-      }
-      else {
+      } else {
         materials.forEach((mat) => {
           mat[type] = 0;
         });
@@ -307,34 +337,34 @@ if (reader.pos === null) {
     $("#sort").change((e) => {
       if (!$(".edit").is(":checked")) {
         materials.sort((a, b) => {
-          if (a.id > b.id) return 1
+          if (a.id > b.id) return 1;
           else return -1;
-        })
+        });
         let sort = e.target.value;
         switch (sort) {
           case "id":
           case "name":
             materials.sort((a, b) => {
-              if (a[sort] > b[sort]) return 1
+              if (a[sort] > b[sort]) return 1;
               else return -1;
-            })
+            });
             break;
           case "qty":
           case "goal":
             materials.sort((a, b) => {
-              if (a[sort] > b[sort]) return -1
+              if (a[sort] > b[sort]) return -1;
               else return 1;
-            })
+            });
             break;
           case "faction":
             materials.sort((a, b) => {
-              if (a.id > b.id) return -1
+              if (a.id > b.id) return -1;
               else return 1;
-            })
+            });
             materials.sort((a, b) => {
-              if (a.faction > b.faction) return 1
+              if (a.faction > b.faction) return 1;
               else return -1;
-            })
+            });
           default:
             break;
         }
@@ -394,8 +424,7 @@ if (reader.pos === null) {
     function onStorageEvent(storageEvent) {
       checkSaveMats();
       if (storageEvent.key === "goalMats") {
-        if (storageEvent.newValue == null)
-          return
+        if (storageEvent.newValue == null) return;
         if (localStorage.tempMaterials) {
           materials = JSON.parse(localStorage.tempMaterials);
           localStorage.removeItem("tempMaterials");
@@ -414,10 +443,8 @@ if (reader.pos === null) {
       window.open("/ArchMatCounter/artefacts.html", "", "width=400");
     });
 
-    $(".matHeader .col:contains('Qty')").dblclick(function(){
-      if($(".edit").is(":checked"))
-        $(".qty").text(1000);
-      })
-
+    $(".matHeader .col:contains('Qty')").dblclick(function () {
+      if ($(".edit").is(":checked")) $(".qty").text(1000);
+    });
   });
 }
