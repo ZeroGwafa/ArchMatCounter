@@ -422,7 +422,13 @@ let materials = [
 
 function checkSaveMats() {
   if (localStorage.getItem("archMats") != null) {
-    materials = JSON.parse(localStorage.archMats);
+    const saveData = JSON.parse(localStorage.archMats);
+    materials.forEach((mat, i) => {
+      if (!saveData[i]) {
+        saveData.push(mat);
+      }
+    });
+    materials = saveData;
   } else {
     localStorage.archMats = JSON.stringify(materials);
   }
