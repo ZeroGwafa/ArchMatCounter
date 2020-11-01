@@ -13,19 +13,7 @@ Or, by going to the following link in the Alt1 Browser
 
 https://zerogwafa.github.io/ArchMatCounter/
 
-## Issues:
-
-Please submit all issues in the following format:
-
-Issue:
-
-Options enabled at the time of issue: (Filter, Edit, Goals)
-
-Steps to reproduce issue:
-
-Screenshots: (Not needed if you provide reproduction steps).
-
-## Instructions:
+## Usage:
     1. Open app with RuneScape window visible.
 
     2. Ensure that the chat filter is off on the chat window you want to track materials on.  
@@ -43,6 +31,18 @@ The app will automatically start tracking as soon as it is opened.
 Click "Stop" to stop tracking.
 
 ![unfiltered](/images/unfiltered.png)
+
+## Issues:
+
+Please submit all issues in the following format:
+
+Issue:
+
+Options enabled at the time of issue: (Filter, Edit, Goals)
+
+Steps to reproduce issue:
+
+Screenshots: (Not needed if you provide reproduction steps).
 
 ### Material Information
 If you mouse over any material name, it will show a small popup showing the level that it can be accessed at, the faction it is affiliated with, and locations for that material.
