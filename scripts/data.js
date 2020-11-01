@@ -385,7 +385,7 @@ let materials = [
     hide: false,
     level: "90",
     faction: "Dragonkin",
-    location: "Ancient Cavern\nOrthen - Crypt of Varanus\nAnachronia West",
+    location: "Ancient Cavern\nOrthen - Crypt of Varanus\nOrthen - Observation Outpost\nAnachronia West",
   },
   {
     id: 37,
