@@ -32,7 +32,9 @@ Screenshots: (Not needed if you provide reproduction steps).
 
         2a. Ensure timestamps are on!  Otherwise, the tracker may miss a material!
 
-    3. Make sure your transparency is turned off (Not see-through) on your interfaces!  Settings -> UI Customisation -> Move Transparency slider all the way to the left.
+    3. Make sure your transparency is turned off (Not see-through) on your interfaces!  
+      
+        3a. Settings -> UI Customisation -> Move Transparency slider all the way to the left.
     
     4. Gather materials.  This will catch all material messages.
 
