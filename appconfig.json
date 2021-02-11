@@ -1,0 +1,14 @@
+{
+    "appName": "ArchMatCounter",
+    "description": "Tracks materials as they appear in the chat box.",
+    "appUrl": "https://zerogwafa.github.io/ArchMatCounter/",
+    "configUrl": "https://zerogwafa.github.io/ArchMatCounter/appconfig.json",
+    "iconUrl": "https://zerogwafa.github.io/ArchMatCounter/images/Archaeology.png",
+    "defaultWidth": 330,
+    "defaultHeight": 551,
+    "minWidth": 330,
+    "minHeight": 108,
+    "requestHandlers": [],
+    "activators": [],
+    "permissions": "pixel,gamestate,overlay"
+}
