@@ -1,9 +1,9 @@
-a1lib.identifyUrl("appconfig.json");
-var reader = new ChatBoxReader();
+A1lib.identifyApp("appconfig.json");
+let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
-    a1lib.mixcolor(255, 255, 255), //White text
-    a1lib.mixcolor(0, 255, 0), //Green Fortune Text
+    A1lib.mixColor(255, 255, 255), //White text
+    A1lib.mixColor(0, 255, 0), //Green Fortune Text
   ],
   backwards: true,
 };
@@ -17,8 +17,8 @@ if (reader.pos === null) {
   reader.pos.boxes.map((box, i) => {
     $(".chat").append(`<option value=${i}>Chat ${i}</option>`);
   });
-  if (localStorage.chat) {
-    reader.pos.mainbox = reader.pos.boxes[localStorage.chat];
+  if (localStorage.archChat) {
+    reader.pos.mainbox = reader.pos.boxes[localStorage.archChat];
   } else {
     //If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
     reader.pos.mainbox = reader.pos.boxes[0];
@@ -32,7 +32,7 @@ if (reader.pos === null) {
     //Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
     try {
       alt1.overLayRect(
-        a1lib.mixcolor(255, 255, 255),
+        A1lib.mixColor(255, 255, 255),
         chat.mainbox.rect.x,
         chat.mainbox.rect.y,
         chat.mainbox.rect.width,
@@ -67,7 +67,7 @@ if (reader.pos === null) {
       if (item.trim() === "") return;
       let name, type;
       if (item.indexOf("You find some") > -1) {
-        name = item.trim().split("You find some")[1].trim().replace("'", "");
+        name = item.trim().split("You find some")[1].trim().replace(/(\.|')/g, "");
         type = "Normal";
       } else if (item.indexOf("Your auto-screener") > -1) {
         //Check if material storage is in the same chat line, if it is, skip this output
@@ -76,21 +76,21 @@ if (reader.pos === null) {
           .trim()
           .split("Your auto-screener spits out some ")[1]
           .trim()
-          .replace("'", "");
+          .replace(/(\.|')/g, "");
         type = "Auto-screener";
       } else if (item.indexOf("Your familiar has produced an item") > -1) {
         name = item
           .trim()
           .split(/produced an item:? /)[1]
           .trim()
-          .replace("'", "");
+          .replace(/(\.|')/g, "");
         type = "Familiar";
       } else if (item.indexOf("material storage") > -1) {
         name = item
           .trim()
           .split(/material storage:? /)[1]
           .trim()
-          .replace("'", "");
+          .replace(/(\.|')/g, "");
         if (item.indexOf("imp-souled") > -1) type = "Imp Souled";
         else type = "Porter";
       } else if (
@@ -99,7 +99,7 @@ if (reader.pos === null) {
       ) {
         //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
         name = item
-          .match(/your bank:? [\w+\s]*/)[0]
+          .match(/your bank:? [(\.|')+g\s]*/)[0]
           .split(/your bank:? /)[1]
           .split(/ x /)[0]
           .trim()
@@ -244,7 +244,7 @@ if (reader.pos === null) {
     $(".chat").change(function () {
       reader.pos.mainbox = reader.pos.boxes[$(this).val()];
       showSelectedChat(reader.pos);
-      localStorage.setItem("chat", $(this).val());
+      localStorage.setItem("archChat", $(this).val());
       $(this).val("");
     });
 
