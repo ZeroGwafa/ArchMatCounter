@@ -3,7 +3,7 @@
     "description": "Tracks materials as they appear in the chat box.",
     "appUrl": "./index.html",
     "configUrl": "./appconfig.json",
-    "iconUrl": "./images/Archaeology.png",
+    "iconUrl": "./images/icon.png",
     "defaultWidth": 330,
     "defaultHeight": 551,
     "minWidth": 330,
