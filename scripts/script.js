@@ -1,4 +1,7 @@
 A1lib.identifyApp("appconfig.json");
+
+const appColor = A1lib.mixColor(255, 199, 0);
+
 let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
@@ -32,13 +35,13 @@ if (reader.pos === null) {
     //Attempt to show a temporary rectangle around the chatbox.  skip if overlay is not enabled.
     try {
       alt1.overLayRect(
-        A1lib.mixColor(255, 255, 255),
+        appColor,
         chat.mainbox.rect.x,
         chat.mainbox.rect.y,
         chat.mainbox.rect.width,
         chat.mainbox.rect.height,
         2000,
-        1
+        5
       );
     } catch {}
   }
