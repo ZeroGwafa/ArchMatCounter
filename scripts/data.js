@@ -5,10 +5,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "5",
+    level: 5,
     faction: "Agnostic",
     location:
-      "Varrock Dig Site\nKharid-et\nInfernal Source\nEverlight\nStormguard Citadel\nWarforge!",
+      "Varrock Dig Site\nKharid-et\nInfernal Source\nEverlight\nStormguard Citadel\nWarforge",
   },
   {
     id: 1,
@@ -16,7 +16,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "5",
+    level: 5,
     faction: "Zarosian",
     location: "Kharid-et (barracks)\nEmpty Throne Room",
   },
@@ -26,7 +26,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "12",
+    level: 12,
     faction: "Agnostic",
     location: "Kharid-et (barracks)\nKharid-et entrance",
   },
@@ -36,7 +36,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "12",
+    level: 12,
     faction: "Zarosian",
     location: "Kharid-et (barracks)\nEmpty Throne Room (east)",
   },
@@ -46,10 +46,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "17",
+    level: 17,
     faction: "Agnostic",
     location:
-      "Ice Mountain\nKharid-et\nInfernal Source\nEverlight\nStormguard Citadel\nWarforge!",
+      "Ice Mountain\nKharid-et\nInfernal Source\nEverlight\nStormguard Citadel\nWarforge",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "20",
+    level: 20,
     faction: "Agnostic",
     location: "Kharid-et\nCamdozaal",
   },
@@ -67,7 +67,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "20",
+    level: 20,
     faction: "Agnostic",
     location: "Anachronia (north)",
   },
@@ -77,7 +77,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "24",
+    level: 24,
     faction: "Agnostic",
     location: "First Tower",
   },
@@ -87,7 +87,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "24",
+    level: 24,
     faction: "Zamorakian",
     location:
       "Infernal Source (Star Lodge cellar)\nInfernal Source (Dagon Overlook south-west)\nFirst Tower",
@@ -98,7 +98,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "25",
+    level: 25,
     faction: "Zarosian",
     location: "Kharid-et (Culinarum)\nSlayer Tower",
   },
@@ -108,7 +108,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "25",
+    level: 25,
     faction: "Zarosian",
     location: "Kharid-et (barracks)\nEmpty Throne Room (south)",
   },
@@ -118,9 +118,9 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "29",
+    level: 29,
     faction: "Agnostic",
-    location: "Morytania (north)",
+    location: "Morytania (north)\nInfernal Source (Dungeon of Disorder)",
   },
   {
     id: 12,
@@ -128,7 +128,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "29",
+    level: 29,
     faction: "Zamorakian",
     location:
       "Infernal Source (Vestibule of Futility, south)\nDaemonheim (south-west)",
@@ -139,10 +139,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "29",
+    level: 29,
     faction: "Zamorakian",
     location:
-      "Infernal Source (The Harrowing, north-east)\nGod Wars Dungeon (Zamorak's Fortress, east)",
+      "Infernal Source (The Harrowing, north & north north west)\nGod Wars Dungeon (Zamorak's Fortress, east)",
   },
   {
     id: 14,
@@ -150,7 +150,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "36",
+    level: 36,
     faction: "Zamorakian",
     location:
       "Infernal Source (Dungeon of Disorder, south-east)\nDaemonheim (south-west)",
@@ -161,7 +161,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "36",
+    level: 36,
     faction: "Zamorakian",
     location:
       "Infernal Source (Dungeon of Disorder)\nInfernal Source (Vestibule of Futility, north-east)\nInfernal Source (Dagon Overlook, north)\nGod Wars Dungeon (Zamorak's Fortress. north)",
@@ -172,7 +172,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "42",
+    level: 42,
     faction: "Saradominist",
     location:
       "Everlight (mass grave)\nEverlight (Oikoi)\nGod Wars Dungeon (Saradominist, south-east)",
@@ -183,10 +183,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "42",
+    level: 42,
     faction: "Saradominist",
     location:
-      "Everlight (Dominion Games stadium)\nEverlight (Acroplois)\nFirst Tower",
+      "Everlight (Dominion Games stadium)\nEverlight (Acropolis)\nFirst Tower",
   },
   {
     id: 18,
@@ -194,7 +194,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "48",
+    level: 48,
     faction: "Saradominist",
     location:
       "Everlight (Amphitheatre)\nGod Wars Dungeon (Saradominist, south-east)",
@@ -205,7 +205,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "51",
+    level: 51,
     faction: "Saradominist",
     location: "Everlight (Dominion Games stadium)\nBarrows mounds",
   },
@@ -215,7 +215,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "51",
+    level: 51,
     faction: "Saradominist",
     location: "Everlight (Acropolis)\nBarrows mounds",
   },
@@ -225,7 +225,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "58",
+    level: 58,
     faction: "Zarosian",
     location: "Kharid-et (Chapel)\nSlayer Tower",
   },
@@ -235,7 +235,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "70",
+    level: 70,
     faction: "Armadylean",
     location:
       "Stormguard Citadel (Research & Development, south-west)\nGod Wars Dungeon (Armadylean, south-west)",
@@ -246,7 +246,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "70",
+    level: 70,
     faction: "Armadylean",
     location:
       "Stormguard Citadel (Dayguard tower)\nStormguard Citadel (Nightguard)\nGod Wars Dungeon (Armadylean, south-west)",
@@ -257,7 +257,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Agnostic",
     location: "Feldip",
   },
@@ -267,7 +267,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Armadylean",
     location:
       "Stormguard Citadel (Keshik memorial)\nStormguard Citadel (Relay station)\nEmpyrean Citadel",
@@ -278,10 +278,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Bandosian",
     location:
-      "Warforge! (Crucible arena)\nWarforge! (north goblin tunnels)\nGod Wars Dungeon (Bandos's Stronghold)",
+      "Warforge (Crucible arena)\nWarforge (north goblin tunnels)\nGod Wars Dungeon (Bandos's Stronghold)",
   },
   {
     id: 27,
@@ -289,10 +289,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Bandosian",
     location:
-      "Warforge! (north goblin tunnels)\nGod Wars Dungeon (Bandosian west)",
+      "Warforge (north goblin tunnels)\nGod Wars Dungeon (Bandosian west)",
   },
   {
     id: 28,
@@ -300,9 +300,9 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Bandosian",
-    location: "Warforge! (south goblin tunnels)\nFeldip (shores)",
+    location: "Warforge (south goblin tunnels)\nFeldip (shores)",
   },
   {
     id: 29,
@@ -310,10 +310,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "76",
+    level: 76,
     faction: "Bandosian",
     location:
-      "Warforge! (Crucible arena)\nWarforge! (north goblin tunnels)\nGod Wars Dungeon (Bandosian, north)\nGod Wars Dungeon (Bandos's Stronghold)",
+      "Warforge (Crucible arena)\nWarforge (north goblin tunnels)\nGod Wars Dungeon (Bandosian, north)\nGod Wars Dungeon (Bandos's Stronghold)",
   },
   {
     id: 30,
@@ -321,7 +321,7 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "81",
+    level: 81,
     faction: "Agnostic",
     location: "Ancient cavern\nOdd old man",
   },
@@ -331,9 +331,9 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "83",
+    level: 83,
     faction: "Bandosian",
-    location: "Warforge! (animal pens)\nFeldip (shores)",
+    location: "Warforge (animal pens)\nFeldip (shores)",
   },
   {
     id: 32,
@@ -341,62 +341,63 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "85",
+    level: 85,
     faction: "Armadylean",
     location:
       "Stormguard Citadel (Research & Development, north-east)\nStormguard Citadel (Research & Development, north-west)\nEmpyrean Citadel",
   },
   {
     id: 33,
+    name: "Compass rose",
+    qty: 0,
+    goal: 0,
+    hide: false,
+    level: 90,
+    faction: "Dragonkin",
+    location: "Orthen (Crypt of Varanus)\nAncient cavern",
+  },
+  {
+    id: 34,
+    name: "Felt",
+    qty: 0,
+    goal: 0,
+    hide: false,
+    level: 90,
+    faction: "Dragonkin",
+    location:
+      "Orthen (Crypt of Varanus)\nOrthen (Observation outpost)\nAnachronia (west)",
+  },
+  {
+    id: 35,
     name: "Quintessence",
     qty: 0,
     goal: 0,
     hide: false,
-    level: "91",
+    level: 91,
     faction: "Armadylean",
     location:
       "Stormguard Citadel (Research & Development, north-east)\nStormguard Citadel (Howl's workshop)\nEmpyrean Citadel",
   },
   {
-    id: 34,
-    name: "Soapstone",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: "98",
-    faction: "Agnostic",
-    location: "Waiko",
-  },
-  {
-    id: 35,
-    name: "Compass rose",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: "90",
-    faction: "Dragonkin",
-    location: "Ancient Cavern\nOrthen - Crypt of Varanus",
-  },
-  {
     id: 36,
-    name: "Felt",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: "90",
-    faction: "Dragonkin",
-    location: "Ancient Cavern\nOrthen - Crypt of Varanus\nOrthen - Observation Outpost\nAnachronia West",
-  },
-  {
-    id: 37,
     name: "Dragon metal",
     qty: 0,
     goal: 0,
     hide: false,
-    level: "96",
+    level: 96,
     faction: "Dragonkin",
     location:
-      "Ancient Cavern\nOrthen - Observation Outpost\nOrthen - Xolo City",
+      "Orthen (Observation outpost)\nOrthen (Xolo city)\nAncient cavern",
+  },
+  {
+    id: 37,
+    name: "Soapstone",
+    qty: 0,
+    goal: 0,
+    hide: false,
+    level: 98,
+    faction: "Agnostic",
+    location: "Waiko",
   },
   {
     id: 38,
@@ -404,9 +405,9 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "99",
+    level: 99,
     faction: "Dragonkin",
-    location: "Orthen - Moksha Ritual Site\nMount Firewake",
+    location: "Orthen (Moksha ritual site)\nMount Firewake",
   },
   {
     id: 39,
@@ -414,9 +415,10 @@ let materials = [
     qty: 0,
     goal: 0,
     hide: false,
-    level: "99",
+    level: 99,
     faction: "Dragonkin",
-    location: "Orthen - Moksha Ritual Site\nMount Firewake",
+    location:
+      "Orthen (Moksha ritual site)\nOrthen (Xolo city)\nAnachronia (west)",
   },
 ];
 
@@ -426,7 +428,13 @@ function checkSaveMats() {
     materials.forEach((mat, i) => {
       if (!saveData[i]) {
         saveData.push(mat);
+        return;
       }
+      saveData.forEach((saveMat) => {
+        if (saveMat.id === mat.id) {
+          saveMat.location = mat.location;
+        }
+      });
     });
     materials = saveData;
   } else {
