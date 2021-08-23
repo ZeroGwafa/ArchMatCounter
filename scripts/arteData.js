@@ -689,12 +689,17 @@ let artefactsList = [
         qty: 18,
       },
     ],
-    collections: ["Zarosian II", "Museum - Zarosian II", "Magic Man"],
+    collections: [
+      "Zarosian II",
+      "Museum - Zarosian II",
+      "Magic Man",
+      "Imperial Sorcery",
+    ],
   },
   {
-    name: "Apex Cap",
+    name: "Apex cap",
     level: 60,
-    experience: 2333.3,
+    experience: 2193.3,
     mats: [
       {
         name: "Samite silk",
@@ -712,7 +717,7 @@ let artefactsList = [
     collections: ["Museum - Zarosian V", "Religious Iconography"],
   },
   {
-    name: "Curse Tablet",
+    name: "Curse tablet",
     level: 60,
     experience: 2333.3,
     mats: [
@@ -932,6 +937,74 @@ let artefactsList = [
     collections: ["Museum - Zarosian VI", "Religious Iconography"],
   },
   {
+    name: "Inquisitors ceremonial armour",
+    level: 64,
+    experience: 3266.7,
+    mats: [
+      {
+        name: "Leather scraps",
+        qty: 14,
+      },
+      {
+        name: "Samite silk",
+        qty: 30,
+      },
+      {
+        name: "Tyrian purple",
+        qty: 18,
+      },
+    ],
+    collections: ["Finery of the Inquisition", "Museum - Zarosian VI"],
+  },
+  {
+    name: "Inquisitors ceremonial mask",
+    level: 64,
+    experience: 3266.7,
+    mats: [
+      {
+        name: "Ancient vis",
+        qty: 14,
+      },
+      {
+        name: "Leather scraps",
+        qty: 12,
+      },
+      {
+        name: "Blood of Orcus",
+        qty: 14,
+      },
+      {
+        name: "Samite silk",
+        qty: 22,
+      },
+    ],
+    collections: ["Finery of the Inquisition", "Museum - Zarosian VI"],
+  },
+  {
+    name: "Inquisitors seal",
+    level: 64,
+    experience: 3266.7,
+    mats: [
+      {
+        name: "Tyrian purple",
+        qty: 14,
+      },
+      {
+        name: "Zarosian insignia",
+        qty: 20,
+      },
+      {
+        name: "Ancient vis",
+        qty: 14,
+      },
+      {
+        name: "Goldrune",
+        qty: 14,
+      },
+    ],
+    collections: ["Finery of the Inquisition", "Museum - Zarosian VI"],
+  },
+  {
     name: "The Lake of Fire painting",
     level: 65,
     experience: 3500,
@@ -978,6 +1051,134 @@ let artefactsList = [
       },
     ],
     collections: ["Showy Fings", "Zamorakian II", "Museum - Zamorakian II"],
+  },
+  {
+    name: "Funerary urn of blood",
+    level: 66,
+    experience: 3773.3,
+    mats: [
+      {
+        name: "Soapstone",
+        qty: 30,
+      },
+      {
+        name: "Tyrian purple",
+        qty: 14,
+      },
+      {
+        name: "Blood of Orcus",
+        qty: 20,
+      },
+    ],
+    collections: ["Museum - Zarosian VII", "Urns of the Empire"],
+  },
+  {
+    name: "Gladiator helmet",
+    level: 66,
+    experience: 3773.3,
+    mats: [
+      {
+        name: "Imperial steel",
+        qty: 30,
+      },
+      {
+        name: "Blood of Orcus",
+        qty: 16,
+      },
+      {
+        name: "Leather scraps",
+        qty: 18,
+      },
+    ],
+    collections: ["Entertaining the Masses", "Museum - Zarosian VII"],
+  },
+  {
+    name: "Gladiator sword",
+    level: 66,
+    experience: 3773.3,
+    mats: [
+      {
+        name: "Imperial steel",
+        qty: 30,
+      },
+      {
+        name: "Goldrune",
+        qty: 18,
+      },
+      {
+        name: "Zarosian insignia",
+        qty: 16,
+      },
+    ],
+    collections: ["Entertaining the Masses", "Museum - Zarosian VII"],
+  },
+  {
+    name: "The Serpents Fall carving",
+    level: 67,
+    experience: 3966.7,
+    mats: [
+      {
+        name: "Vellum",
+        qty: 16,
+      },
+      {
+        name: "Tyrian purple",
+        qty: 24,
+      },
+      {
+        name: "Blood of Orcus",
+        qty: 12,
+      },
+      {
+        name: "White oak",
+        qty: 12,
+      },
+    ],
+    collections: ["Museum - Zarosian VII", "Religious Iconography"],
+  },
+  {
+    name: "Funerary urn of miasma",
+    level: 67,
+    experience: 3966.7,
+    mats: [
+      {
+        name: "Soapstone",
+        qty: 30,
+      },
+      {
+        name: "Tyrian purple",
+        qty: 14,
+      },
+      {
+        name: "Ancient vis",
+        qty: 20,
+      },
+    ],
+    collections: ["Museum - Zarosian VII", "Urns of the Empire"],
+  },
+  {
+    name: "Model chariot",
+    level: 67,
+    experience: 3966.7,
+    mats: [
+      {
+        name: "Vellum",
+        qty: 12,
+      },
+      {
+        name: "Imperial steel",
+        qty: 18,
+      },
+      {
+        name: "Goldrune",
+        qty: 20,
+      },
+      {
+        name: "Zarosian insignia",
+        qty: 14,
+      },
+    ],
+    collections: ["Museum - Zarosian VII", "Religious Iconography"],
   },
   {
     name: "Chaos star",
@@ -1733,6 +1934,7 @@ let artefactsList = [
       "Zarosian III",
       "Museum - Zarosian III",
       "Knowledge is Power",
+      "Imperial Sorcery",
     ],
   },
   {
@@ -1749,7 +1951,12 @@ let artefactsList = [
         qty: 36,
       },
     ],
-    collections: ["Zarosian III", "Museum - Zarosian III", "Magic Man"],
+    collections: [
+      "Zarosian III",
+      "Museum - Zarosian III",
+      "Magic Man",
+      "Imperial Sorcery",
+    ],
   },
   {
     name: "High priest crozier",
@@ -2470,7 +2677,12 @@ let artefactsList = [
         qty: 32,
       },
     ],
-    collections: ["Magic Man", "Museum - Zarosian III", "Zarosian III"],
+    collections: [
+      "Magic Man",
+      "Museum - Zarosian III",
+      "Zarosian III",
+      "Imperial Sorcery",
+    ],
   },
   {
     name: "Vigorem vial",
@@ -2846,7 +3058,7 @@ let artefactsList = [
         qty: 64,
       },
     ],
-    collections: ["Museum - Zarosian III", "Zarosian III"],
+    collections: ["Museum - Zarosian III", "Zarosian III", "Imperial Sorcery"],
   },
   {
     name: "Portable phylactery",
@@ -2886,7 +3098,12 @@ let artefactsList = [
         qty: 40,
       },
     ],
-    collections: ["Magic Man", "Museum - Zarosian III", "Zarosian III"],
+    collections: [
+      "Magic Man",
+      "Museum - Zarosian III",
+      "Zarosian III",
+      "Imperial Sorcery",
+    ],
   },
   {
     name: "Lingam stone",
