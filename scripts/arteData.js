@@ -1393,6 +1393,38 @@ let artefactsList = [
     collections: ["Saradominist II", "Museum - Saradominist II"],
   },
   {
+    name: "Castle gatestone",
+    level: 73,
+    experience: 5366.7,
+    mats: [
+      {
+        name: "Orgone",
+        qty: 36,
+      },
+      {
+        name: "Orthenglass",
+        qty: 32,
+      },
+    ],
+    collections: ["Dragonkin V", "Museum - Dragonkin V"],
+  },
+  {
+    name: "Engraved ring of kinship",
+    level: 73,
+    experience: 5366.7,
+    mats: [
+      {
+        name: "Goldrune",
+        qty: 28,
+      },
+      {
+        name: "Dragon metal",
+        qty: 40,
+      },
+    ],
+    collections: ["Dragonkin V", "Museum - Dragonkin V"],
+  },
+  {
     name: "Ceremonial mace",
     level: 74,
     experience: 5600,
@@ -1583,6 +1615,94 @@ let artefactsList = [
       },
     ],
     collections: ["Green Gobbo Goodies I", "Museum - Bandosian I"],
+  },
+    {
+    name: "Exploratory totem",
+    level: 77,
+    experience: 6300,
+    mats: [
+      {
+        name: "Dragon metal",
+        qty: 34,
+      },
+      {
+        name: "Compass rose",
+        qty: 36,
+      },
+    ],
+    collections: ["Dragonkin V", "Museum - Dragonkin V"],
+  },
+  {
+    name: "Excavator portal mine",
+    level: 77,
+    experience: 6300,
+    mats: [
+      {
+        name: "Orgone",
+        qty: 36,
+      },
+      {
+        name: "Orthenglass",
+        qty: 34,
+      },
+    ],
+    collections: ["Dragonkin V", "Museum - Dragonkin V"],
+  },
+  {
+    name: "Storage totem",
+    level: 78,
+    experience: 6533.3,
+    mats: [
+      {
+        name: "Dragon metal",
+        qty: 36,
+      },
+      {
+        name: "Compass rose",
+        qty: 34,
+      },
+    ],
+    collections: ["Dragonkin VI", "Museum - Dragonkin VI"],
+  },
+    {
+    name: "Plant seed satchel",
+    level: 78,
+    experience: 6533.3,
+    mats: [
+      {
+        name: "Felt",
+        qty: 28,
+      },
+      {
+        name: "Carbon black",
+        qty: 28,
+      },
+      {
+        name: "Compass rose",
+        qty: 14,
+      },
+    ],
+    collections: ["Dragonkin VI", "Museum - Dragonkin VI"],
+  },
+  {
+    name: "Snuff box",
+    level: 78,
+    experience: 6533.3,
+    mats: [
+      {
+        name: "Soapstone",
+        qty: 20,
+      },
+      {
+        name: "Carbon black",
+        qty: 30,
+      },
+      {
+        name: "Felt",
+        qty: 20,
+      },
+    ],
+    collections: ["Dragonkin VI", "Museum - Dragonkin VI"],
   },
   {
     name: "Aviansie dreamcoat",
@@ -1957,6 +2077,22 @@ let artefactsList = [
       "Magic Man",
       "Imperial Sorcery",
     ],
+  },
+  {
+    name: "Spent summoning charm",
+    level: 87,
+    experience: 9722.2,
+    mats: [
+      {
+        name: "Orgone",
+        qty: 46,
+      },
+      {
+        name: "Felt",
+        qty: 30,
+      },
+    ],
+    collections: ["Dragonkin VI", "Museum - Dragonkin VI"],
   },
   {
     name: "High priest crozier",
