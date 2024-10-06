@@ -1,8 +1,8 @@
 A1lib.identifyApp("appconfig.json");
 
 window.setTimeout(function () {
-
   const appColor = A1lib.mixColor(255, 199, 0);
+  const timestampRegex = /\[\d{2}:\d{2}:\d{2}\]/;
 
   let reader = new Chatbox.default();
   reader.readargs = {
@@ -47,93 +47,83 @@ window.setTimeout(function () {
         2000,
         5
       );
-    } catch { }
+    } catch {}
   }
 
   function readChatbox() {
     var opts = reader.read() || [];
     var chat = "";
 
-    for (a in opts) {
-      chat += opts[a].text + " ";
-    }
-
-    let chatParse = chat.split(/\d+:?|\[|\]/g);
-    chatParse.forEach((item) => {
-      // Start of a chat "buffer", to prevent extra chat reads.
-      // let date = new Date();
-      // let chatTime = "";
-      // let curTime = `${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${
-      //   (date.getMinutes() < 10 ? "0" : "") + date.getMinutes()
-      // }:${(date.getSeconds() < 10 ? "0" : "") + date.getSeconds()}`;
-      // let curTimeSeconds = `${(date.getSeconds() < 10 ? "0" : "") + date.getSeconds()}`;
-      // if (chat.match(/\d*:\d*:\d*/)) chatTime = chat.match(/\d*:\d*:\d*/)[0];
-      // if (chatTime !== curTime)
-      //   return console.log("Found old chat, skipping", chatTime, curTime);
-
-      if (item.trim() === "") return;
-      let name, type;
-      if (item.indexOf("You find some") > -1) {
-        name = item
-          .trim()
-          .split("You find some")[1]
-          .trim()
-          .replace(/(\.|')/g, "");
-        type = "Normal";
-      } else if (item.indexOf("Your auto-screener") > -1) {
-        //Check if material storage is in the same chat line, if it is, skip this output
-        if (chat.indexOf("material storage") > -1) return;
-        name = item
-          .trim()
-          .split("Your auto-screener spits out some ")[1]
-          .trim()
-          .replace(/(\.|')/g, "");
-        type = "Auto-screener";
-      } else if (item.indexOf("Your familiar has produced an item") > -1) {
-        name = item
-          .trim()
-          .split(/produced an item:? /)[1]
-          .trim()
-          .replace(/(\.|')/g, "");
-        type = "Familiar";
-      } else if (item.indexOf("material storage") > -1) {
-        name = item
-          .trim()
-          .split(/material storage:? /)[1]
-          .trim()
-          .replace(/(\.|')/g, "");
-        if (item.indexOf("imp-souled") > -1) type = "Imp Souled";
-        else type = "Porter";
-      } else if (
-        item.indexOf("Fortune perk") > -1 ||
-        item.indexOf("imp-souled") > -1
-      ) {
-        //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
-        name = item
-          .match(/your bank:? [(\.|')+g\s]*/)[0]
-          .split(/your bank:? /)[1]
-          .split(/ x /)[0]
-          .trim()
-          .replace("'", "");
-        type = "Fortune";
-      } else {
-        if (chat.length > 0)
-          // console.log({ chat: chat, item: item, error: "No material found" });
-          return;
+    if (opts.length != 0) {
+      for (let line in opts) {
+        //Filter out accidentally reading a second material, in case multiple chat lines happen on the same tick.
+        //Check if no timestamp exists, and it's the first line in the chatreader.
+        if (!opts[line].text.match(timestampRegex) && line == "0") {
+          continue;
+        }
+        chat += opts[line].text + " ";
       }
+    }
+    let name, type;
+    if (chat.indexOf("You find some") > -1) {
+      name = chat
+        .trim()
+        .split("You find some")[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Normal";
+    } else if (chat.indexOf("Your auto-screener") > -1) {
+      //Check if material storage is in the same chat line, if it is, skip this output
+      if (chat.indexOf("material storage") > -1) return;
+      name = chat
+        .trim()
+        .split("Your auto-screener spits out some ")[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Auto-screener";
+    } else if (chat.indexOf("Your familiar has produced an item") > -1) {
+      name = chat
+        .trim()
+        .split(/produced an item:? /)[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Familiar";
+    } else if (chat.indexOf("material storage") > -1) {
+      name = chat
+        .trim()
+        .split(/material storage:? /)[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      if (chat.indexOf("imp-souled") > -1) type = "Imp Souled";
+      else type = "Porter";
+    } else if (
+      chat.indexOf("Fortune perk") > -1 ||
+      chat.indexOf("imp-souled") > -1
+    ) {
+      //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
+      name = chat
+        .match(/your bank:? [(\.|')+g\s]*/)[0]
+        .split(/your bank:? /)[1]
+        .split(/ x /)[0]
+        .trim()
+        .replace("'", "");
+      type = "Fortune";
+    }
+    if (name && !name.match(timestampRegex)) {
       console.log({
         chat: chat,
-        item: item,
         name: name,
         type: type,
       });
+      // Really crappy way to update the LocalStorage.
+      // TODO: Refactor materials/localStorage data handling.
       materials.forEach((mat) => {
         if (mat.name.replace("'", "") === name) {
           mat.qty++;
           tidyTable(name);
         }
       });
-    });
+    }
   }
 
   function mapLocations(location) {
@@ -149,16 +139,18 @@ window.setTimeout(function () {
       $(".mats").append(
         `
         <div class='row' data-name="${name}">
-        <div class="col hide"><input type="checkbox" class="hideMe" ${mat.hide ? "checked=checked" : ""
+        <div class="col hide"><input type="checkbox" class="hideMe" ${
+          mat.hide ? "checked=checked" : ""
         }/></div>
             <div class='col-6' tabindex="0" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom"
             title="${mat.name}" 
-            data-content="<div><span class='header'>Level:</span> ${mat.level
-        }<br/>
+            data-content="<div><span class='header'>Level:</span> ${
+              mat.level
+            }<br/>
             <span class='header'>Faction:</span> ${mat.faction}<br/>
             <span class='header'>Location(s):</span><br/>${mapLocations(
-          mat.location
-        )}</div>">
+              mat.location
+            )}</div>">
             ${mat.name}
             </div>
             <div class="col qty">
@@ -232,12 +224,12 @@ window.setTimeout(function () {
           if ($(".goals").is(":checked")) {
             $(".mats").append(
               "<div class='warning'>Filtering materials by goals.  This will only show materials that have a goal value set." +
-              " Please enter these values through either Edit Mode, or using the Artifact Calculator in the Settings box.  Or, uncheck 'Enable Filter'.</div>"
+                " Please enter these values through either Edit Mode, or using the Artifact Calculator in the Settings box.  Or, uncheck 'Enable Filter'.</div>"
             );
           } else {
             $(".mats").append(
               "<div class='warning'>Filter has been enabled, showing only mats that have a amount greater than 0." +
-              "  Please either fill in your current materials using Edit Mode, or this list will populate as you gain materials.</div>"
+                "  Please either fill in your current materials using Edit Mode, or this list will populate as you gain materials.</div>"
             );
           }
         }
@@ -450,4 +442,4 @@ window.setTimeout(function () {
       if ($(".edit").is(":checked")) $(".qty").text(1000);
     });
   });
-}, 50)
+}, 50);
