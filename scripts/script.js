@@ -2,7 +2,7 @@ A1lib.identifyApp("appconfig.json");
 
 window.setTimeout(function () {
   const appColor = A1lib.mixColor(255, 199, 0);
-  const timestampRegex = /\[\d{2}:\d{2}:\d{2}\]/;
+  const timestampRegex = /\[\d{2}:\d{2}:\d{2}\]/g;
 
   let reader = new Chatbox.default();
   reader.readargs = {
@@ -52,78 +52,135 @@ window.setTimeout(function () {
 
   function readChatbox() {
     var opts = reader.read() || [];
-    var chat = "";
+    var chatStr = "";
+    var chatArr;
 
     if (opts.length != 0) {
       for (let line in opts) {
-        //Filter out accidentally reading a second material, in case multiple chat lines happen on the same tick.
+        //Filter out the first chat[line], if it has no timestamp.  This is probably from a screen reload.
         //Check if no timestamp exists, and it's the first line in the chatreader.
         if (!opts[line].text.match(timestampRegex) && line == "0") {
           continue;
         }
-        chat += opts[line].text + " ";
+        // Beginning of chat line
+        if (opts[line].text.match(timestampRegex)) {
+          if (line > 0) {
+            chatStr += "\n";
+          }
+          chatStr += opts[line].text + " ";
+          continue;
+        }
+        chatStr += opts[line].text;
       }
     }
-    let name, type;
-    if (chat.indexOf("You find some") > -1) {
-      name = chat
-        .trim()
-        .split("You find some")[1]
-        .trim()
-        .replace(/(\.|')/g, "");
-      type = "Normal";
-    } else if (chat.indexOf("Your auto-screener") > -1) {
-      //Check if material storage is in the same chat line, if it is, skip this output
-      if (chat.indexOf("material storage") > -1) return;
-      name = chat
-        .trim()
-        .split("Your auto-screener spits out some ")[1]
-        .trim()
-        .replace(/(\.|')/g, "");
-      type = "Auto-screener";
-    } else if (chat.indexOf("Your familiar has produced an item") > -1) {
-      name = chat
-        .trim()
-        .split(/produced an item:? /)[1]
-        .trim()
-        .replace(/(\.|')/g, "");
-      type = "Familiar";
-    } else if (chat.indexOf("material storage") > -1) {
-      name = chat
-        .trim()
-        .split(/material storage:? /)[1]
-        .trim()
-        .replace(/(\.|')/g, "");
-      if (chat.indexOf("imp-souled") > -1) type = "Imp Souled";
-      else type = "Porter";
-    } else if (
-      chat.indexOf("Fortune perk") > -1 ||
-      chat.indexOf("imp-souled") > -1
-    ) {
-      //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
-      name = chat
-        .match(/your bank:? [(\.|')+g\s]*/)[0]
-        .split(/your bank:? /)[1]
-        .split(/ x /)[0]
-        .trim()
-        .replace("'", "");
-      type = "Fortune";
+    if (chatStr.trim() != "") {
+      chatArr = chatStr.trim().split("\n");
     }
-    if (name && !name.match(timestampRegex)) {
-      console.log({
-        chat: chat,
-        name: name,
-        type: type,
-      });
-      // Really crappy way to update the LocalStorage.
-      // TODO: Refactor materials/localStorage data handling.
-      materials.forEach((mat) => {
-        if (mat.name.replace("'", "") === name) {
-          mat.qty++;
-          tidyTable(name);
+    for (let line in chatArr) {
+      console.log(chatArr[line]);
+      if (localStorage.lastChat.split("\n").includes(chatArr[line])) {
+        console.log("Material already logged: " + chatArr[line]);
+        continue;
+      }
+      if (chatArr[line].trim() != "") {
+        let name, type;
+        // Normal Excavation/Sand Sifting
+        if (chatArr[line].indexOf("You find some") > -1) {
+          name = chatArr[line]
+            .trim()
+            .split("You find some")[1]
+            .trim()
+            .replace(/(\.|')/g, "");
+          type = "Normal";
+          console.log({ name, type });
         }
-      });
+        // Auto Screener
+        else if (chatArr[line].indexOf("Your auto-screener") > -1) {
+          name = chatArr[line]
+            .trim()
+            .split("Your auto-screener spits out some ")[1]
+            .trim()
+            .replace(/(\.|')/g, "");
+          type = "Auto-screener";
+        }
+        // Familiar (Waterfiend/etc)
+        else if (
+          chatArr[line].indexOf("Your familiar has produced an item") > -1
+        ) {
+          name = chatArr[line]
+            .trim()
+            .split(/produced an item:? /)[1]
+            .trim()
+            .replace(/(\.|')/g, "");
+          type = "Familiar";
+        }
+        // Porter/Imp-Souled
+        else if (chatArr[line].indexOf("material storage") > -1) {
+          // If the previous line was an auto-screener drop, skip the porter/imp line, to prevent double counts.
+          if (
+            chatArr[line - 1] &&
+            chatArr[line - 1].indexOf("Your auto-screener") > -1
+          ) {
+            console.log("Previous line was a auto-screener effect, skip.");
+            updateChatHistory(chatArr[line]);
+            continue;
+          }
+          name = chatArr[line]
+            .trim()
+            .split(/material storage:? /)[1]
+            .trim()
+            .replace(/(\.|')/g, "");
+          if (chatArr[line].indexOf("imp-souled") > -1) type = "Imp Souled";
+          else type = "Porter";
+        }
+        //Fortune Perk/Imp-Souled(material storage full catch)
+        else if (
+          chatArr[line].indexOf("Fortune perk") > -1 ||
+          chatArr[line].indexOf("imp-souled") > -1
+        ) {
+          //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
+          name = chatArr[line]
+            .match(/your bank:? [(\.|')+g\s]*/)[0]
+            .split(/your bank:? /)[1]
+            .split(/ x /)[0]
+            .trim()
+            .replace("'", "");
+          type = "Fortune";
+        }
+        // If material found, log to console, and update Materials List.
+        if (name) {
+          console.log({
+            line: chatArr[line],
+            name: name,
+            type: type,
+          });
+          // Really crappy way to update the LocalStorage.
+          // TODO: Refactor materials/localStorage data handling.
+          materials.forEach((mat) => {
+            if (mat.name.replace("'", "") === name) {
+              mat.qty++;
+              tidyTable(name);
+            }
+          });
+        }
+      }
+      if (chatStr != "") {
+        updateChatHistory(chatArr[line]);
+      }
     }
+  }
+
+  function updateChatHistory(line) {
+    if(!localStorage.lastChat){
+      localStorage.lastChat = line;
+      return;
+    }
+    var history = localStorage.lastChat.split("\n");
+    if (history.length == 5) {
+      history.splice(0, 1);
+    }
+    history.push(line);
+    localStorage.lastChat = history.join("\n");
   }
 
   function mapLocations(location) {
@@ -302,7 +359,7 @@ window.setTimeout(function () {
       if ($(this).html().trim() === "Start") {
         tracking = setInterval(function () {
           readChatbox();
-        }, 600);
+        }, 200);
         $(this).html("Stop");
       } else {
         $(this).html("Start");
