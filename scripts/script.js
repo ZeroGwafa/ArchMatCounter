@@ -76,6 +76,7 @@ window.setTimeout(function () {
     if (chatStr.trim() != "") {
       chatArr = chatStr.trim().split("\n");
     }
+    let name, type, qty;
     for (let line in chatArr) {
       console.log(chatArr[line]);
       if (localStorage.lastChat.split("\n").includes(chatArr[line])) {
@@ -83,85 +84,41 @@ window.setTimeout(function () {
         continue;
       }
       if (chatArr[line].trim() != "") {
-        let name, type;
-        // Normal Excavation/Sand Sifting
-        if (chatArr[line].indexOf("You find some") > -1) {
-          name = chatArr[line]
-            .trim()
-            .split("You find some")[1]
-            .trim()
-            .replace(/(\.|')/g, "");
-          type = "Normal";
-          console.log({ name, type });
-        }
-        // Auto Screener
-        else if (chatArr[line].indexOf("Your auto-screener") > -1) {
-          name = chatArr[line]
-            .trim()
-            .split("Your auto-screener spits out some ")[1]
-            .trim()
-            .replace(/(\.|')/g, "");
-          type = "Auto-screener";
-        }
-        // Familiar (Waterfiend/etc)
-        else if (
-          chatArr[line].indexOf("Your familiar has produced an item") > -1
-        ) {
-          name = chatArr[line]
-            .trim()
-            .split(/produced an item:? /)[1]
-            .trim()
-            .replace(/(\.|')/g, "");
-          type = "Familiar";
-        }
-        // Porter/Imp-Souled
-        else if (chatArr[line].indexOf("material storage") > -1) {
-          // If the previous line was an auto-screener drop, skip the porter/imp line, to prevent double counts.
-          if (
-            chatArr[line - 1] &&
-            chatArr[line - 1].indexOf("Your auto-screener") > -1
-          ) {
+        // Determine quantity modifier
+        if (chatArr[line] && !qty) {
+          // Auto-Screener - Set qty to 1, process next line.
+          if (chatArr[line].indexOf("Your auto-screener") > -1) {
             console.log("Previous line was a auto-screener effect, skip.");
             updateChatHistory(chatArr[line]);
+            qty = 1;
             continue;
           }
-          name = chatArr[line]
-            .trim()
-            .split(/material storage:? /)[1]
-            .trim()
-            .replace(/(\.|')/g, "");
-          if (chatArr[line].indexOf("imp-souled") > -1) type = "Imp Souled";
-          else type = "Porter";
+          // Fortune and Balarak - double the material found.
+          if (
+            chatArr[line].indexOf("Fortune perk") > -1 ||
+            chatArr[line].indexOf("Balarak") > -1
+          ) {
+            console.log("Fortune, or Balarak triggered, doubling mat.");
+            updateChatHistory(chatArr[line]);
+            qty = 2;
+            continue;
+          }
+          // All other situations, set qty to 1, process current line.
+          qty = 1;
         }
-        //Fortune Perk/Imp-Souled(material storage full catch)
-        else if (
-          chatArr[line].indexOf("Fortune perk") > -1 ||
-          chatArr[line].indexOf("imp-souled") > -1
-        ) {
-          //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
-          name = chatArr[line]
-            .match(/your bank:? [(\.|')+g\s]*/)[0]
-            .split(/your bank:? /)[1]
-            .split(/ x /)[0]
-            .trim()
-            .replace("'", "");
-          type = "Fortune";
-        }
+        // Get name and type
+        [name, type] = checkLine(chatArr[line]);
+
         // If material found, log to console, and update Materials List.
         if (name) {
           console.log({
             line: chatArr[line],
-            name: name,
-            type: type,
+            name,
+            type,
+            qty,
           });
-          // Really crappy way to update the LocalStorage.
-          // TODO: Refactor materials/localStorage data handling.
-          materials.forEach((mat) => {
-            if (mat.name.replace("'", "") === name) {
-              mat.qty++;
-              tidyTable(name);
-            }
-          });
+          updateMats(name, qty);
+          qty = null;
         }
       }
       if (chatStr != "") {
@@ -171,7 +128,7 @@ window.setTimeout(function () {
   }
 
   function updateChatHistory(line) {
-    if(!localStorage.lastChat){
+    if (!localStorage.lastChat) {
       localStorage.lastChat = line;
       return;
     }
@@ -183,6 +140,72 @@ window.setTimeout(function () {
     localStorage.lastChat = history.join("\n");
   }
 
+  function updateMats(name, qty) {
+    let mats = JSON.parse(localStorage.archMats);
+    for (let mat of mats) {
+      if (mat.name == name) {
+        console.log({matQty: mat.qty, qty})
+        mat.qty += qty;
+      }
+    }
+    localStorage.archMats = JSON.stringify(mats);
+    tidyTable(name);
+  }
+
+  function checkLine(line) {
+    var name, type;
+    // Inventory
+    if (line.indexOf("You find some") > -1) {
+      name = line
+        .trim()
+        .split("You find some")[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Normal";
+    }
+    // Auto Screener
+    if (line.indexOf("Your auto-screener") > -1) {
+      name = line
+        .trim()
+        .split("Your auto-screener spits out some ")[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Auto-screener";
+    }
+    // Porter/Imp-Souled
+    if (line.indexOf("material storage") > -1) {
+      name = line
+        .trim()
+        .split(/material storage:? /)[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
+      else type = "Porter";
+    }
+    // Familiar (Waterfiend/etc)
+    if (line.indexOf("Your familiar has produced an item") > -1) {
+      name = line
+        .trim()
+        .split(/produced an item:? /)[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      type = "Familiar";
+    }
+    //Fortune Perk/Imp-Souled(material storage full catch)
+    if (line.indexOf("Fortune perk") > -1 || line.indexOf("imp-souled") > -1) {
+      //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
+      name = line
+        .match(/your bank:? [(\.|')+g\s]*/)[0]
+        .split(/your bank:? /)[1]
+        .split(/ x /)[0]
+        .trim()
+        .replace("'", "");
+      if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
+      else type = "Fortune";
+    }
+
+    return [name, type];
+  }
   function mapLocations(location) {
     let loc = "";
     location.split("\n").forEach((site) => (loc += `- ${site}<br/>`));
@@ -191,7 +214,7 @@ window.setTimeout(function () {
 
   function buildTable() {
     $(".mats").empty();
-    materials.forEach((mat) => {
+    JSON.parse(localStorage.archMats).forEach((mat) => {
       let name = mat.name.replace("'", "");
       $(".mats").append(
         `
@@ -237,8 +260,8 @@ window.setTimeout(function () {
   }
 
   function tidyTable(name) {
+    let materials = JSON.parse(localStorage.archMats);
     $(".mats .warning").remove();
-    localStorage.archMats = JSON.stringify(materials);
     $(`[data-name="${name}"]`).removeClass("normal complete");
     $(`[data-name="${name}"]`).addClass("getMat");
     materials.forEach((mat) => {
@@ -305,6 +328,7 @@ window.setTimeout(function () {
     });
 
     $(".edit").change(function () {
+      let materials = JSON.parse(localStorage.archMats);
       document.querySelectorAll(".hideMe").forEach((row, i) => {
         if (row.checked === true) materials[i].hide = true;
         else materials[i].hide = false;
@@ -349,6 +373,7 @@ window.setTimeout(function () {
           mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
           mat.goal = parseInt($(`[data-name='${name}'] .goal`).text());
         });
+        localStorage.archMats = JSON.stringify(materials);
         buildTable();
       }
     });
@@ -381,7 +406,7 @@ window.setTimeout(function () {
         data.forEach((item) => localStorage.removeItem(item));
         location.reload();
       } else {
-        materials.forEach((mat) => {
+        JSON.parse(localStorage.archMats).forEach((mat) => {
           mat[type] = 0;
         });
         buildTable();
@@ -390,6 +415,7 @@ window.setTimeout(function () {
 
     $("#sort").change((e) => {
       if (!$(".edit").is(":checked")) {
+        let materials = JSON.parse(localStorage.archMats);
         materials.sort((a, b) => {
           if (a.id > b.id) return 1;
           else return -1;
@@ -422,13 +448,14 @@ window.setTimeout(function () {
           default:
             break;
         }
+        localStorage.archMats = JSON.stringify(materials);
         buildTable();
       }
     });
 
     $(".export").click(function () {
       var str = "Material,Quantity,Goal\n"; // column headers
-      materials.forEach((mat) => {
+      JSON.parse(localStorage.archMats).forEach((mat) => {
         let name = mat.name.replace("'", "");
         str = `${str}${name},${mat.qty},${mat.goal}\n`;
       });
@@ -482,7 +509,7 @@ window.setTimeout(function () {
           localStorage.removeItem("tempMaterials");
         }
         var mats = JSON.parse(storageEvent.newValue);
-        materials.forEach((mat, i) => {
+        JSON.parse(localStorage.archMats).forEach((mat, i) => {
           mat.goal = parseInt(mats[mat.name]);
         });
         buildTable();
