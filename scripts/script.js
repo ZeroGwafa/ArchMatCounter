@@ -176,16 +176,6 @@ window.setTimeout(function () {
         .replace(/(\.|')/g, "");
       type = "Auto-screener";
     }
-    // Porter/Imp-Souled
-    if (line.indexOf("material storage") > -1) {
-      name = line
-        .trim()
-        .split(/material storage:? /)[1]
-        .trim()
-        .replace(/(\.|')/g, "");
-      if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
-      else type = "Porter";
-    }
     // Familiar (Waterfiend/etc)
     if (line.indexOf("Your familiar has produced an item") > -1) {
       name = line
@@ -195,8 +185,19 @@ window.setTimeout(function () {
         .replace(/(\.|')/g, "");
       type = "Familiar";
     }
+    // Porter/Imp-Souled
+    if (line.indexOf("material storage") > -1) {
+      name = line
+        .trim()
+        .split(/material storage:? /)[1]
+        .trim()
+        .replace(/(\.|')/g, "");
+      if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
+      if (line.indexOf("Fortune perk") > -1) type = "Fortune";
+      else type = "Porter";
+    }
     //Fortune Perk/Imp-Souled(material storage full catch)
-    if (line.indexOf("Fortune perk") > -1 || line.indexOf("imp-souled") > -1) {
+    if (line.indexOf("your bank") > -1) {
       //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
       name = line
         .match(/your bank:? [(\.|')+g\s]*/)[0]
