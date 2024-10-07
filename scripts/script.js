@@ -149,7 +149,6 @@ window.setTimeout(function () {
     let mats = JSON.parse(localStorage.archMats);
     for (let mat of mats) {
       if (mat.name == name) {
-        console.log({ matQty: mat.qty, qty });
         mat.qty += qty;
       }
     }
