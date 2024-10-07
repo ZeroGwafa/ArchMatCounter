@@ -79,18 +79,13 @@ window.setTimeout(function () {
     let name, type, qty;
     for (let line in chatArr) {
       console.log(chatArr[line]);
-      if (localStorage.chatHistory.split("\n").includes(chatArr[line])) {
-        console.log("Material already logged: " + chatArr[line]);
-        continue;
-      }
       if (chatArr[line].trim() != "") {
         // Determine quantity modifier
         if (chatArr[line] && !qty) {
-          // Auto-Screener - Set qty to 1, process next line.
-          if (chatArr[line].indexOf("Your auto-screener") > -1) {
+          // Previous line was from Auto-Screener, therefore, already processed.
+          if (chatArr[line - 1] && chatArr[line - 1].indexOf("Your auto-screener") > -1) {
             console.log("Previous line was a auto-screener effect, skip.");
             updateChatHistory(chatArr[line]);
-            qty = 1;
             continue;
           }
           // Fortune and Balarak - double the material found.
@@ -106,6 +101,15 @@ window.setTimeout(function () {
           // All other situations, set qty to 1, process current line.
           qty = 1;
         }
+        // Determine if chat line was already logged, skip further processing this line.
+        if (
+          localStorage.chatHistory &&
+          localStorage.chatHistory.split("\n").includes(chatArr[line])
+        ) {
+          console.log("Material already logged: " + chatArr[line]);
+          qty = null;
+          continue;
+        }
         // Get name and type
         [name, type] = checkLine(chatArr[line]);
 
@@ -119,10 +123,8 @@ window.setTimeout(function () {
           });
           updateMats(name, qty);
           qty = null;
+          updateChatHistory(chatArr[line]);
         }
-      }
-      if (chatStr != "") {
-        updateChatHistory(chatArr[line]);
       }
     }
   }
@@ -144,7 +146,7 @@ window.setTimeout(function () {
     let mats = JSON.parse(localStorage.archMats);
     for (let mat of mats) {
       if (mat.name == name) {
-        console.log({matQty: mat.qty, qty})
+        console.log({ matQty: mat.qty, qty });
         mat.qty += qty;
       }
     }
