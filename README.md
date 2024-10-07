@@ -13,6 +13,10 @@ Or, by going to the following link in the Alt1 Browser
 
 https://zerogwafa.github.io/ArchMatCounter/
 
+ # **NOTE**
+You will want to have at least 5 timestamps visible on your selected chatbox for the rare-but-can-happen of Fortune/Brush/Screener/Porters to be tracked properly.  Otherwise, there is a chance a material will be missed.
+
+
 ## Usage:
     1. Open app with RuneScape window visible.
 
