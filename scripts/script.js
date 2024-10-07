@@ -81,24 +81,27 @@ window.setTimeout(function () {
       console.log(chatArr[line]);
       if (chatArr[line].trim() != "") {
         // Determine quantity modifier
-        if (chatArr[line] && !qty) {
-          // Previous line was from Auto-Screener, therefore, already processed.
-          if (chatArr[line - 1] && chatArr[line - 1].indexOf("Your auto-screener") > -1) {
-            console.log("Previous line was a auto-screener effect, skip.");
-            updateChatHistory(chatArr[line]);
-            continue;
-          }
-          // Fortune and Balarak - double the material found.
-          if (
-            chatArr[line].indexOf("Fortune perk") > -1 ||
-            chatArr[line].indexOf("Balarak") > -1
-          ) {
-            console.log("Fortune, or Balarak triggered, doubling mat.");
-            updateChatHistory(chatArr[line]);
-            qty = 2;
-            continue;
-          }
-          // All other situations, set qty to 1, process current line.
+        // Previous line was from Auto-Screener, therefore, already processed.
+        if (
+          chatArr[line - 1] &&
+          chatArr[line - 1].indexOf("Your auto-screener") > -1
+        ) {
+          console.log("Previous line was a auto-screener effect, skip.");
+          updateChatHistory(chatArr[line]);
+          continue;
+        }
+        // Fortune and Balarak - double the material found.
+        if (
+          chatArr[line].indexOf("Fortune perk") > -1 ||
+          chatArr[line].indexOf("Balarak") > -1
+        ) {
+          console.log("Fortune, or Balarak triggered, doubling mat.");
+          updateChatHistory(chatArr[line]);
+          qty = 2;
+          continue;
+        }
+        // All other situations, set qty to 1, if not previously set, and process current line.
+        if (!qty) {
           qty = 1;
         }
         // Determine if chat line was already logged, skip further processing this line.
