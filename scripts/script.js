@@ -192,9 +192,9 @@ window.setTimeout(function () {
         .split(/material storage:? /)[1]
         .trim()
         .replace(/(\.|')/g, "");
+      type = "Porter";
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       if (line.indexOf("Fortune perk") > -1) type = "Fortune";
-      else type = "Porter";
     }
     //Fortune Perk/Imp-Souled(material storage full catch)
     if (line.indexOf("your bank") > -1) {
