@@ -79,7 +79,7 @@ window.setTimeout(function () {
     let name, type, qty;
     for (let line in chatArr) {
       console.log(chatArr[line]);
-      if (localStorage.lastChat.split("\n").includes(chatArr[line])) {
+      if (localStorage.chatHistory.split("\n").includes(chatArr[line])) {
         console.log("Material already logged: " + chatArr[line]);
         continue;
       }
@@ -128,16 +128,16 @@ window.setTimeout(function () {
   }
 
   function updateChatHistory(line) {
-    if (!localStorage.lastChat) {
-      localStorage.lastChat = line;
+    if (!localStorage.chatHistory) {
+      localStorage.chatHistory = line;
       return;
     }
-    var history = localStorage.lastChat.split("\n");
+    var history = localStorage.chatHistory.split("\n");
     if (history.length == 5) {
       history.splice(0, 1);
     }
     history.push(line);
-    localStorage.lastChat = history.join("\n");
+    localStorage.chatHistory = history.join("\n");
   }
 
   function updateMats(name, qty) {
