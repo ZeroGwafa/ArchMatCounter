@@ -514,9 +514,11 @@ window.setTimeout(function () {
           localStorage.removeItem("tempMaterials");
         }
         var mats = JSON.parse(storageEvent.newValue);
-        JSON.parse(localStorage.archMats).forEach((mat, i) => {
+        const curMats = JSON.parse(localStorage.archMats);
+        curMats.forEach((mat, i) => {
           mat.goal = parseInt(mats[mat.name]);
         });
+        localStorage.archMats = JSON.stringify(curMats);
         buildTable();
       }
     }
