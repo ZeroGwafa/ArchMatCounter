@@ -78,35 +78,40 @@ window.setTimeout(function () {
     }
     let name, type, qty;
     for (let line in chatArr) {
-      console.log(chatArr[line]);
-      if (chatArr[line].trim() != "") {
+      let chatLine = chatArr[line].trim();
+      let prevChatLine;
+      if (chatArr[line - 1]) {
+        prevChatLine = chatArr[line - 1].trim();
+      }
+      console.log(chatLine);
+      if (chatLine != "") {
+        // Determine if chat line was already logged, skip further processing this line.
+        if (isInHistory(chatLine)) {
+          console.log("Material already logged: " + chatLine);
+          qty = null;
+          continue;
+        }
         // Determine quantity modifier
         // Previous line was from Auto-Screener, therefore, already processed.
-        if (
-          chatArr[line - 1] &&
-          chatArr[line - 1].indexOf("Your auto-screener") > -1
-        ) {
+        if (prevChatLine && prevChatLine.indexOf("Your auto-screener") > -1) {
           console.log("Previous line was a auto-screener effect, skip.");
-          updateChatHistory(chatArr[line]);
           continue;
         }
         // Fortune and Balarak - double the material found.
         if (
-          chatArr[line].indexOf("Fortune perk") > -1 ||
-          chatArr[line].indexOf("Balarak") > -1
+          chatLine.indexOf("Fortune perk") > -1 ||
+          chatLine.indexOf("Balarak") > -1
         ) {
           // if Fortune procs, check if it was triggered by a Balarak's Brush proc.  Thanks Ex Inferni!
           if (
-            chatArr[line].indexOf("Fortune perk") > -1 &&
-            chatArr[line - 1] &&
-            chatArr[line - 1].indexOf("Balarak")
+            chatLine.indexOf("Fortune perk") > -1 &&
+            prevChatLine &&
+            prevChatLine.indexOf("Balarak")
           ) {
             qty = 4;
-            updateChatHistory(chatArr[line]);
             continue;
           }
           console.log("Fortune, or Balarak triggered, doubling mat.");
-          updateChatHistory(chatArr[line]);
           qty = 2;
           continue;
         }
@@ -114,45 +119,38 @@ window.setTimeout(function () {
         if (!qty) {
           qty = 1;
         }
-        // Determine if chat line was already logged, skip further processing this line.
-        if (
-          localStorage.chatHistory &&
-          localStorage.chatHistory.split("\n").includes(chatArr[line])
-        ) {
-          console.log("Material already logged: " + chatArr[line]);
-          qty = null;
-          continue;
-        }
         // Get name and type
-        [name, type] = checkLine(chatArr[line]);
+        [name, type] = checkLine(chatLine);
 
         // If material found, log to console, and update Materials List.
         if (name) {
           console.log({
-            line: chatArr[line],
+            line: chatLine,
             name,
             type,
             qty,
           });
           updateMats(name, qty);
           qty = null;
-          updateChatHistory(chatArr[line]);
         }
       }
     }
+    if (chatArr) {
+      updateChatHistory(chatArr);
+    }
   }
 
-  function updateChatHistory(line) {
-    if (!localStorage.chatHistory) {
-      localStorage.chatHistory = line;
+  function updateChatHistory(chatArr) {
+    if (!sessionStorage.chatHistory) {
+      sessionStorage.chatHistory = chatArr.join("\n");
       return;
     }
-    var history = localStorage.chatHistory.split("\n");
-    if (history.length == 5) {
+    var history = sessionStorage.chatHistory.split("\n");
+    while (history.length > 100) {
       history.splice(0, 1);
     }
-    history.push(line);
-    localStorage.chatHistory = history.join("\n");
+    chatArr.forEach((line) => history.push(line.trim()));
+    sessionStorage.chatHistory = history.join("\n");
   }
 
   function updateMats(name, qty) {
@@ -167,21 +165,16 @@ window.setTimeout(function () {
   }
 
   function checkLine(line) {
-    var name, type;
+    let name = "",
+      type;
     // Inventory
     if (line.indexOf("You find some") > -1) {
-      name = line
-        .trim()
-        .split("You find some")[1]
-        .trim();
+      name = line.trim().split("You find some")[1].trim();
       type = "Normal";
     }
     // Auto Screener
     if (line.indexOf("Your auto-screener") > -1) {
-      name = line
-        .trim()
-        .split("Your auto-screener spits out some ")[1]
-        .trim();
+      name = line.trim().split("Your auto-screener spits out some ")[1].trim();
       type = "Auto-screener";
     }
     // Familiar (Waterfiend/etc)
@@ -213,13 +206,24 @@ window.setTimeout(function () {
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       else type = "Fortune";
     }
-
+    name = name.replace(/(\.)/g, "");
     return [name, type];
   }
   function mapLocations(location) {
     let loc = "";
     location.split("\n").forEach((site) => (loc += `- ${site}<br/>`));
     return loc;
+  }
+
+  function isInHistory(chatLine) {
+    if (sessionStorage.chatHistory) {
+      for (let historyLine of sessionStorage.chatHistory.split("\n")) {
+        if (historyLine.trim() == chatLine) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   function buildTable() {
