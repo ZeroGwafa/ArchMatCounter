@@ -8,7 +8,7 @@ window.setTimeout(function () {
   reader.readargs = {
     colors: [
       A1lib.mixColor(255, 255, 255), //White text
-      A1lib.mixColor(0, 255, 0), //Green Fortune Text
+      A1lib.mixColor(60, 183, 30), //Green Fortune Text
     ],
     backwards: true,
   };
@@ -95,6 +95,16 @@ window.setTimeout(function () {
           chatArr[line].indexOf("Fortune perk") > -1 ||
           chatArr[line].indexOf("Balarak") > -1
         ) {
+          // if Fortune procs, check if it was triggered by a Balarak's Brush proc.  Thanks Ex Inferni!
+          if (
+            chatArr[line].indexOf("Fortune perk") > -1 &&
+            chatArr[line - 1] &&
+            chatArr[line - 1].indexOf("Balarak")
+          ) {
+            qty = 4;
+            updateChatHistory(chatArr[line]);
+            continue;
+          }
           console.log("Fortune, or Balarak triggered, doubling mat.");
           updateChatHistory(chatArr[line]);
           qty = 2;
