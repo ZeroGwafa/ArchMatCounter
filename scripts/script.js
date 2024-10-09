@@ -173,8 +173,7 @@ window.setTimeout(function () {
       name = line
         .trim()
         .split("You find some")[1]
-        .trim()
-        .replace(/(\.|')/g, "");
+        .trim();
       type = "Normal";
     }
     // Auto Screener
@@ -182,8 +181,7 @@ window.setTimeout(function () {
       name = line
         .trim()
         .split("Your auto-screener spits out some ")[1]
-        .trim()
-        .replace(/(\.|')/g, "");
+        .trim();
       type = "Auto-screener";
     }
     // Familiar (Waterfiend/etc)
@@ -191,8 +189,7 @@ window.setTimeout(function () {
       name = line
         .trim()
         .split(/produced an item:? /)[1]
-        .trim()
-        .replace(/(\.|')/g, "");
+        .trim();
       type = "Familiar";
     }
     // Porter/Imp-Souled
@@ -200,8 +197,7 @@ window.setTimeout(function () {
       name = line
         .trim()
         .split(/material storage:? /)[1]
-        .trim()
-        .replace(/(\.|')/g, "");
+        .trim();
       type = "Porter";
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       if (line.indexOf("Fortune perk") > -1) type = "Fortune";
@@ -213,8 +209,7 @@ window.setTimeout(function () {
         .match(/your bank:? [(\.|')+g\s]*/)[0]
         .split(/your bank:? /)[1]
         .split(/ x /)[0]
-        .trim()
-        .replace("'", "");
+        .trim();
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       else type = "Fortune";
     }
