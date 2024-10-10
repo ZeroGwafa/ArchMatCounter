@@ -83,18 +83,18 @@ window.setTimeout(function () {
       if (chatArr[line - 1]) {
         prevChatLine = chatArr[line - 1].trim();
       }
-      console.log(chatLine);
+      console.debug(chatLine);
       if (chatLine != "") {
         // Determine if chat line was already logged, skip further processing this line.
         if (isInHistory(chatLine)) {
-          console.log("Material already logged: " + chatLine);
+          console.debug("Material already logged: " + chatLine);
           qty = null;
           continue;
         }
         // Determine quantity modifier
         // Previous line was from Auto-Screener, therefore, already processed.
         if (prevChatLine && prevChatLine.indexOf("Your auto-screener") > -1) {
-          console.log("Previous line was a auto-screener effect, skip.");
+          console.debug("Previous line was a auto-screener effect, skip.");
           continue;
         }
         // Fortune and Balarak - double the material found.
@@ -111,7 +111,7 @@ window.setTimeout(function () {
             qty = 4;
             continue;
           }
-          console.log("Fortune, or Balarak triggered, doubling mat.");
+          console.debug("Fortune, or Balarak triggered, doubling mat.");
           qty = 2;
           continue;
         }
@@ -124,7 +124,7 @@ window.setTimeout(function () {
 
         // If material found, log to console, and update Materials List.
         if (name) {
-          console.log({
+          console.debug({
             line: chatLine,
             name,
             type,
