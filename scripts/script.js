@@ -420,9 +420,11 @@ window.setTimeout(function () {
         data.forEach((item) => localStorage.removeItem(item));
         location.reload();
       } else {
-        JSON.parse(localStorage.archMats).forEach((mat) => {
+        let mats = JSON.parse(localStorage.archMats);
+        mats.forEach((mat) => {
           mat[type] = 0;
         });
+        localStorage.archMats = JSON.stringify(mats);
         buildTable();
       }
     });
