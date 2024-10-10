@@ -438,13 +438,6 @@ window.setTimeout(function () {
         });
         let sort = e.target.value;
         switch (sort) {
-          case "id":
-          case "name":
-            materials.sort((a, b) => {
-              if (a[sort] > b[sort]) return 1;
-              else return -1;
-            });
-            break;
           case "qty":
           case "goal":
             materials.sort((a, b) => {
@@ -452,19 +445,18 @@ window.setTimeout(function () {
               else return 1;
             });
             break;
-          case "faction":
+          case "id":
+          case "name":
             materials.sort((a, b) => {
-              if (a.id > b.id) return -1;
-              else return 1;
-            });
-            materials.sort((a, b) => {
-              if (a.faction > b.faction) return 1;
+              if (a[sort] > b[sort]) return 1;
               else return -1;
             });
+            break;
           default:
             break;
         }
         localStorage.archMats = JSON.stringify(materials);
+        document.querySelector("#sort").value = "";
         buildTable();
       }
     });

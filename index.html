@@ -1,214 +1,300 @@
 <html>
-
-<head>
-
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://runeapps.org/runeappslib.css">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://runeapps.org/nis/nis.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://runeapps.org/runeappslib.css"
+    />
     <script src="https://www.unpkg.com/@alt1/base/dist/index.bundle.js"></script>
     <script src="https://www.unpkg.com/@alt1/ocr/dist/index.bundle.js"></script>
     <script src="https://www.unpkg.com/@alt1/chatbox/dist/index.bundle.js"></script>
-</head>
+  </head>
 
-<body class="nis">
+  <body class="nis">
     <div class="container">
-        <div class="row matHeader">
-            <div class="col hide">Hide</div>
-            <div class="col-6">
-                Mats
-            </div>
+      <div class="row matHeader">
+        <div class="col hide">Hide</div>
+        <div class="col-6">Mats</div>
+        <div class="col">Qty</div>
+        <div class="col goalCol">Goal</div>
+      </div>
+      <div class="row scroll">
+        <div class="col mats"></div>
+      </div>
+      <div class="row fixed-bottom">
+        <div class="col">
+          <div class="row">
             <div class="col">
-                Qty
+              <button class="tracker nisbutton">Start</button>
+              <button
+                class="nisbutton"
+                data-toggle="modal"
+                data-target="#settings"
+                type="button"
+              >
+                Settings
+              </button>
             </div>
-            <div class="col goalCol">
-                Goal
-            </div>
+          </div>
         </div>
-        <div class="row scroll">
-            <div class="col mats ">
-            </div>
-        </div>
-        <div class="row fixed-bottom">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <button class="tracker nisbutton">
-                            Start
-                        </button>
-                        <button class="nisbutton" data-toggle="modal" data-target="#settings" type="button">
-                            Settings
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
     <div class="modal nis" tabindex="-1" role="dialog" id="settings">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Settings</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col">
-                            <h6>Sort Mats by: </h6>
-                        </div>
-                        <div class="col">
-                            <select id="sort">
-                                <option value="id">Default</option>
-                                <option value="faction">Mat Storage</option>
-                                <option value="name">Name</option>
-                                <option value="qty">Qty</option>
-                                <option value="goal">Goal</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="When checked, will only show materials with a Quantity greater than 0">
-                            <h6>Enable Filter</h6>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" class="filter" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="When checked, allows you to edit the values for each material.">
-                            <h6>Enable Edit</h6>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" class="edit" data-toggle="modal" data-target="#settings" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="When checked, Shows the goals column.">
-                            <h6>Enable Goals</h6>
-                        </div>
-                        <div class="col">
-                            <input type="checkbox" class="goals" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="Allows the user to select the chat box the app should target.">
-                            <h6>Select Chat</h6>
-                        </div>
-                        <div class="col">
-                            <select class="chat">
-                                <option value="">Select Chat</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="Clears material Qty column.">
-                            <button class="nisbutton" data-type="qty" name='qty' data-toggle="collapse" href="#clearQty">
-                                ClearQty
-                            </button>
-                        </div>
-                        <div class="col header" title="Clears material Goals column.">
-                            <button class="nisbutton" data-type="goal" name="goals" data-toggle="collapse" href="#clearGoals">
-                                ClearGoals
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row collapse warning" id="clearQty">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col text-center">
-                                    Clear Qty?
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col header">
-                                    <button class="nisbutton clear" data-type="qty" data-toggle="collapse" href="#clearQty">
-                                        Yes
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="nisbutton" data-toggle="collapse" href="#clearQty">
-                                        No
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row collapse warning" id="clearGoals">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col text-center">
-                                    Clear Goals?
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col header">
-                                    <button class="nisbutton clear" data-type="goal" data-toggle="collapse" href="#clearGoals">
-                                        Yes
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="nisbutton" data-toggle="collapse" href="#clearGoals">
-                                        No
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col header" title="Opens the Artefact calculator.">
-                            <button class='nisbutton openImport' data-toggle="modal" data-target="#settings">
-                                ArtifactCalc
-                            </button>
-                        </div>
-                        <div class="col header" title="Exports the current data as a CSV file.">
-                            <button class='nisbutton export'>
-                                CSV Export
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="nisbutton" data-type="reset" data-toggle="collapse" href="#resetApp">
-                                        Factory Reset
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row collapse danger" id="resetApp">
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            This will remove all saved data and set all settings to default. This is irreversable!
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col header">
-                                            <button class="nisbutton clear" data-type="reset" data-toggle="collapse" href="#resetApp">
-                                                Yes
-                                            </button>
-                                        </div>
-                                        <div class="col">
-                                            <button class="nisbutton" data-toggle="collapse" href="#resetApp">
-                                                No
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Settings</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <h6>Sort Mats by:</h6>
+              </div>
+              <div class="col">
+                <select id="sort">
+                  <option value="">Select</option>
+                  <option value="id">Mat Storage</option>
+                  <option value="name">Name</option>
+                  <option value="qty">Qty</option>
+                  <option value="goal">Goal</option>
+                </select>
+              </div>
             </div>
+            <div class="row">
+              <div
+                class="col header"
+                title="When checked, will only show materials with a Quantity greater than 0"
+              >
+                <h6>Enable Filter</h6>
+              </div>
+              <div class="col">
+                <input type="checkbox" class="filter" />
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col header"
+                title="When checked, allows you to edit the values for each material."
+              >
+                <h6>Enable Edit</h6>
+              </div>
+              <div class="col">
+                <input
+                  type="checkbox"
+                  class="edit"
+                  data-toggle="modal"
+                  data-target="#settings"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col header"
+                title="When checked, Shows the goals column."
+              >
+                <h6>Enable Goals</h6>
+              </div>
+              <div class="col">
+                <input type="checkbox" class="goals" />
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col header"
+                title="Allows the user to select the chat box the app should target."
+              >
+                <h6>Select Chat</h6>
+              </div>
+              <div class="col">
+                <select class="chat">
+                  <option value="">Select Chat</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col header" title="Clears material Qty column.">
+                <button
+                  class="nisbutton"
+                  data-type="qty"
+                  name="qty"
+                  data-toggle="collapse"
+                  href="#clearQty"
+                >
+                  ClearQty
+                </button>
+              </div>
+              <div class="col header" title="Clears material Goals column.">
+                <button
+                  class="nisbutton"
+                  data-type="goal"
+                  name="goals"
+                  data-toggle="collapse"
+                  href="#clearGoals"
+                >
+                  ClearGoals
+                </button>
+              </div>
+            </div>
+            <div class="row collapse warning" id="clearQty">
+              <div class="col">
+                <div class="row">
+                  <div class="col text-center">Clear Qty?</div>
+                </div>
+                <div class="row">
+                  <div class="col header">
+                    <button
+                      class="nisbutton clear"
+                      data-type="qty"
+                      data-toggle="collapse"
+                      href="#clearQty"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      class="nisbutton"
+                      data-toggle="collapse"
+                      href="#clearQty"
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row collapse warning" id="clearGoals">
+              <div class="col">
+                <div class="row">
+                  <div class="col text-center">Clear Goals?</div>
+                </div>
+                <div class="row">
+                  <div class="col header">
+                    <button
+                      class="nisbutton clear"
+                      data-type="goal"
+                      data-toggle="collapse"
+                      href="#clearGoals"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      class="nisbutton"
+                      data-toggle="collapse"
+                      href="#clearGoals"
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col header" title="Opens the Artefact calculator.">
+                <button
+                  class="nisbutton openImport"
+                  data-toggle="modal"
+                  data-target="#settings"
+                >
+                  ArtifactCalc
+                </button>
+              </div>
+              <div
+                class="col header"
+                title="Exports the current data as a CSV file."
+              >
+                <button class="nisbutton export">CSV Export</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <button
+                      class="nisbutton"
+                      data-type="reset"
+                      data-toggle="collapse"
+                      href="#resetApp"
+                    >
+                      Factory Reset
+                    </button>
+                  </div>
+                </div>
+                <div class="row collapse danger" id="resetApp">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col text-center">
+                        This will remove all saved data and set all settings to
+                        default. This is irreversable!
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col header">
+                        <button
+                          class="nisbutton clear"
+                          data-type="reset"
+                          data-toggle="collapse"
+                          href="#resetApp"
+                        >
+                          Yes
+                        </button>
+                      </div>
+                      <div class="col">
+                        <button
+                          class="nisbutton"
+                          data-toggle="collapse"
+                          href="#resetApp"
+                        >
+                          No
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</body>
-<script src="scripts/data.js"></script>
-<script src="scripts/script.js"></script>
-
+  </body>
+  <script src="scripts/data.js"></script>
+  <script src="scripts/script.js"></script>
 </html>
