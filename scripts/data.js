@@ -7,8 +7,7 @@ let materials = [
     hide: false,
     level: 5,
     faction: "Agnostic",
-    location:
-      "Varrock Dig Site\n Kharid-et\n Infernal Source\n Everlight\n Stormguard Citadel\n Warforge",
+    location: ["Archaeology Guild excavation site"],
   },
   {
     id: 1,
@@ -18,7 +17,10 @@ let materials = [
     hide: false,
     level: 12,
     faction: "Agnostic",
-    location: "Kharid-et",
+    location: [
+      "Al Kharid east excavation site",
+      "Kharid-et - Exterior excavation site",
+    ],
   },
   {
     id: 2,
@@ -28,8 +30,7 @@ let materials = [
     hide: false,
     level: 17,
     faction: "Agnostic",
-    location:
-      "Ice Mountain\n Kharid-et\n Infernal Source\n Everlight\n Stormguard Citadel\n Warforge",
+    location: ["Ice mountain excavation site"],
   },
   {
     id: 3,
@@ -39,7 +40,7 @@ let materials = [
     hide: false,
     level: 20,
     faction: "Agnostic",
-    location: "Kharid-et\n Camdozaal",
+    location: ["Camdozaal cavern excavation site"],
   },
   {
     id: 4,
@@ -49,7 +50,7 @@ let materials = [
     hide: false,
     level: 20,
     faction: "Agnostic",
-    location: "Anachronia",
+    location: ["Anachronia north excavation site"],
   },
   {
     id: 5,
@@ -59,7 +60,7 @@ let materials = [
     hide: false,
     level: 24,
     faction: "Agnostic",
-    location: "First Tower",
+    location: ["First Tower excavation site"],
   },
   {
     id: 6,
@@ -69,7 +70,7 @@ let materials = [
     hide: false,
     level: 29,
     faction: "Agnostic",
-    location: "Morytania\n Infernal Source",
+    location: ["Morytania north excavation site"],
   },
   {
     id: 7,
@@ -79,7 +80,7 @@ let materials = [
     hide: false,
     level: 60,
     faction: "Agnostic",
-    location: "Waiko",
+    location: ["Waiko excavation site"],
   },
   {
     id: 8,
@@ -89,7 +90,7 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Agnostic",
-    location: "Feldip",
+    location: ["Feldip excavation site"],
   },
   {
     id: 9,
@@ -99,7 +100,10 @@ let materials = [
     hide: false,
     level: 81,
     faction: "Agnostic",
-    location: "Ancient Cavern\n Odd Old Man",
+    location: [
+      "Ancient cavern excavation site",
+      "Odd Old Man - excavation site",
+    ],
   },
   {
     id: 10,
@@ -109,7 +113,10 @@ let materials = [
     hide: false,
     level: 70,
     faction: "Armadylean",
-    location: "Stormguard Citadel\n God Wars Dungeon",
+    location: [
+      "Stormguard Citadel - Research & Development south-west excavation site",
+      "God Wars Dungeon - Armadylean south-west excavation site",
+    ],
   },
   {
     id: 11,
@@ -119,7 +126,11 @@ let materials = [
     hide: false,
     level: 70,
     faction: "Armadylean",
-    location: "Stormguard Citadel\n God Wars Dungeon",
+    location: [
+      "Stormguard Citadel - Dayguard tower excavation site",
+      "Stormguard Citadel - Nightguard tower excavation site",
+      "God Wars Dungeon - Armadylean south-west excavation site",
+    ],
   },
   {
     id: 12,
@@ -129,7 +140,11 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Armadylean",
-    location: "Stormguard Citadel\n Empyrean Citadel",
+    location: [
+      "Stormguard Citadel - Keshik memorial excavation site",
+      "Stormguard Citadel - Relay station excavation site",
+      "Empyrean Citadel excavation site",
+    ],
   },
   {
     id: 13,
@@ -139,7 +154,11 @@ let materials = [
     hide: false,
     level: 85,
     faction: "Armadylean",
-    location: "Stormguard Citadel\n Empyrean Citadel",
+    location: [
+      "Stormguard Citadel - Research & Development north-east excavation site",
+      "Stormguard Citadel - Research & Development north-west excavation site",
+      "Empyrean Citadel excavation site",
+    ],
   },
   {
     id: 14,
@@ -149,7 +168,11 @@ let materials = [
     hide: false,
     level: 91,
     faction: "Armadylean",
-    location: "Stormguard Citadel\n Empyrean Citadel",
+    location: [
+      "Stormguard Citadel - Howl's workshop excavation site",
+      "Stormguard Citadel - Research & Development north-east excavation site",
+      "Empyrean Citadel excavation site",
+    ],
   },
   {
     id: 15,
@@ -159,7 +182,11 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Bandosian",
-    location: "Warforge\n God Wars Dungeon",
+    location: [
+      "Warforge - Crucible arena excavation site",
+      "Warforge - North goblin tunnels",
+      "God Wars Dungeon - Bandos's Stronghold excavation site",
+    ],
   },
   {
     id: 16,
@@ -169,7 +196,10 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Bandosian",
-    location: "Warforge\n God Wars Dungeon",
+    location: [
+      "Warforge - North goblin tunnels",
+      "God Wars Dungeon - Bandosian west excavation site",
+    ],
   },
   {
     id: 17,
@@ -179,7 +209,10 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Bandosian",
-    location: "Warforge\n Feldip",
+    location: [
+      "Warforge - South goblin tunnels excavation site",
+      "Feldip shores excavation site",
+    ],
   },
   {
     id: 18,
@@ -189,7 +222,12 @@ let materials = [
     hide: false,
     level: 76,
     faction: "Bandosian",
-    location: "Warforge\n God Wars Dungeon\n God Wars Dungeon",
+    location: [
+      "Warforge - Crucible arena excavation site",
+      "Warforge - North goblin tunnels",
+      "God Wars Dungeon - Bandosian north excavation site",
+      "God Wars Dungeon - Bandos's Stronghold excavation site",
+    ],
   },
   {
     id: 19,
@@ -199,7 +237,10 @@ let materials = [
     hide: false,
     level: 83,
     faction: "Bandosian",
-    location: "Warforge\n Feldip",
+    location: [
+      "Feldip shores excavation site",
+      "Warforge - Animal pens excavation site",
+    ],
   },
   {
     id: 20,
@@ -209,7 +250,11 @@ let materials = [
     hide: false,
     level: 73,
     faction: "Dragonkin",
-    location: "Orthen\n Daemonheim\n Ancient cavern",
+    location: [
+      "Ancient cavern excavation site",
+      "Orthen - Observation outpost excavation site",
+      "Orthen - Xolo city excavation site",
+    ],
   },
   {
     id: 21,
@@ -219,7 +264,11 @@ let materials = [
     hide: false,
     level: 73,
     faction: "Dragonkin",
-    location: "Orthen\n Daemonheim\n Anachronia",
+    location: [
+      "Orthen - Moksha ritual site excavation site",
+      "Orthen - Xolo city excavation site",
+      "Anachronia west excavation site",
+    ],
   },
   {
     id: 22,
@@ -229,7 +278,10 @@ let materials = [
     hide: false,
     level: 77,
     faction: "Dragonkin",
-    location: "Orthen\n Daemonheim\n Ancient cavern",
+    location: [
+      "Ancient cavern excavation site",
+      "Orthen - Crypt of Varanus excavation site",
+    ],
   },
   {
     id: 23,
@@ -239,7 +291,10 @@ let materials = [
     hide: false,
     level: 78,
     faction: "Dragonkin",
-    location: "Orthen\n Daemonheim\n Mount Firewake",
+    location: [
+      "Orthen - Moksha ritual site excavation site",
+      "Mount Firewake excavation site",
+    ],
   },
   {
     id: 24,
@@ -249,7 +304,11 @@ let materials = [
     hide: false,
     level: 78,
     faction: "Dragonkin",
-    location: "Orthen\n Daemonheim\n Anachronia",
+    location: [
+      "Orthen - Crypt of Varanus excavation site",
+      "Orthen - Observation outpost excavation site",
+      "Anachronia west excavation site",
+    ],
   },
   {
     id: 25,
@@ -259,7 +318,11 @@ let materials = [
     hide: false,
     level: 42,
     faction: "Saradominist",
-    location: "Everlight\n God Wars Dungeon",
+    location: [
+      "Everlight - Mass grave excavation site",
+      "Everlight - Oikoi excavation site",
+      "God Wars Dungeon - Saradominist south-east excavation site",
+    ],
   },
   {
     id: 26,
@@ -269,7 +332,11 @@ let materials = [
     hide: false,
     level: 42,
     faction: "Saradominist",
-    location: "Everlight\n First Tower",
+    location: [
+      "Everlight - Dominion Games stadium excavation site",
+      "Everlight - Acropolis excavation site",
+      "First Tower excavation site",
+    ],
   },
   {
     id: 27,
@@ -279,7 +346,10 @@ let materials = [
     hide: false,
     level: 48,
     faction: "Saradominist",
-    location: "Everlight\n God Wars Dungeon",
+    location: [
+      "Everlight - Amphitheatre excavation site",
+      "God Wars Dungeon - Saradominist south-east excavation site",
+    ],
   },
   {
     id: 28,
@@ -289,7 +359,10 @@ let materials = [
     hide: false,
     level: 51,
     faction: "Saradominist",
-    location: "Everlight\n Barrows mounds",
+    location: [
+      "Everlight - Dominion Games stadium excavation site",
+      "Barrows mounds excavation site",
+    ],
   },
   {
     id: 29,
@@ -299,7 +372,10 @@ let materials = [
     hide: false,
     level: 51,
     faction: "Saradominist",
-    location: "Everlight\n Barrows mounds",
+    location: [
+      "Everlight - Acropolis excavation site",
+      "Barrows mounds excavation site",
+    ],
   },
   {
     id: 30,
@@ -309,7 +385,11 @@ let materials = [
     hide: false,
     level: 24,
     faction: "Zamorakian",
-    location: "Infernal Source\n First Tower",
+    location: [
+      "Infernal Source - Dagon Overlook south-west excavation site",
+      "Infernal Source - Star Lodge cellar excavation site",
+      "First Tower excavation site",
+    ],
   },
   {
     id: 31,
@@ -319,7 +399,10 @@ let materials = [
     hide: false,
     level: 29,
     faction: "Zamorakian",
-    location: "Infernal Source\n Daemonheim",
+    location: [
+      "Infernal Source - Vestibule of Futility south excavation site",
+      "Daemonheim south-west excavation site",
+    ],
   },
   {
     id: 32,
@@ -329,7 +412,10 @@ let materials = [
     hide: false,
     level: 29,
     faction: "Zamorakian",
-    location: "Infernal Source\n God Wars Dungeon",
+    location: [
+      "Infernal Source - The Harrowing north-east excavation site",
+      "God Wars Dungeon - Zamorak's Fortress east excavation site",
+    ],
   },
   {
     id: 33,
@@ -339,7 +425,10 @@ let materials = [
     hide: false,
     level: 36,
     faction: "Zamorakian",
-    location: "Infernal Source\n Daemonheim",
+    location: [
+      "Infernal Source - Dungeon of Disorder excavation site",
+      "Daemonheim south-west excavation site",
+    ],
   },
   {
     id: 34,
@@ -349,7 +438,12 @@ let materials = [
     hide: false,
     level: 36,
     faction: "Zamorakian",
-    location: "Infernal Source\n God Wars Dungeon",
+    location: [
+      "Infernal Source - Dungeon of Disorder excavation site",
+      "Infernal Source - Vestibule of Futility north-east excavation site",
+      "Infernal Source - Dagon Overlook north excavation site",
+      "God Wars Dungeon - Zamorak's Fortress north excavation site",
+    ],
   },
   {
     id: 35,
@@ -359,7 +453,10 @@ let materials = [
     hide: false,
     level: 5,
     faction: "Zarosian",
-    location: "Kharid-et\n The Empty Throne Room",
+    location: [
+      "Empty Throne Room east excavation site",
+      "Kharid-et - Barracks excavation site",
+    ],
   },
   {
     id: 36,
@@ -369,7 +466,10 @@ let materials = [
     hide: false,
     level: 12,
     faction: "Zarosian",
-    location: "Kharid-et\n The Empty Throne Room",
+    location: [
+      "Empty Throne Room north excavation site",
+      "Kharid-et - Barracks excavation site",
+    ],
   },
   {
     id: 37,
@@ -379,7 +479,10 @@ let materials = [
     hide: false,
     level: 25,
     faction: "Zarosian",
-    location: "Kharid-et\n Slayer Tower",
+    location: [
+      "Kharid-et - Culinarum excavation site",
+      "Slayer Tower excavation site",
+    ],
   },
   {
     id: 38,
@@ -389,7 +492,10 @@ let materials = [
     hide: false,
     level: 25,
     faction: "Zarosian",
-    location: "Kharid-et\n The Empty Throne Room",
+    location: [
+      "Kharid-et - Barracks excavation site",
+      "Empty Throne Room south excavation site",
+    ],
   },
   {
     id: 39,
@@ -399,7 +505,10 @@ let materials = [
     hide: false,
     level: 58,
     faction: "Zarosian",
-    location: "Kharid-et\n Slayer Tower",
+    location: [
+      "Kharid-et - Chapel excavation site",
+      "Slayer Tower excavation site",
+    ],
   },
 ];
 
