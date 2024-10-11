@@ -60,7 +60,7 @@ async function getMatsfromWiki() {
 async function checkSaveMats() {
   if (localStorage.getItem("archMats") != null) {
     const saveData = JSON.parse(localStorage.archMats);
-    // Add new mats from materials Array above if they don't exist in LocalStorage.
+    // Add new mats from wiki if they don't exist in LocalStorage.
     let materials = await getMatsfromWiki();
     materials.forEach((mat, i) => {
       if (!saveData[i]) {
