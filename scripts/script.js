@@ -209,7 +209,7 @@ window.setTimeout(function () {
     name = name.replace(/(\.)/g, "");
     return [name, type];
   }
-  
+
   function mapLocations(location) {
     let loc = "";
     location.forEach((site) => (loc += `- ${site}<br/>`));

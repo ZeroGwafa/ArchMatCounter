@@ -1,521 +1,67 @@
-let materials = [
-  {
-    id: 0,
-    name: "Third Age iron",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 5,
-    faction: "Agnostic",
-    location: ["Archaeology Guild excavation site"],
-  },
-  {
-    id: 1,
-    name: "Samite silk",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 12,
-    faction: "Agnostic",
-    location: [
-      "Al Kharid east excavation site",
-      "Kharid-et - Exterior excavation site",
-    ],
-  },
-  {
-    id: 2,
-    name: "White oak",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 17,
-    faction: "Agnostic",
-    location: ["Ice mountain excavation site"],
-  },
-  {
-    id: 3,
-    name: "Goldrune",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 20,
-    faction: "Agnostic",
-    location: ["Camdozaal cavern excavation site"],
-  },
-  {
-    id: 4,
-    name: "Orthenglass",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 20,
-    faction: "Agnostic",
-    location: ["Anachronia north excavation site"],
-  },
-  {
-    id: 5,
-    name: "Vellum",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 24,
-    faction: "Agnostic",
-    location: ["First Tower excavation site"],
-  },
-  {
-    id: 6,
-    name: "Leather scraps",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 29,
-    faction: "Agnostic",
-    location: ["Morytania north excavation site"],
-  },
-  {
-    id: 7,
-    name: "Soapstone",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 60,
-    faction: "Agnostic",
-    location: ["Waiko excavation site"],
-  },
-  {
-    id: 8,
-    name: "Animal furs",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Agnostic",
-    location: ["Feldip excavation site"],
-  },
-  {
-    id: 9,
-    name: "Fossilised bone",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 81,
-    faction: "Agnostic",
-    location: [
-      "Ancient cavern excavation site",
-      "Odd Old Man - excavation site",
-    ],
-  },
-  {
-    id: 10,
-    name: "Stormguard steel",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 70,
-    faction: "Armadylean",
-    location: [
-      "Stormguard Citadel - Research & Development south-west excavation site",
-      "God Wars Dungeon - Armadylean south-west excavation site",
-    ],
-  },
-  {
-    id: 11,
-    name: "Wings of War",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 70,
-    faction: "Armadylean",
-    location: [
-      "Stormguard Citadel - Dayguard tower excavation site",
-      "Stormguard Citadel - Nightguard tower excavation site",
-      "God Wars Dungeon - Armadylean south-west excavation site",
-    ],
-  },
-  {
-    id: 12,
-    name: "Armadylean yellow",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Armadylean",
-    location: [
-      "Stormguard Citadel - Keshik memorial excavation site",
-      "Stormguard Citadel - Relay station excavation site",
-      "Empyrean Citadel excavation site",
-    ],
-  },
-  {
-    id: 13,
-    name: "Aetherium alloy",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 85,
-    faction: "Armadylean",
-    location: [
-      "Stormguard Citadel - Research & Development north-east excavation site",
-      "Stormguard Citadel - Research & Development north-west excavation site",
-      "Empyrean Citadel excavation site",
-    ],
-  },
-  {
-    id: 14,
-    name: "Quintessence",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 91,
-    faction: "Armadylean",
-    location: [
-      "Stormguard Citadel - Howl's workshop excavation site",
-      "Stormguard Citadel - Research & Development north-east excavation site",
-      "Empyrean Citadel excavation site",
-    ],
-  },
-  {
-    id: 15,
-    name: "Malachite green",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Bandosian",
-    location: [
-      "Warforge - Crucible arena excavation site",
-      "Warforge - North goblin tunnels",
-      "God Wars Dungeon - Bandos's Stronghold excavation site",
-    ],
-  },
-  {
-    id: 16,
-    name: "Mark of the Kyzaj",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Bandosian",
-    location: [
-      "Warforge - North goblin tunnels",
-      "God Wars Dungeon - Bandosian west excavation site",
-    ],
-  },
-  {
-    id: 17,
-    name: "Vulcanised rubber",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Bandosian",
-    location: [
-      "Warforge - South goblin tunnels excavation site",
-      "Feldip shores excavation site",
-    ],
-  },
-  {
-    id: 18,
-    name: "Warforged bronze",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 76,
-    faction: "Bandosian",
-    location: [
-      "Warforge - Crucible arena excavation site",
-      "Warforge - North goblin tunnels",
-      "God Wars Dungeon - Bandosian north excavation site",
-      "God Wars Dungeon - Bandos's Stronghold excavation site",
-    ],
-  },
-  {
-    id: 19,
-    name: "Yu'biusk clay",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 83,
-    faction: "Bandosian",
-    location: [
-      "Feldip shores excavation site",
-      "Warforge - Animal pens excavation site",
-    ],
-  },
-  {
-    id: 20,
-    name: "Dragon metal",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 73,
-    faction: "Dragonkin",
-    location: [
-      "Ancient cavern excavation site",
-      "Orthen - Observation outpost excavation site",
-      "Orthen - Xolo city excavation site",
-    ],
-  },
-  {
-    id: 21,
-    name: "Orgone",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 73,
-    faction: "Dragonkin",
-    location: [
-      "Orthen - Moksha ritual site excavation site",
-      "Orthen - Xolo city excavation site",
-      "Anachronia west excavation site",
-    ],
-  },
-  {
-    id: 22,
-    name: "Compass rose",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 77,
-    faction: "Dragonkin",
-    location: [
-      "Ancient cavern excavation site",
-      "Orthen - Crypt of Varanus excavation site",
-    ],
-  },
-  {
-    id: 23,
-    name: "Carbon black",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 78,
-    faction: "Dragonkin",
-    location: [
-      "Orthen - Moksha ritual site excavation site",
-      "Mount Firewake excavation site",
-    ],
-  },
-  {
-    id: 24,
-    name: "Felt",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 78,
-    faction: "Dragonkin",
-    location: [
-      "Orthen - Crypt of Varanus excavation site",
-      "Orthen - Observation outpost excavation site",
-      "Anachronia west excavation site",
-    ],
-  },
-  {
-    id: 25,
-    name: "Keramos",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 42,
-    faction: "Saradominist",
-    location: [
-      "Everlight - Mass grave excavation site",
-      "Everlight - Oikoi excavation site",
-      "God Wars Dungeon - Saradominist south-east excavation site",
-    ],
-  },
-  {
-    id: 26,
-    name: "White marble",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 42,
-    faction: "Saradominist",
-    location: [
-      "Everlight - Dominion Games stadium excavation site",
-      "Everlight - Acropolis excavation site",
-      "First Tower excavation site",
-    ],
-  },
-  {
-    id: 27,
-    name: "Cobalt blue",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 48,
-    faction: "Saradominist",
-    location: [
-      "Everlight - Amphitheatre excavation site",
-      "God Wars Dungeon - Saradominist south-east excavation site",
-    ],
-  },
-  {
-    id: 28,
-    name: "Everlight silvthril",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 51,
-    faction: "Saradominist",
-    location: [
-      "Everlight - Dominion Games stadium excavation site",
-      "Barrows mounds excavation site",
-    ],
-  },
-  {
-    id: 29,
-    name: "Star of Saradomin",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 51,
-    faction: "Saradominist",
-    location: [
-      "Everlight - Acropolis excavation site",
-      "Barrows mounds excavation site",
-    ],
-  },
-  {
-    id: 30,
-    name: "Cadmium red",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 24,
-    faction: "Zamorakian",
-    location: [
-      "Infernal Source - Dagon Overlook south-west excavation site",
-      "Infernal Source - Star Lodge cellar excavation site",
-      "First Tower excavation site",
-    ],
-  },
-  {
-    id: 31,
-    name: "Chaotic brimstone",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 29,
-    faction: "Zamorakian",
-    location: [
-      "Infernal Source - Vestibule of Futility south excavation site",
-      "Daemonheim south-west excavation site",
-    ],
-  },
-  {
-    id: 32,
-    name: "Demonhide",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 29,
-    faction: "Zamorakian",
-    location: [
-      "Infernal Source - The Harrowing north-east excavation site",
-      "God Wars Dungeon - Zamorak's Fortress east excavation site",
-    ],
-  },
-  {
-    id: 33,
-    name: "Eye of Dagon",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 36,
-    faction: "Zamorakian",
-    location: [
-      "Infernal Source - Dungeon of Disorder excavation site",
-      "Daemonheim south-west excavation site",
-    ],
-  },
-  {
-    id: 34,
-    name: "Hellfire metal",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 36,
-    faction: "Zamorakian",
-    location: [
-      "Infernal Source - Dungeon of Disorder excavation site",
-      "Infernal Source - Vestibule of Futility north-east excavation site",
-      "Infernal Source - Dagon Overlook north excavation site",
-      "God Wars Dungeon - Zamorak's Fortress north excavation site",
-    ],
-  },
-  {
-    id: 35,
-    name: "Zarosian insignia",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 5,
-    faction: "Zarosian",
-    location: [
-      "Empty Throne Room east excavation site",
-      "Kharid-et - Barracks excavation site",
-    ],
-  },
-  {
-    id: 36,
-    name: "Imperial steel",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 12,
-    faction: "Zarosian",
-    location: [
-      "Empty Throne Room north excavation site",
-      "Kharid-et - Barracks excavation site",
-    ],
-  },
-  {
-    id: 37,
-    name: "Ancient vis",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 25,
-    faction: "Zarosian",
-    location: [
-      "Kharid-et - Culinarum excavation site",
-      "Slayer Tower excavation site",
-    ],
-  },
-  {
-    id: 38,
-    name: "Tyrian purple",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 25,
-    faction: "Zarosian",
-    location: [
-      "Kharid-et - Barracks excavation site",
-      "Empty Throne Room south excavation site",
-    ],
-  },
-  {
-    id: 39,
-    name: "Blood of Orcus",
-    qty: 0,
-    goal: 0,
-    hide: false,
-    level: 58,
-    faction: "Zarosian",
-    location: [
-      "Kharid-et - Chapel excavation site",
-      "Slayer Tower excavation site",
-    ],
-  },
-];
+function isInMatsList(matsList, name, location) {
+  for (let mat of matsList) {
+    if (mat.name == name) {
+      mat.location = mat.location.concat(location);
+      return true;
+    }
+  }
+  return false;
+}
 
-function checkSaveMats() {
+// API code Stolen from Ex Inferi <3
+async function getMatsfromWiki() {
+  const response = await fetch(
+    "https://runescape.wiki/api.php?action=parse&format=json&page=Material_caches&prop=text&onlypst=1&section=1&formatversion=2"
+  );
+  const data = await response.json();
+
+  const htmlContent = data.parse.text;
+  const parser = new DOMParser();
+  const document = parser.parseFromString(htmlContent, "text/html");
+
+  var mats = Array.from(
+    document.querySelectorAll(".wikitable tbody tr:not(:nth-child(1)")
+  );
+  var matsList = [];
+  for (let i = 0; i < mats.length; i++) {
+    let cells = mats[i].querySelectorAll("td");
+    let name = cells[4].innerText.trim();
+    let location = cells[6].innerText.trim().split("\n");
+    let level = Number(cells[0].innerText);
+    let faction = cells[7].innerText.trim();
+
+    if (isInMatsList(matsList, name, location)) {
+      continue;
+    }
+    matsList.push({
+      name,
+      qty: 0,
+      goal: 0,
+      hide: false,
+      level: level,
+      faction: faction,
+      location: location,
+    });
+  }
+  // Put matsList in Material Storage order by default.
+  matsList.sort((a, b) => {
+    if (a["level"] < b["level"]) return 1;
+    else return -1;
+  });
+  matsList.sort((a, b) => {
+    if (a["faction"] > b["faction"]) return 1;
+    else return -1;
+  });
+  matsList.forEach((mat, i) => (mat.id = i));
+
+  return matsList;
+}
+
+async function checkSaveMats() {
   if (localStorage.getItem("archMats") != null) {
     const saveData = JSON.parse(localStorage.archMats);
     // Add new mats from materials Array above if they don't exist in LocalStorage.
+    let materials = await getMatsfromWiki();
     materials.forEach((mat, i) => {
       if (!saveData[i]) {
         console.debug("Adding new Material: " + mat.name);
