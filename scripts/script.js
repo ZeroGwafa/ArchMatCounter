@@ -14,6 +14,7 @@ window.setTimeout(function () {
   };
 
   $(".mats").append("<span>Searching for chatboxes</span>");
+  $(".mats").append("<div>If this is showing for an extended period of time, then the chatbox read for Alt1 isn't working due to an update.  Please be patient, and the issue will be fixed as soon as it can!</div>");
   reader.find();
   let findChat = setInterval(function () {
     if (reader.pos === null) reader.find();
