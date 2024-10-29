@@ -14,7 +14,9 @@ window.setTimeout(function () {
   };
 
   $(".mats").append("<span>Searching for chatboxes</span>");
-  $(".mats").append("<div>If this is showing for an extended period of time, then the chatbox read for Alt1 isn't working due to an update.  Please be patient, and the issue will be fixed as soon as it can!</div>");
+  $(".mats").append(
+    "<div>If this is showing for an extended period of time, then the chatbox read for Alt1 isn't working due to an update.  Please be patient, and the issue will be fixed as soon as it can!</div>"
+  );
   reader.find();
   let findChat = setInterval(function () {
     if (reader.pos === null) reader.find();
@@ -208,6 +210,9 @@ window.setTimeout(function () {
       else type = "Fortune";
     }
     name = name.replace(/(\.)/g, "");
+    if (name.match(/he..fire metal/i)) {
+      name = "Hellfire metal";
+    }
     return [name, type];
   }
 
@@ -231,7 +236,7 @@ window.setTimeout(function () {
   function buildTable() {
     $(".mats").empty();
     JSON.parse(localStorage.archMats).forEach((mat) => {
-      let name = mat.name.replace("'", "");
+      let name = mat.name;
       $(".mats").append(
         `
         <div class='row' data-name="${name}">
@@ -281,8 +286,8 @@ window.setTimeout(function () {
     $(`[data-name="${name}"]`).removeClass("normal complete");
     $(`[data-name="${name}"]`).addClass("getMat");
     materials.forEach((mat) => {
-      let name = mat.name.replace("'", "");
-      $("[data-name='" + name + "'] > .qty").text(mat.qty);
+      let name = mat.name;
+      $('[data-name="' + name + '"] > .qty').text(mat.qty);
       if (
         mat.qty >= 0 &&
         mat.goal > 0 &&
@@ -302,16 +307,16 @@ window.setTimeout(function () {
       $(".mats .row").hide();
       if ($(".goals").is(":checked")) {
         materials.forEach((mat) => {
-          let name = mat.name.replace("'", "");
+          let name = mat.name;
           if (mat.hide === false && mat.goal > 0) {
             $(`[data-name='${name}']`).show();
           }
         });
       } else {
         materials.forEach((mat) => {
-          let name = mat.name.replace("'", "");
+          let name = mat.name;
           if (mat.hide === false && mat.qty > 0) {
-            $(`[data-name='${name}']`).show();
+            $(`[data-name="${name}"]`).show();
           }
         });
       }
@@ -385,7 +390,7 @@ window.setTimeout(function () {
         $(".hide").hide();
         $(".qty, .goal").removeAttr("contenteditable");
         materials.forEach((mat) => {
-          let name = mat.name.replace("'", "");
+          let name = mat.name;
           mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
           mat.goal = parseInt($(`[data-name='${name}'] .goal`).text());
         });
@@ -466,7 +471,7 @@ window.setTimeout(function () {
     $(".export").click(function () {
       var str = "Material,Quantity,Goal\n"; // column headers
       JSON.parse(localStorage.archMats).forEach((mat) => {
-        let name = mat.name.replace("'", "");
+        let name = mat.name;
         str = `${str}${name},${mat.qty},${mat.goal}\n`;
       });
       var blob = new Blob([str], { type: "text/csv;charset=utf-8;" });
