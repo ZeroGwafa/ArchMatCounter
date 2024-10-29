@@ -309,7 +309,7 @@ window.setTimeout(function () {
         materials.forEach((mat) => {
           let name = mat.name;
           if (mat.hide === false && mat.goal > 0) {
-            $(`[data-name='${name}']`).show();
+            $(`[data-name="${name}"]`).show();
           }
         });
       } else {
@@ -391,8 +391,8 @@ window.setTimeout(function () {
         $(".qty, .goal").removeAttr("contenteditable");
         materials.forEach((mat) => {
           let name = mat.name;
-          mat.qty = parseInt($(`[data-name='${name}'] .qty`).text());
-          mat.goal = parseInt($(`[data-name='${name}'] .goal`).text());
+          mat.qty = parseInt($(`[data-name="${name}"] .qty`).text());
+          mat.goal = parseInt($(`[data-name="${name}"] .goal`).text());
         });
         localStorage.archMats = JSON.stringify(materials);
         buildTable();
