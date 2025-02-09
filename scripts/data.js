@@ -28,7 +28,7 @@ async function getMatsfromWiki() {
     let name = cells[1].innerText.trim();
     let location = cells[4].innerText.trim().split("\n");
     let level = Number(cells[0].innerText);
-    let faction = cells[7].innerText.trim();
+    let faction = cells[6].innerText.trim();
 
     if (isInMatsList(matsList, name, location)) {
       continue;
