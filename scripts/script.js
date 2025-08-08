@@ -193,7 +193,8 @@ window.setTimeout(function () {
       name = line
         .trim()
         .split(/material storage:? /)[1]
-        .trim();
+        .trim()
+        .replace(/^\d+\s+x\s+/i, "");
       type = "Porter";
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       if (line.indexOf("Fortune perk") > -1) type = "Fortune";
