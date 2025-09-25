@@ -7,11 +7,11 @@ Retains data until you hit the "Clear" button.
 ## Installation:
 Install by copying this either copy pasting the following link in your browser. 
 
-alt1://addapp/https://zerogwafa.github.io/ArchMatCounter/appconfig.json
+alt1://addapp/https://sleeped32.github.io/ArchMatCounter/appconfig.json
 
 Or, by going to the following link in the Alt1 Browser
 
-https://zerogwafa.github.io/ArchMatCounter/
+https://sleeped32.github.io/ArchMatCounter/
 
  # **NOTE**
 You will want to have at least 5 timestamps visible on your selected chatbox for the rare-but-can-happen of Fortune/Brush/Screener/Porters to be tracked properly.  Otherwise, there is a chance a material will be missed.
