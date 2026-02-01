@@ -105,7 +105,7 @@ window.setTimeout(function () {
           chatLine.indexOf("Fortune perk") > -1 ||
           chatLine.indexOf("Balarak") > -1
         ) {
-          // if Fortune procs, check if it was triggered by a Balarak's Brush proc.  Thanks Ex Inferni!
+          // if Fortune procs, check if it was triggered by a Balarak's Brush proc.  Thanks Ex Inferi!
           if (
             chatLine.indexOf("Fortune perk") > -1 &&
             prevChatLine &&
@@ -204,12 +204,11 @@ window.setTimeout(function () {
       name = line
         .match(/your bank:? [(\.|')+g\s]*/)[0]
         .split(/your bank:? /)[1]
-        .split(/ x /)[0]
         .trim();
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       else type = "Fortune";
     }
-    name = name.replace(/(\.)/g, "");
+    name = name.replace(/(\.)/g, "").split(" x ")[1];
     if (name.match(/he..fire metal/i)) {
       name = "Hellfire metal";
     }
