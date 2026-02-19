@@ -208,6 +208,10 @@ window.setTimeout(function () {
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
       else type = "Fortune";
     }
+    // Early exit, in case name has not been determined.
+    if(!name){
+      return [false, false];
+    }
     name = name.replace(/(\.)/g, "").split(" x ")[1];
     if (name.match(/he..fire metal/i)) {
       name = "Hellfire metal";
