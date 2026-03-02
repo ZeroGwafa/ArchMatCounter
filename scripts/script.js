@@ -251,7 +251,7 @@ window.setTimeout(function () {
             data-content="<div><span class='header'>Level:</span> ${
               mat.level
             }<br/>
-            <span class='header'>Faction:</span> ${mat.faction}<br/>
+            <!-- <span class='header'>Faction:</span> ${mat.faction}<br/> -->
             <span class='header'>Location(s):</span><br/>${mapLocations(
               mat.location
             )}</div>">

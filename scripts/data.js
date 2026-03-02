@@ -26,9 +26,9 @@ async function getMatsfromWiki() {
   for (let i = 0; i < mats.length; i++) {
     let cells = mats[i].querySelectorAll("td");
     let name = cells[3].innerText.trim();
-    let location = cells[4].innerText.trim().split("\n");
+    let location = cells[5].innerText.trim().split("\n");
     let level = Number(cells[0].innerText);
-    let faction = cells[6].innerText.trim();
+    // let faction = cells[6].innerText.trim();
 
     if (isInMatsList(matsList, name, location)) {
       continue;
@@ -39,7 +39,7 @@ async function getMatsfromWiki() {
       goal: 0,
       hide: false,
       level: level,
-      faction: faction,
+      // faction: faction,
       location: location,
     });
   }
