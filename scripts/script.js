@@ -212,7 +212,8 @@ window.setTimeout(function () {
     if(!name){
       return [false, false];
     }
-    name = name.replace(/(\.)/g, "").split(" x ")[1];
+    //Remove period, any numeric reference.
+    name = name.replace(/^\d+\s*x\s*|\.$/g, "");
     if (name.match(/he..fire metal/i)) {
       name = "Hellfire metal";
     }
