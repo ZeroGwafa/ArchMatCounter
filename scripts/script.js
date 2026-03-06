@@ -201,12 +201,10 @@ window.setTimeout(function () {
     //Fortune Perk/Imp-Souled(material storage full catch)
     if (line.indexOf("your bank") > -1) {
       //Imp-souled here as well, in case user doesn't have enough slots unlocked in item storage.
-      name = line
-        .match(/your bank:? [(\.|')+g\s]*/)[0]
-        .split(/your bank:? /)[1]
-        .trim();
+      name = line.match(/x\s+(.+)\./)[1];
+      type = "Porter";
       if (line.indexOf("imp-souled") > -1) type = "Imp Souled";
-      else type = "Fortune";
+      if (line.indexOf("Fortune perk") > -1) type = "Fortune";
     }
     // Early exit, in case name has not been determined.
     if(!name){
