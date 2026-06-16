@@ -55,13 +55,22 @@ async function getMatsfromWiki() {
 	return matsList;
 }
 
+function isMatinSaveData(saveData, mat) {
+	for (let saveMat of saveData) {
+		if (saveMat.name === mat.name) {
+			return true;
+		}
+	}
+	return false;
+}
+
 async function checkSaveMats() {
 	// Add new mats from wiki if they don't exist in LocalStorage.
 	let materials = await getMatsfromWiki();
 	if (localStorage.getItem("archMats") != null) {
 		const saveData = JSON.parse(localStorage.archMats);
 		materials.forEach((mat, i) => {
-			if (!saveData[i]) {
+			if (!isMatinSaveData(saveData, mat)) {
 				console.debug("Adding new Material: " + mat.name);
 				saveData.push(mat);
 				return;
@@ -72,6 +81,7 @@ async function checkSaveMats() {
 					saveMat.id = mat.id;
 					saveMat.location = mat.location;
 					saveMat.level = mat.level;
+					return;
 				}
 			});
 		});
